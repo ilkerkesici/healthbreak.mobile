@@ -1,0 +1,3 @@
+export const DEFAULT_SCREEN_HORIZONTAL_PADDING = 16;
+export const DEFAULT_DIVIDER_HEIGHT = 10;
+export const TABBAR_HEIGHT = 54;
