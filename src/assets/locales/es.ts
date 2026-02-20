@@ -19,6 +19,14 @@ export default {
     tasks: 'Diario',
     analyzing: 'Analizando...',
   },
+  welcome: {
+    title_1: 'En este mundo donde la IA está en todas partes,',
+    title_2: 'los ejercicios Health Break',
+    title_3: 'están preparados por profesionales de la salud reales.',
+    subtitle: 'Micro-ejercicios cortos, seguros y adaptados al día a día.',
+    get_started: 'Comenzar',
+    expert_approved: 'CONTENIDO AVALADO POR EXPERTOS',
+  },
   onboarding: {
     title: 'Bienvenido a Better Me AI',
     description:

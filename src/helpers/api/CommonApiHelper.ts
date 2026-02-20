@@ -22,7 +22,7 @@ const DEV_URL = 'http://localhost:4002';
 
 const ANDROID_PACKAGE_NAME = 'com.looksgoodai';
 
-const CommonApiController = new ApiHelper(PROD_URL);
+const CommonApiController = new ApiHelper(DEV_URL);
 
 class CommonApi {
   getUser = async () => {

@@ -5,7 +5,7 @@ import React, { memo, useCallback, useEffect } from 'react';
 import { useAppInitStore } from 'store/useAppInitStore';
 import { useAppSettingStore } from 'store/useAppSettingStore';
 import { useSplashStore } from 'store/useSplashStore';
-import usePremiumHook from 'helpers/hooks/usePremiumHook';
+// import usePremiumHook from 'helpers/hooks/usePremiumHook';
 import useAuthHook from 'helpers/hooks/useAuthHook';
 import ScreenContainer from 'containers/ScreenContainer/ScreenContainer';
 import useAnonymousLoginHook from 'helpers/hooks/auth/useAnonymousLoginHook';
@@ -17,7 +17,7 @@ const Splash = () => {
   const { hasHydrated: hydratedApp, token, setProfile } = useAppInitStore();
   const { hasHydrated: hydratedSetting } = useAppSettingStore();
 
-  const { getAppSubscriptions, checkIsPremium } = usePremiumHook();
+  // const { getAppSubscriptions, checkIsPremium } = usePremiumHook();
   const { getUser } = useAuthHook();
   const { signIn } = useAnonymousLoginHook({});
   const { initTranslation } = useTranslation();
@@ -36,14 +36,14 @@ const Splash = () => {
   const goToOnboarding = useCallback(() => {
     const action = CommonActions.reset({
       index: 0,
-      routes: [{ name: 'ONBOARDING', params: {} }],
+      routes: [{ name: 'WELCOME', params: {} }],
     });
     navigation.dispatch(action);
   }, [navigation]);
 
   const initProject = useCallback(async () => {
     await initTranslation();
-    getAppSubscriptions();
+    // getAppSubscriptions();
     requestTrackingTransparency();
     // await OneSignalHelper.init();
 
@@ -62,13 +62,14 @@ const Splash = () => {
     // }
     const userInfo = await getUser();
     if (userInfo) {
-      checkIsPremium(userInfo);
+      // checkIsPremium(userInfo);
       // await OneSignalHelper.login(userInfo.uid);
     }
 
-    goToHome();
+    goToOnboarding();
+    // goToHome();
     closeSplash();
-  }, [token, goToHome, closeSplash, getAppSubscriptions]);
+  }, [token, goToHome, goToOnboarding, closeSplash]);
 
   useEffect(() => {
     if (hydratedApp && hydratedSetting) {

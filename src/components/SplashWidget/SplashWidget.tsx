@@ -11,6 +11,7 @@ import Animated, {
   withTiming,
   runOnJS,
 } from 'react-native-reanimated';
+import { useThemeColor } from 'helpers/hooks/useThemeColor';
 
 const { width, height } = Dimensions.get('window');
 
@@ -23,6 +24,8 @@ const IMAGE_HEIGHT = 200;
 const SplashWidget = () => {
   const [localVisible, setLocalVisible] = useState(true);
   const [companyNameLoadEnd, setCompanyNameLoadEnd] = useState(false);
+
+  const [backgroundColor] = useThemeColor(['bg-1']);
 
   const opacity = useSharedValue(0);
   const screenOpacity = useSharedValue(1);
@@ -61,6 +64,7 @@ const SplashWidget = () => {
       closeScreen();
     }
   }, [visible, companyNameLoadEnd, closeScreen]);
+  
 
   if (!localVisible) {
     return null;
@@ -70,22 +74,22 @@ const SplashWidget = () => {
     <Animated.View
       style={[
         styles.container,
-        { backgroundColor: '#000' },
+        { backgroundColor },
         animatedScreenOpacity,
       ]}
     >
       <Block fill flex={1}>
-        {/* <Image
+        <Image
           onLoad={onLoadWidget}
-          source={images.app_icon}
+          source={images.logo}
           width={IMAGE_WIDTH}
           height={IMAGE_HEIGHT}
           marginBottom={0}
-        /> */}
+        />
       </Block>
       <Animated.View style={[styles.animatedBottom, animatedOpacity]}>
         <Text variant="text" size="md">
-          Better Me AI
+          Health Break
         </Text>
       </Animated.View>
     </Animated.View>

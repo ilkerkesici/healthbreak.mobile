@@ -20,8 +20,8 @@ export const colorPalette = (isLightTheme: boolean = true) => ({
   'primary.100': isLightTheme ? '#e0f2fe' : '#1b465f',
   'primary.200': isLightTheme ? '#b9e6fe' : '#0D0D0D',
   'primary.300': isLightTheme ? '#7cd3fd' : '#1b6289',
-  'primary.400': isLightTheme ? '#36befa' : '#2282b3',
-  'primary.500': isLightTheme ? '#7F5AF0' : '#8F00FF',
+  'primary.400': isLightTheme ? '#14EDB9' : '#14EDB9',
+  'primary.500': isLightTheme ? '#056650' : '#056650',
   'primary.600': isLightTheme ? '#007fc0' : '#55b2db',
   'primary.700': isLightTheme ? '#0169a3' : '#90cce9',
   'primary.700.15': isLightTheme ? '#4671B126' : '#4671B126',
@@ -47,7 +47,7 @@ export const colorPalette = (isLightTheme: boolean = true) => ({
   'neutral.400': isLightTheme ? '#D5D7DA' : '#303C47',
   'neutral.500': isLightTheme ? '#A4A7AE' : '#E0E0E0',
   'neutral.600': isLightTheme ? '#717680' : '#81868f',
-  'neutral.700': isLightTheme ? '#535862' : '#C3C5CB',
+  'neutral.700': isLightTheme ? '#94A3B8' : '#94A3B8',
   'neutral.800': isLightTheme ? '#414651' : '#E8EAEE',
   'neutral.900': isLightTheme ? '#252B37' : '#F8F9FC',
   'neutral.950': isLightTheme ? '#101828' : '#F8F9FC',
@@ -63,7 +63,7 @@ export const colorPalette = (isLightTheme: boolean = true) => ({
   'neutral.700-f': '#535862',
   'neutral.800-f': '#414651',
   'neutral.900-f': '#F8F9FC',
-  'neutral.950-f':isLightTheme ? '#101828' : '#191B1F',
+  'neutral.950-f': isLightTheme ? '#101828' : '#191B1F',
   'neutral.400/30-f': '#06102410',
   'neutral.400/00-f': '#06102400',
   'neutral.500-t': '#A4A7AE',
@@ -137,6 +137,8 @@ export const colorPalette = (isLightTheme: boolean = true) => ({
   'dark.100/50': '#DADADA',
   'dark-guess.100': '#2E77BD',
   'dark-odd-name': '#8F969C',
+
+  'bg-1': '#0d2329',
 });
 
 export const defaultPalette = colorPalette();

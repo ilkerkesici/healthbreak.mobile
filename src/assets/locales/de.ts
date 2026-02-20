@@ -19,6 +19,14 @@ export default {
     tasks: 'Täglich',
     analyzing: 'Analysiere...',
   },
+  welcome: {
+    title_1: 'In dieser Welt, in der KI überall ist,',
+    title_2: 'Health Break Übungen',
+    title_3: 'wurden von echten Gesundheitsexperten erstellt!',
+    subtitle: 'Kurze, sichere Mikro-Übungen für den Alltag.',
+    get_started: 'Loslegen',
+    expert_approved: 'VON EXPERTEN GEPRÜFTE INHALTE',
+  },
   onboarding: {
     title: 'Willkommen bei Better Me AI',
     description:

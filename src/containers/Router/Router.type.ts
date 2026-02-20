@@ -10,6 +10,7 @@ export type RootStackParamList = {
   PAYWALL: undefined;
   LANGUAGE_CHANGE: undefined;
   PROMO_CODE: undefined;
+  WELCOME: undefined;
 };
 
 export type RootNavigation = NativeStackNavigationProp<RootStackParamList>;

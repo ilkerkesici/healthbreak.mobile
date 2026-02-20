@@ -12,6 +12,7 @@ import Paywall from 'screens/Paywall/Paywall';
 import LanguageChange from 'screens/LanguageChange/LanguageChange';
 import PromoCodeScreen from 'screens/PromoCodeScreen/PromoCodeScreen';
 import Home from 'screens/Home/Home';
+import Welcome from 'screens/Welcome/Welcome';
 
 const MainNavigator = createNativeStackNavigator<RootStackParamList>();
 
@@ -57,6 +58,11 @@ export default function Router() {
           options={screenOptions}
           name="ONBOARDING"
           component={Onboarding}
+        />
+        <MainNavigator.Screen
+          options={screenOptions}
+          name="WELCOME"
+          component={Welcome}
         />
         <MainNavigator.Screen
           options={screenOptions}

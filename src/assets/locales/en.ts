@@ -19,6 +19,14 @@ export default {
     tasks: 'Daily',
     analyzing: 'Analyzing...',
   },
+  welcome: {
+    title_1: 'In this world where AI is everywhere,',
+    title_2: 'Health Break exercises',
+    title_3: 'are prepared by real health professionals!',
+    subtitle: 'Short, safe micro-exercises that fit into daily life.',
+    get_started: 'Get Started',
+    expert_approved: 'EXPERT APPROVED CONTENT',
+  },
   onboarding: {
     title: 'Welcome to Better Me AI',
     description:

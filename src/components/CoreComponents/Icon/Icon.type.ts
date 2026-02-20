@@ -138,4 +138,5 @@ export type IconType =
   | 'o:logout'
   | 'o:gallery'
   | 'o:camera'
-  | 'o:gallery-gradient';
+  | 'o:gallery-gradient'
+  | 'o:security';

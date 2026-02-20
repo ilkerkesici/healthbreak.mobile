@@ -19,22 +19,13 @@ export default {
     tasks: 'Günlük',
     analyzing: 'Analiz Ediliyor...',
   },
-  onboarding: {
-    title: "Better Me AI'a Hoş Geldiniz",
-    description:
-      'Better Me AI, iyi görünmenize ve kendinizi iyi hissetmenize yardımcı olan bir platformdur.',
+  welcome: {
+    title_1: 'Yapay zekanın her yerde olduğu bu dünyada,',
+    title_2: 'Health Break egzersizleri',
+    title_3: 'gerçek sağlık profesyonelleri tarafından hazırlandı!',
+    subtitle: 'Kısa, güvenli ve günlük hayata uygun mikro egzersizler.',
     get_started: 'Başla',
-    profile_title: 'Profilinizi oluşturun',
-    profile_description: 'Sizi daha iyi tanıyalım',
-    name: 'İsim',
-    enter_name: 'İsminizi girin',
-    gender: 'Cinsiyet',
-    male: 'Erkek',
-    female: 'Kadın',
-    enter_gender: 'Cinsiyetinizi girin',
-    age: 'Yaş',
-    enter_age: 'Yaşınızı girin',
-    create_profile: 'Profil Oluştur',
+    expert_approved: 'UZMAN ONAYLI İÇERİK',
   },
   login: {
     title: 'Giriş Yap',
@@ -53,7 +44,7 @@ export default {
     password_dont_match: 'Şifreler eşleşmiyor.',
   },
   home: {
-    title: "Anasayfa"
+    title: 'Anasayfa',
   },
   permission: {
     camera_alert_title: 'Kamera İzni',

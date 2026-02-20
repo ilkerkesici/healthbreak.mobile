@@ -24,7 +24,7 @@ export class ApiHelper {
       pk: string;
     } = {
       'Accept-Language': i18n.locale,
-      pk: 'e1d4a00e-268d-4dcc-a7b9-6cb0591bc2ec',
+      pk: '19aa8575-6c69-4eb8-818d-204ba8aed156',
     };
     const localToken = useAppInitStore.getState().token;
     if (localToken) {

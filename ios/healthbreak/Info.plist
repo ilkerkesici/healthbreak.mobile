@@ -39,6 +39,10 @@
 	<string>This permission will be used to improve your advertising experience.</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This permission will be used to improve your advertising experience.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Manrope-VariableFont_wght.ttf</string>
+	</array>
 	<key>RCTNewArchEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
