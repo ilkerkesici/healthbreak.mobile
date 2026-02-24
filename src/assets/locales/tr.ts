@@ -46,6 +46,81 @@ export default {
   home: {
     title: 'Anasayfa',
   },
+  onboarding_next: 'İlerle',
+  onboarding_questions: {
+    habits: {
+      stepLabel: 'ADIM 1: ALIŞKANLIKLAR',
+      question: 'Günde ortalama kaç saat bilgisayar başındasın?',
+      subtitle:
+        'Sağlık hedeflerini kişiselleştirmemiz için çalışma rutinini anlamamız gerekiyor.',
+      footerText: 'Dilediğin zaman cevaplarını değiştirebilirsin.',
+      options: {
+        '2-4': '2-4 saat',
+        '4-6': '4-6 saat',
+        '6-8': '6-8 saat',
+        '8+': '8+ saat',
+      },
+    },
+    sitting: {
+      stepLabel: 'ADIM 2',
+      question: 'Genelde aralıksız ne kadar süre oturuyorsun?',
+      subtitle:
+        'Size en uygun çalışma molası programını hazırlamamıza yardımcı olun.',
+      footerText:
+        'Verdiğin bilgiler gizli kalıp kişiselleştirmemizde kullanılacak.',
+      options: {
+        'under-30': '30 dakikadan az',
+        '30-60': '30-60 dk',
+        '1-2': '1-2 saat',
+        '2+': '2 saatten fazla',
+      },
+    },
+    areas: {
+      stepLabel: 'ADIM 3',
+      question: 'Şu anda en çok zorlanan bölgeler hangileri?',
+      subtitle:
+        'Birden fazla seçim yapabilirsin. Bu bilgiler sana özel egzersiz planını oluşturmamıza yardımcı olacak.',
+      footerText: 'Dilediğin zaman cevaplarını değiştirebilirsin.',
+      options: {
+        eyes: 'Gözler',
+        neck: 'Boyun',
+        'lower-back': 'Bel',
+        'upper-back': 'Sırt',
+        wrist: 'El / Bilek',
+        none: 'Şu an sorun yok',
+      },
+    },
+    work_hours: {
+      stepLabel: 'ADIM 4',
+      question: 'Genelde hangi saatlerde çalışıyorsun?',
+      subtitle:
+        'Sana en uygun egzersiz hatırlatıcılarını planlamamıza yardımcı olacak.',
+      footerText:
+        'Birden fazla zaman dilimi seçebilirsin. Programı sana göre değiştirelim.',
+      options: {
+        morning: 'Sabah 08:00 - 10:00',
+        noon: 'Öğlen 12:00 - 17:00',
+        evening: 'Akşam 17:00 - 20:00',
+      },
+    },
+  },
+  onboarding: {
+    title: "Better Me AI'a Hoş Geldiniz",
+    description:
+      'Better Me AI, iyi görünmenize ve kendinizi iyi hissetmenize yardımcı olan bir platformdur.',
+    get_started: 'Başla',
+    profile_title: 'Profilinizi oluşturun',
+    profile_description: 'Sizi daha iyi tanıyalım',
+    name: 'İsim',
+    enter_name: 'İsminizi girin',
+    gender: 'Cinsiyet',
+    male: 'Erkek',
+    female: 'Kadın',
+    enter_gender: 'Cinsiyetinizi girin',
+    age: 'Yaş',
+    enter_age: 'Yaşınızı girin',
+    create_profile: 'Profil Oluştur',
+  },
   permission: {
     camera_alert_title: 'Kamera İzni',
     camera_alert_subtitle: 'Yüzünüzü taramak için kameranıza erişim gerekiyor',

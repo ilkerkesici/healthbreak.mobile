@@ -27,6 +27,61 @@ export default {
     get_started: 'Rozpocznij',
     expert_approved: 'TREŚCI ZATWIERDZONE PRZEZ EKSPERTÓW',
   },
+  onboarding_next: 'Dalej',
+  onboarding_questions: {
+    habits: {
+      stepLabel: 'KROK 1: NAWYKI',
+      question: 'Średnio ile godzin dziennie spędzasz przy komputerze?',
+      subtitle:
+        'Potrzebujemy poznać Twoją rutynę pracy, aby spersonalizować cele zdrowotne.',
+      footerText: 'Możesz w każdej chwili zmienić odpowiedzi.',
+      options: {
+        '2-4': '2-4 godz.',
+        '4-6': '4-6 godz.',
+        '6-8': '6-8 godz.',
+        '8+': '8+ godz.',
+      },
+    },
+    sitting: {
+      stepLabel: 'KROK 2',
+      question: 'Jak długo zazwyczaj siedzisz bez przerwy?',
+      subtitle: 'Pomóż nam przygotować najlepszy plan przerw dla Ciebie.',
+      footerText: 'Twoje dane pozostaną poufne i posłużą do personalizacji.',
+      options: {
+        'under-30': 'Mniej niż 30 min',
+        '30-60': '30-60 min',
+        '1-2': '1-2 godz.',
+        '2+': 'Ponad 2 godz.',
+      },
+    },
+    areas: {
+      stepLabel: 'KROK 3',
+      question: 'Z którymi partiami ciała masz obecnie największe problemy?',
+      subtitle:
+        'Możesz wybrać kilka. Te informacje pomogą stworzyć Twój plan ćwiczeń.',
+      footerText: 'Możesz w każdej chwili zmienić odpowiedzi.',
+      options: {
+        eyes: 'Oczy',
+        neck: 'Szyja',
+        'lower-back': 'Dolny odcinek pleców',
+        'upper-back': 'Górny odcinek pleców',
+        wrist: 'Dłoń / Nadgarstek',
+        none: 'Obecnie brak problemów',
+      },
+    },
+    work_hours: {
+      stepLabel: 'KROK 4',
+      question: 'O której godzinie zazwyczaj pracujesz?',
+      subtitle: 'Pomoże nam to zaplanować przypomnienia o ćwiczeniach.',
+      footerText:
+        'Możesz wybrać więcej niż jeden przedział. Spersonalizujmy program.',
+      options: {
+        morning: 'Rano 08:00 - 10:00',
+        noon: 'Południe 12:00 - 17:00',
+        evening: 'Wieczór 17:00 - 20:00',
+      },
+    },
+  },
   onboarding: {
     title: 'Witamy w Better Me AI',
     description:

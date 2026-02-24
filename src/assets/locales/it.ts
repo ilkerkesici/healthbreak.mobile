@@ -27,6 +27,62 @@ export default {
     get_started: 'Inizia',
     expert_approved: 'CONTENUTO APPROVATO DA ESPERTI',
   },
+  onboarding_next: 'Continua',
+  onboarding_questions: {
+    habits: {
+      stepLabel: 'PASSO 1: ABITUDINI',
+      question: 'In media quante ore al giorno passi al computer?',
+      subtitle:
+        'Ci serve capire la tua routine lavorativa per personalizzare i tuoi obiettivi di salute.',
+      footerText: 'Puoi cambiare le risposte quando vuoi.',
+      options: {
+        '2-4': '2-4 ore',
+        '4-6': '4-6 ore',
+        '6-8': '6-8 ore',
+        '8+': '8+ ore',
+      },
+    },
+    sitting: {
+      stepLabel: 'PASSO 2',
+      question: 'Quanto tempo resti di solito seduto senza pause?',
+      subtitle: 'Aiutaci a preparare il programma di pause più adatto a te.',
+      footerText:
+        'Le tue informazioni restano riservate e usate per la personalizzazione.',
+      options: {
+        'under-30': 'Meno di 30 min',
+        '30-60': '30-60 min',
+        '1-2': '1-2 ore',
+        '2+': 'Oltre 2 ore',
+      },
+    },
+    areas: {
+      stepLabel: 'PASSO 3',
+      question: 'Con quali zone hai più difficoltà in questo momento?',
+      subtitle:
+        'Puoi scegliere più opzioni. Ci aiuteranno a creare il tuo piano di esercizi personalizzato.',
+      footerText: 'Puoi cambiare le risposte quando vuoi.',
+      options: {
+        eyes: 'Occhi',
+        neck: 'Collo',
+        'lower-back': 'Schiena bassa',
+        'upper-back': 'Schiena alta',
+        wrist: 'Mano / Polso',
+        none: 'Nessun problema al momento',
+      },
+    },
+    work_hours: {
+      stepLabel: 'PASSO 4',
+      question: 'In genere a che ore lavori?',
+      subtitle: 'Ci aiuterà a pianificare i promemoria per gli esercizi.',
+      footerText:
+        'Puoi selezionare più fasce orarie. Personalizziamo il programma.',
+      options: {
+        morning: 'Mattina 08:00 - 10:00',
+        noon: 'Pomeriggio 12:00 - 17:00',
+        evening: 'Sera 17:00 - 20:00',
+      },
+    },
+  },
   onboarding: {
     title: 'Benvenuto in Better Me AI',
     description:

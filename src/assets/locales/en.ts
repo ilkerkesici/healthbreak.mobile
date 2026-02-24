@@ -27,6 +27,63 @@ export default {
     get_started: 'Get Started',
     expert_approved: 'EXPERT APPROVED CONTENT',
   },
+  onboarding_next: 'Continue',
+  onboarding_questions: {
+    habits: {
+      stepLabel: 'STEP 1: HABITS',
+      question:
+        'On average, how many hours a day do you spend at the computer?',
+      subtitle:
+        'We need to understand your work routine to personalize your health goals.',
+      footerText: 'You can change your answers anytime.',
+      options: {
+        '2-4': '2-4 hours',
+        '4-6': '4-6 hours',
+        '6-8': '6-8 hours',
+        '8+': '8+ hours',
+      },
+    },
+    sitting: {
+      stepLabel: 'STEP 2',
+      question: 'How long do you usually sit without a break?',
+      subtitle: 'Help us create the best work break schedule for you.',
+      footerText:
+        'Your information will remain confidential and used for personalization.',
+      options: {
+        'under-30': 'Under 30 min',
+        '30-60': '30-60 min',
+        '1-2': '1-2 hours',
+        '2+': 'Over 2 hours',
+      },
+    },
+    areas: {
+      stepLabel: 'STEP 3',
+      question: 'Which areas are you currently struggling with the most?',
+      subtitle:
+        'You can select multiple. This helps us create your personalized exercise plan.',
+      footerText: 'You can change your answers anytime.',
+      options: {
+        eyes: 'Eyes',
+        neck: 'Neck',
+        'lower-back': 'Lower back',
+        'upper-back': 'Upper back',
+        wrist: 'Hand / Wrist',
+        none: 'No issues right now',
+      },
+    },
+    work_hours: {
+      stepLabel: 'STEP 4',
+      question: 'What hours do you usually work?',
+      subtitle: 'This will help us plan the best exercise reminders for you.',
+      footerText:
+        "You can select more than one time slot. Let's customize the program for you.",
+      options: {
+        morning: 'Morning 08:00 - 10:00',
+        noon: 'Noon 12:00 - 17:00',
+        evening: 'Evening 17:00 - 20:00',
+      },
+    },
+  },
   onboarding: {
     title: 'Welcome to Better Me AI',
     description:

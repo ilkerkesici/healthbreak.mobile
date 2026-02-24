@@ -27,6 +27,64 @@ export default {
     get_started: 'Loslegen',
     expert_approved: 'VON EXPERTEN GEPRÜFTE INHALTE',
   },
+  onboarding_next: 'Weiter',
+  onboarding_questions: {
+    habits: {
+      stepLabel: 'SCHRITT 1: GEWOHNHEITEN',
+      question:
+        'Wie viele Stunden verbringst du durchschnittlich am Tag am Computer?',
+      subtitle:
+        'Wir müssen deine Arbeitsroutine verstehen, um deine Gesundheitsziele zu personalisieren.',
+      footerText: 'Du kannst deine Antworten jederzeit ändern.',
+      options: {
+        '2-4': '2-4 Std.',
+        '4-6': '4-6 Std.',
+        '6-8': '6-8 Std.',
+        '8+': '8+ Std.',
+      },
+    },
+    sitting: {
+      stepLabel: 'SCHRITT 2',
+      question: 'Wie lange sitzt du in der Regel ohne Pause?',
+      subtitle:
+        'Hilf uns, den besten Arbeitspausen-Plan für dich zu erstellen.',
+      footerText:
+        'Deine Angaben bleiben vertraulich und dienen der Personalisierung.',
+      options: {
+        'under-30': 'Unter 30 Min.',
+        '30-60': '30-60 Min.',
+        '1-2': '1-2 Std.',
+        '2+': 'Über 2 Std.',
+      },
+    },
+    areas: {
+      stepLabel: 'SCHRITT 3',
+      question: 'Mit welchen Bereichen hast du derzeit am meisten zu kämpfen?',
+      subtitle:
+        'Du kannst mehrere auswählen. So erstellen wir deinen persönlichen Übungsplan.',
+      footerText: 'Du kannst deine Antworten jederzeit ändern.',
+      options: {
+        eyes: 'Augen',
+        neck: 'Nacken',
+        'lower-back': 'Rücken (unten)',
+        'upper-back': 'Rücken (oben)',
+        wrist: 'Hand / Handgelenk',
+        none: 'Aktuell keine Probleme',
+      },
+    },
+    work_hours: {
+      stepLabel: 'SCHRITT 4',
+      question: 'Zu welchen Zeiten arbeitest du in der Regel?',
+      subtitle: 'So planen wir die passenden Übungs-Erinnerungen für dich.',
+      footerText:
+        'Du kannst mehrere Zeitspannen wählen. Wir passen das Programm an.',
+      options: {
+        morning: 'Morgen 08:00 - 10:00',
+        noon: 'Mittag 12:00 - 17:00',
+        evening: 'Abend 17:00 - 20:00',
+      },
+    },
+  },
   onboarding: {
     title: 'Willkommen bei Better Me AI',
     description:

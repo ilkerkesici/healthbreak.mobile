@@ -27,6 +27,57 @@ export default {
     get_started: 'Comenzar',
     expert_approved: 'CONTENIDO AVALADO POR EXPERTOS',
   },
+  onboarding_next: 'Continuar',
+  onboarding_questions: {
+    habits: {
+      stepLabel: 'PASO 1: HÁBITOS',
+      question: '¿Cuántas horas al día pasas en promedio frente al ordenador?',
+      subtitle:
+        'Necesitamos entender tu rutina de trabajo para personalizar tus objetivos de salud.',
+      footerText: 'Puedes cambiar tus respuestas cuando quieras.',
+      options: { '2-4': '2-4 h', '4-6': '4-6 h', '6-8': '6-8 h', '8+': '8+ h' },
+    },
+    sitting: {
+      stepLabel: 'PASO 2',
+      question: '¿Cuánto tiempo sueles estar sentado sin descanso?',
+      subtitle: 'Ayúdanos a preparar el mejor plan de pausas para ti.',
+      footerText:
+        'Tu información será confidencial y se usará para personalización.',
+      options: {
+        'under-30': 'Menos de 30 min',
+        '30-60': '30-60 min',
+        '1-2': '1-2 h',
+        '2+': 'Más de 2 h',
+      },
+    },
+    areas: {
+      stepLabel: 'PASO 3',
+      question: '¿Con qué zonas tienes más dificultades ahora?',
+      subtitle:
+        'Puedes elegir varias. Así creamos tu plan de ejercicios personalizado.',
+      footerText: 'Puedes cambiar tus respuestas cuando quieras.',
+      options: {
+        eyes: 'Ojos',
+        neck: 'Cuello',
+        'lower-back': 'Espalda baja',
+        'upper-back': 'Espalda alta',
+        wrist: 'Mano / Muñeca',
+        none: 'Ningún problema ahora',
+      },
+    },
+    work_hours: {
+      stepLabel: 'PASO 4',
+      question: '¿A qué horas sueles trabajar?',
+      subtitle: 'Así planificamos los recordatorios de ejercicio para ti.',
+      footerText:
+        'Puedes elegir más de un horario. Personalicemos el programa.',
+      options: {
+        morning: 'Mañana 08:00 - 10:00',
+        noon: 'Mediodía 12:00 - 17:00',
+        evening: 'Tarde 17:00 - 20:00',
+      },
+    },
+  },
   onboarding: {
     title: 'Bienvenido a Better Me AI',
     description:
