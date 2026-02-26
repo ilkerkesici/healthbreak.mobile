@@ -27,6 +27,20 @@ export default {
     get_started: 'Get Started',
     expert_approved: 'EXPERT APPROVED CONTENT',
   },
+  notif_permit: {
+    title: 'Want us to remind you of break time?',
+    subtitle: 'We need notifications to reach you at the right time.',
+    turn_on: 'Turn on Notifications',
+    later: 'Later',
+  },
+  start_page: {
+    title: 'We are ready!',
+    subtitle: 'Your first 1-minute exercise is waiting for you.',
+    duration: '1 Minute',
+    area: 'Shoulder',
+    cta: 'Start',
+    later: 'Maybe later',
+  },
   onboarding_next: 'Continue',
   onboarding_questions: {
     habits: {

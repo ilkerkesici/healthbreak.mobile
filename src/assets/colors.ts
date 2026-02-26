@@ -34,7 +34,7 @@ export const colorPalette = (isLightTheme: boolean = true) => ({
   'secondary.200': isLightTheme ? '#7877C8' : '#7877C8',
   'secondary.300': isLightTheme ? '#4846AC' : '#4846AC',
   'secondary.400': isLightTheme ? '#FFBD1B' : '#FFBD1B',
-  'secondary.500': isLightTheme ? '#ff9900' : '#ff9900',
+  'secondary.500': isLightTheme ? '#D1F15D' : '#D1F15D',
   'secondary.600': isLightTheme ? '#25245C' : '#25245C',
   'secondary.700': isLightTheme ? '#25245C' : '#25245C',
   'secondary.800': isLightTheme ? '#555A6B' : '#131338',

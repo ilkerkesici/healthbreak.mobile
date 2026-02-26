@@ -26,7 +26,7 @@ import {DesignProps} from 'types/design';
 
 const Button: React.FC<ButtonProps> = props => {
   const {
-    size = 'md',
+    size = 'lg',
     variant = 'primary',
     text,
     leftIcon,

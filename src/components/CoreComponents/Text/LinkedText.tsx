@@ -1,12 +1,12 @@
-import React, {memo} from 'react';
-import {Alert, Linking} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, { memo } from 'react';
+import { Alert, Linking } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-import Text, {CustomTextProps} from './Text';
-import {ColorType} from 'assets/colors';
-import {FontWeightType} from 'assets/typography';
-import {RootNavigation} from 'containers/Router/Router.type';
-import {TypographyBaseSize, TypographyVariants} from 'types/design';
+import Text, { CustomTextProps } from './Text';
+import { ColorType } from 'assets/colors';
+import { FontWeightType } from 'assets/typography';
+import { RootNavigation } from 'containers/Router/Router.type';
+import { TypographyBaseSize, TypographyVariants } from 'types/design';
 
 export interface LinkedItem {
   text: string;
@@ -18,6 +18,7 @@ export interface LinkedItem {
     size?: TypographyBaseSize;
     color?: ColorType;
     fontWeight?: FontWeightType;
+    underline?: boolean;
   };
 }
 
@@ -96,7 +97,8 @@ const LinkedText: React.FC<LinkedTextProps> = ({
             {...rest}
             color={'primary.500'}
             {...matchedItem.textProps}
-            underline>
+            underline={matchedItem.textProps?.underline ?? true}
+          >
             {part}
           </Text>
         ) : (

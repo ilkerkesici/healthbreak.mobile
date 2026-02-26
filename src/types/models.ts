@@ -32,3 +32,17 @@ export interface Profile {
   age?: number;
   gender?: 'f' | 'm';
 }
+
+export interface OnboardingQuestionAnswer {
+  questionId: string;
+  selectedLabels: string[];
+}
+
+export type OnboardingAnswersPayload = OnboardingQuestionAnswer[];
+
+export interface OnboardingProfile extends Partial<Profile> {
+  id: number;
+  user: number;
+  data: OnboardingAnswersPayload | null;
+  created_at: string;
+}

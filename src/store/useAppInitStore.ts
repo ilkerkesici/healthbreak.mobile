@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Profile, User } from 'types/models';
+import { OnboardingProfile, User } from 'types/models';
 
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
@@ -11,8 +11,8 @@ export interface AppInitStoreType {
   setToken: (token?: string) => void;
   setUser: (user?: User) => void;
 
-  profile?: Profile;
-  setProfile: (profile?: Profile) => void;
+  profile?: OnboardingProfile | undefined;
+  setProfile: (profile?: OnboardingProfile) => void;
 
   hasHydrated: boolean;
   setHasHydrated: (value: boolean) => void;
@@ -29,7 +29,7 @@ export const useAppInitStore = create<AppInitStoreType>()(
       setUser: (user?: User) => set({ user: user }),
 
       profile: undefined,
-      setProfile: (profile?: Profile) => set({ profile: profile }),
+      setProfile: (profile?: OnboardingProfile) => set({ profile: profile }),
 
       hasHydrated: false,
       setHasHydrated: (value: boolean) => set({ hasHydrated: value }),

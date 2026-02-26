@@ -13,6 +13,8 @@ import LanguageChange from 'screens/LanguageChange/LanguageChange';
 import PromoCodeScreen from 'screens/PromoCodeScreen/PromoCodeScreen';
 import Home from 'screens/Home/Home';
 import Welcome from 'screens/Welcome/Welcome';
+import StartPage from 'screens/StartPage/StartPage';
+import NotificationPermission from 'screens/NotificationPermission/NotificationPermission';
 
 const MainNavigator = createNativeStackNavigator<RootStackParamList>();
 
@@ -63,6 +65,16 @@ export default function Router() {
           options={screenOptions}
           name="WELCOME"
           component={Welcome}
+        />
+        <MainNavigator.Screen
+          options={screenOptions}
+          name="START_PAGE"
+          component={StartPage}
+        />
+        <MainNavigator.Screen
+          options={screenOptions}
+          name="NOTIF_PERMIT"
+          component={NotificationPermission}
         />
         <MainNavigator.Screen
           options={screenOptions}

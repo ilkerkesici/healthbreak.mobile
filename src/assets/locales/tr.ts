@@ -27,6 +27,22 @@ export default {
     get_started: 'Başla',
     expert_approved: 'UZMAN ONAYLI İÇERİK',
   },
+  notif_permit: {
+    title: 'Mola zamanını hatırlatmamızı ister misin?',
+    subtitle:
+      'Sana en doğru zamanda ulaşabilmemiz için bildirimlere ihtiyacımız var.',
+    turn_on: 'Bildirimleri Aç',
+    later: 'Daha Sonra',
+  },
+  start_page: {
+    title: 'Hazırız!',
+    subtitle: 'Sadece 1 dakikalık ilk egzersizin seni bekliyor.',
+    linked: '1 dakikalık',
+    duration: '1 Dakika',
+    area: 'Omuz',
+    cta: 'Başla',
+    later: 'Belki daha sonra',
+  },
   login: {
     title: 'Giriş Yap',
     title_2: 'Giriş yap veya hesap oluştur',

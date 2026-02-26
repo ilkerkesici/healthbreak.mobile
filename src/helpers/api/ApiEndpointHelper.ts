@@ -1,7 +1,6 @@
-import { User } from 'types/models';
-import { APIHelper } from './ApiHelper';
+import { OnboardingAnswersPayload, OnboardingProfile } from 'types/models';
+import { ApiHelper } from './ApiHelper';
 import NetworkError from '../errors/NetworkError';
-import { APICacheKeys } from './api.types';
 
 enum Status {}
 
@@ -17,9 +16,18 @@ export interface PaginationFetchResponse<T> {
   current_page: number;
 }
 
+const PROD_URL = 'https://common-api.venei.co';
+const DEV_URL = 'http://localhost:4003';
+
+const ApiController = new ApiHelper(DEV_URL);
+
 class ApiEndpointHelper {
-  getUser = async () => {
-    const result = await APIHelper.get<DefaultResponse<User>>('/api/user', {});
+  createOnboardingProfile = async (payload: OnboardingAnswersPayload) => {
+    const result = await ApiController.post<DefaultResponse<OnboardingProfile>>(
+      '/api/profile',
+      payload,
+    );
+
     if (!result || result instanceof NetworkError) {
       return;
     }
@@ -27,10 +35,12 @@ class ApiEndpointHelper {
     return result.Data;
   };
 
-  loginFirebase = async (idToken: string) => {
-    const result = await APIHelper.get<DefaultResponse<User>>('/api/user', {
-      idToken,
-    });
+  getOnboardingProfile = async () => {
+    const result = await ApiController.get<DefaultResponse<OnboardingProfile>>(
+      '/api/profile',
+      {},
+    );
+
     if (!result || result instanceof NetworkError) {
       return;
     }

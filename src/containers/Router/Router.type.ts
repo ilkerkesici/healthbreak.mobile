@@ -11,6 +11,8 @@ export type RootStackParamList = {
   LANGUAGE_CHANGE: undefined;
   PROMO_CODE: undefined;
   WELCOME: undefined;
+  NOTIF_PERMIT: undefined;
+  START_PAGE: undefined;
 };
 
 export type RootNavigation = NativeStackNavigationProp<RootStackParamList>;

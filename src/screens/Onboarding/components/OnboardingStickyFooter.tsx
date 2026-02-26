@@ -1,6 +1,6 @@
-import { Block, Icon, Text } from 'components/CoreComponents';
+import { Button } from 'components/CoreComponents';
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const BUTTON_HEIGHT = 52;
@@ -22,17 +22,12 @@ export function OnboardingStickyFooter({
 
   return (
     <View style={[styles.wrapper, { paddingBottom: bottomPadding }]}>
-      <TouchableOpacity
+      <Button
+        text={label}
         onPress={onPress}
         disabled={disabled}
-        activeOpacity={0.9}
-        style={[styles.button, disabled && styles.buttonDisabled]}
-      >
-        <Text variant="headline" size="md" color="white" style={styles.label}>
-          {label}
-        </Text>
-        <Icon name="o:arrow_right" size={22} color="white" />
-      </TouchableOpacity>
+        rightIcon="o:arrow_right"
+      />
     </View>
   );
 }

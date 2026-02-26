@@ -3,7 +3,7 @@ import { Block } from 'components/CoreComponents';
 import { RootNavigation } from 'containers/Router/Router.type';
 import ScreenContainer from 'containers/ScreenContainer/ScreenContainer';
 import React, { useCallback, useRef, useState } from 'react';
-import { Alert, Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
 import { useSharedValue } from 'react-native-reanimated';
 
@@ -14,6 +14,7 @@ import {
 } from './components';
 import type { OnboardingAnswers } from './Onboarding.types';
 import { useOnboardingQuestions } from './useOnboardingQuestions';
+import useProfileHook from 'helpers/hooks/useProfileHook';
 
 const { width, height } = Dimensions.get('window');
 
@@ -22,6 +23,7 @@ const Onboarding = () => {
   const carouselRef = useRef<ICarouselInstance>(null);
   const progress = useSharedValue(0);
   const { questions, nextLabel } = useOnboardingQuestions();
+  const { setProfile } = useProfileHook();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<OnboardingAnswers>({});
@@ -43,22 +45,21 @@ const Onboarding = () => {
   }, []);
 
   const handleSubmit = useCallback(
-    (finalAnswers: OnboardingAnswers) => {
+    async (finalAnswers: OnboardingAnswers) => {
       const payload = questions.map(q => ({
         questionId: q.id,
-        question: q.question,
-        selectedLabels: (finalAnswers[q.id] ?? []).map(id => {
-          const opt = q.options.find(o => o.id === id);
-          return opt?.label ?? id;
-        }),
+        selectedLabels: finalAnswers[q.id] ?? [],
       }));
-      console.log('Onboarding submit:', payload);
-      Alert.alert('Onboarding Tamamlandı', JSON.stringify(payload, null, 2), [
-        { text: 'Tamam' },
-      ]);
-      // navigation.navigate('ONBOARDING_PROFILE'); // veya sonraki ekran
+
+      try {
+        await setProfile(payload);
+        navigation.navigate('NOTIF_PERMIT');
+        // navigation.navigate('ONBOARDING_PROFILE'); // veya sonraki ekran
+      } catch (e: any) {
+        console.log(e);
+      }
     },
-    [questions],
+    [questions, setProfile, navigation],
   );
 
   const goNext = useCallback(() => {

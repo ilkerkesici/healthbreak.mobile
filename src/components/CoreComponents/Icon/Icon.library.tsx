@@ -101,6 +101,155 @@ export const GalleryGradient = ({
   );
 };
 
+export const NeckIcon = ({
+  width = 24,
+  height = 24,
+  color,
+  strokeWidth = 1.5,
+}: IconLibraryProps): JSX.Element => {
+  return (
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+      {/* Kafa */}
+      <Circle
+        cx="12"
+        cy="5"
+        r="3"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+      {/* Boyun kıvrımı (ön ve arka çizgi) */}
+      <Path
+        d="M10.5 8.5C10 9.3 9.7 10.3 9.7 11.4C9.7 12.7 10.1 13.8 10.9 14.7"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M13.5 8.5C14 9.3 14.3 10.3 14.3 11.4C14.3 12.7 13.9 13.8 13.1 14.7"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+      {/* Omuz hattı */}
+      <Path
+        d="M9.5 17C10.4 16.3 11.2 16 12 16C12.8 16 13.6 16.3 14.5 17"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
+export const UpperBackIcon = ({
+  width = 24,
+  height = 24,
+  color,
+  strokeWidth = 1.5,
+}: IconLibraryProps): JSX.Element => {
+  return (
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+      {/* Kafa */}
+      <Circle
+        cx="12"
+        cy="5"
+        r="3"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+      {/* Gövde */}
+      <Path
+        d="M9 9C9.5 8 10.6 7.5 12 7.5C13.4 7.5 14.5 8 15 9V16.5C15 17.9 13.9 19 12.5 19H11.5C10.1 19 9 17.9 9 16.5V9Z"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+      {/* Üst sırt kıvrımı */}
+      <Path
+        d="M9.5 10.2C10.4 9.8 11.2 9.6 12 9.6C12.8 9.6 13.6 9.8 14.5 10.2"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
+export const LowerBackIcon = ({
+  width = 24,
+  height = 24,
+  color,
+  strokeWidth = 1.5,
+}: IconLibraryProps): JSX.Element => {
+  return (
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+      {/* Kafa */}
+      <Circle
+        cx="12"
+        cy="5"
+        r="3"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+      {/* Gövde */}
+      <Path
+        d="M9 9C9.5 8 10.6 7.5 12 7.5C13.4 7.5 14.5 8 15 9V16.5C15 17.9 13.9 19 12.5 19H11.5C10.1 19 9 17.9 9 16.5V9Z"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+      {/* Bel kıvrımı */}
+      <Path
+        d="M9.7 13.2C10.5 13 11.2 13 12 13.2C12.8 13.4 13.4 13.8 13.8 14.4C14.1 14.9 14.3 15.5 14.3 16.1"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
+export const WristIcon = ({
+  width = 24,
+  height = 24,
+  color,
+  strokeWidth = 1.5,
+}: IconLibraryProps): JSX.Element => {
+  return (
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+      {/* Avuç içi */}
+      <Rect
+        x="9.5"
+        y="6"
+        width="5"
+        height="6"
+        rx="1.4"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+      {/* Parmaklar */}
+      <Rect x="10" y="3" width="1.1" height="3" rx="0.55" fill={color} />
+      <Rect x="11.5" y="2.5" width="1.1" height="3.5" rx="0.55" fill={color} />
+      <Rect x="13" y="3" width="1.1" height="3" rx="0.55" fill={color} />
+      {/* Bilek */}
+      <Rect
+        x="10.3"
+        y="12.5"
+        width="3.4"
+        height="4"
+        rx="1.4"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+    </Svg>
+  );
+};
+
 export const HomeSolid = ({
   width = 24,
   height = 24,
@@ -2030,6 +2179,106 @@ export const ClockOutline = ({
   );
 };
 
+/** Outline pie chart – 25% filled (2–4 saat) */
+export const PieChartQuarterOutline = ({
+  width = 24,
+  height = 24,
+  color,
+  strokeWidth = 1.5,
+}: IconLibraryProps): JSX.Element => {
+  return (
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+      <Circle
+        cx="12"
+        cy="12"
+        r="10"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+      <Path
+        d="M12 12 L12 2 A10 10 0 0 1 22 12 Z"
+        fill={color}
+        fillOpacity={0.4}
+      />
+    </Svg>
+  );
+};
+
+/** Outline pie chart – 50% filled (4–6 saat) */
+export const PieChartHalfOutline = ({
+  width = 24,
+  height = 24,
+  color,
+  strokeWidth = 1.5,
+}: IconLibraryProps): JSX.Element => {
+  return (
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+      <Circle
+        cx="12"
+        cy="12"
+        r="10"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+      <Path
+        d="M12 12 L12 2 A10 10 0 0 1 12 22 Z"
+        fill={color}
+        fillOpacity={0.4}
+      />
+    </Svg>
+  );
+};
+
+/** Outline pie chart – 75% filled (6–8 saat) */
+export const PieChartThreeQuarterOutline = ({
+  width = 24,
+  height = 24,
+  color,
+  strokeWidth = 1.5,
+}: IconLibraryProps): JSX.Element => {
+  return (
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+      <Circle
+        cx="12"
+        cy="12"
+        r="10"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+      <Path
+        d="M12 12 L12 2 A10 10 0 0 1 12 22 A10 10 0 0 1 2 12 Z"
+        fill={color}
+        fillOpacity={0.4}
+      />
+    </Svg>
+  );
+};
+
+/** Outline pie chart – 100% filled (8+ saat) */
+export const PieChartFullOutline = ({
+  width = 24,
+  height = 24,
+  color,
+  strokeWidth = 1.5,
+}: IconLibraryProps): JSX.Element => {
+  return (
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+      <Circle
+        cx="12"
+        cy="12"
+        r="10"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        fill={color}
+        fillOpacity={0.4}
+      />
+    </Svg>
+  );
+};
+
 export const LogoSolid = ({
   width = 119,
   height = 36,
@@ -2235,6 +2484,108 @@ export const MoonOutline = ({
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
+/** Öğlen güneş */
+export const SunOutline = ({
+  width = 24,
+  height = 24,
+  color,
+  strokeWidth = 1.5,
+}: IconLibraryProps): JSX.Element => {
+  return (
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+      <Circle
+        cx="12"
+        cy="12"
+        r="4"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+      <Path
+        d="M12 2V4"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M12 20V22"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M4 12H2"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M22 12H20"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M5.64 5.64L4.22 4.22"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M19.78 19.78L18.36 18.36"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M5.64 18.36L4.22 19.78"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M19.78 4.22L18.36 5.64"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
+/** Sabah / yeni doğan güneş */
+export const SunriseOutline = ({
+  width = 24,
+  height = 24,
+  color,
+  strokeWidth = 1.5,
+}: IconLibraryProps): JSX.Element => {
+  return (
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M4 18H2M22 18H20M6 12H4M20 12H18M6 6L4.5 4.5M19.5 4.5L18 6M12 2V4"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+      <Circle
+        cx="12"
+        cy="12"
+        r="4"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+      <Path
+        d="M12 16V22M9 19H15"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
       />
     </Svg>
   );
@@ -2706,6 +3057,10 @@ const iconLookUp: Record<IconType, any> = {
   's:nav_dotted': NavDottedSolid,
   'o:user': UserOutline,
   's:user': UserSolid,
+  'o:neck': NeckIcon,
+  'o:lower_back': LowerBackIcon,
+  'o:upper_back': UpperBackIcon,
+  'o:wrist': WristIcon,
   'o:audit': Audit,
   'o:lock_key_hole_light': LockKeyHoleLight,
   'o:calendar': Calendar,
@@ -2746,6 +3101,10 @@ const iconLookUp: Record<IconType, any> = {
   's:puzzle': PuzzleSolid,
   'o:comment': CommentOutline,
   'o:clock': ClockOutline,
+  'o:pie_quarter': PieChartQuarterOutline,
+  'o:pie_half': PieChartHalfOutline,
+  'o:pie_three_quarter': PieChartThreeQuarterOutline,
+  'o:pie_full': PieChartFullOutline,
   'o:eye': EyeOutline,
   'o:eye-slash': EyeSlashOutline,
   's:play': PlaySolid,
@@ -2757,6 +3116,8 @@ const iconLookUp: Record<IconType, any> = {
   'o:shop': ShopOutline,
   'o:briefcase': BriefCaseOutline,
   'o:moon': MoonOutline,
+  'o:sun': SunOutline,
+  'o:sunrise': SunriseOutline,
   'o:sms': SmsOutline,
   'o:plus': PlusOutline,
   's:plus': PlusSolid,
