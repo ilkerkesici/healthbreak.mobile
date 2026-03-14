@@ -1,4 +1,4 @@
-import { Block, Text } from 'components/CoreComponents';
+import { Text } from 'components/CoreComponents';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { OnboardingQuestion } from '../Onboarding.types';
@@ -28,7 +28,7 @@ export function OnboardingQuestionSlide({
         <Text
           variant="subhead"
           size="sm"
-          color="neutral.600"
+          color="neutral.500"
           style={styles.stepLabel}
         >
           {question.stepLabel}
@@ -37,7 +37,7 @@ export function OnboardingQuestionSlide({
       <Text
         variant="title2"
         size="xl"
-        color="neutral.950"
+        color="white"
         style={styles.question}
       >
         {question.question}
@@ -45,7 +45,7 @@ export function OnboardingQuestionSlide({
       <Text
         variant="text"
         size="md"
-        color="neutral.600"
+        color="neutral.400"
         style={styles.subtitle}
       >
         {question.subtitle}

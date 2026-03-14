@@ -7,12 +7,14 @@ import { designPropToStyle } from 'helpers/utils/design.utils';
 import { DEFAULT_SCREEN_HORIZONTAL_PADDING } from 'constants/design';
 import { useTheme, useThemeColor } from 'helpers/hooks/useThemeColor';
 //import {useNavigationState} from '@react-navigation/native';
+import { ColorType } from 'assets/colors';
 
 interface Props extends DesignProps {
   children?: React.ReactNode;
   safeAreaTop?: boolean;
   safeAreaBottom?: boolean;
   defaultPadding?: boolean;
+  bgColor?: ColorType;
 }
 
 const ScreenContainer: React.FC<Props> = ({
@@ -21,19 +23,13 @@ const ScreenContainer: React.FC<Props> = ({
   paddingHorizontal = defaultPadding ? DEFAULT_SCREEN_HORIZONTAL_PADDING : 0,
   safeAreaBottom = false,
   safeAreaTop = false,
+  bgColor = 'bg-1',
   ...rest
 }) => {
   const insets = useSafeAreaInsets();
   const { isDarkMode } = useTheme();
 
-  //const state = useNavigationState(state => state);
-  //const isForceDark = useMemo(
-  //  () => state.routeNames[state.index] === 'VIDEO_FEED',
-  //  [state],
-  //);
-  const isForceDark = false;
-
-  const [backgroundColor] = useThemeColor(['bg-1']);
+  const [backgroundColor] = useThemeColor([bgColor]);
   const designProps = designPropToStyle({ paddingHorizontal, ...rest });
   const propsStyle = {
     paddingTop: safeAreaTop ? insets.top : 0,

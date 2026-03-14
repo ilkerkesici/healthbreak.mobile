@@ -32,6 +32,7 @@ const StartPage = () => {
           marginHorizontal={60}
           marginTop={12}
           marginBottom={32}
+          color="neutral.400"
           linked={[
             {
               text: i18n.t('start_page.linked'),

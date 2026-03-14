@@ -18,10 +18,13 @@ export const colorPalette = (isLightTheme: boolean = true) => ({
 
   'primary.50': isLightTheme ? '#f0f9ff' : '#122d3f',
   'primary.100': isLightTheme ? '#e0f2fe' : '#1b465f',
+  'primary.150': '#E6F0EE',
   'primary.200': isLightTheme ? '#b9e6fe' : '#0D0D0D',
   'primary.300': isLightTheme ? '#7cd3fd' : '#1b6289',
   'primary.400': isLightTheme ? '#14EDB9' : '#14EDB9',
   'primary.500': isLightTheme ? '#056650' : '#056650',
+  'primary.500/60': isLightTheme ? '#05665099' : '#05665099',
+  'primary.500/20': isLightTheme ? '#05665033' : '#05665033',
   'primary.600': isLightTheme ? '#007fc0' : '#55b2db',
   'primary.700': isLightTheme ? '#0169a3' : '#90cce9',
   'primary.700.15': isLightTheme ? '#4671B126' : '#4671B126',
@@ -139,6 +142,7 @@ export const colorPalette = (isLightTheme: boolean = true) => ({
   'dark-odd-name': '#8F969C',
 
   'bg-1': '#0d2329',
+  'bg-2': '#F5F8F8',
 });
 
 export const defaultPalette = colorPalette();

@@ -22,7 +22,7 @@ export function OnboardingHeader({
       <View style={styles.row}>
         {onBack ? (
           <TouchableOpacity onPress={onBack} hitSlop={12} style={styles.back}>
-            <Icon name="o:arrow_left" size={24} color="neutral.950" />
+            <Icon name="o:arrow_left" size={24} color="white" />
           </TouchableOpacity>
         ) : (
           <Block width={40} height={40} />
@@ -35,7 +35,7 @@ export function OnboardingHeader({
         <Text
           variant="text"
           size="sm"
-          color="neutral.600"
+          color="neutral.500"
           style={styles.counter}
         >
           {currentIndex + 1}/{total}

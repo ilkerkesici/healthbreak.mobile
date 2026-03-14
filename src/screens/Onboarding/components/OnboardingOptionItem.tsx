@@ -41,7 +41,7 @@ export function OnboardingOptionItem({
         <Text
           variant="text"
           size="sm"
-          color="neutral.950"
+          color="white"
           numberOfLines={2}
           style={styles.gridLabel}
         >
@@ -74,7 +74,7 @@ export function OnboardingOptionItem({
       <Text
         variant="text"
         size="lg"
-        color="neutral.950"
+        color="white"
         style={styles.listLabel}
       >
         {option.label}

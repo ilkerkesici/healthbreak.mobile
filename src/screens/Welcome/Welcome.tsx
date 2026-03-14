@@ -35,7 +35,7 @@ const Welcome = () => {
           //   marginHorizontal={DEFAULT_SCREEN_HORIZONTAL_PADDING}
         >
           <Image source={images.logo} width={100} height={100} />
-          <Text style={styles.title} fontWeight="600" fill center>
+          <Text style={styles.title} fontWeight="600" fill center color="white">
             {i18n.t('welcome.title_1')}
           </Text>
           <Text
@@ -48,12 +48,12 @@ const Welcome = () => {
           >
             {i18n.t('welcome.title_2')}
           </Text>
-          <Text style={styles.title} fill center fontWeight="600">
+          <Text style={styles.title} fill center fontWeight="600" color="white">
             {i18n.t('welcome.title_3')}
           </Text>
         </Block>
 
-        <Text center paddingHorizontal={30} marginTop={20} size="md">
+        <Text center paddingHorizontal={30} marginTop={20} size="md" color="neutral.400">
           {i18n.t('welcome.subtitle')}
         </Text>
         <Block flex={1} />

@@ -40,7 +40,7 @@ export const useTheme = () => {
 
   return {
     theme: 'dark',
-    isDarkMode: true,
+    isDarkMode: false,
     // selectTheme,
     // getLocalSelection,
   };

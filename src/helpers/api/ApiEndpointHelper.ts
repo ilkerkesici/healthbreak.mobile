@@ -1,4 +1,10 @@
-import { OnboardingAnswersPayload, OnboardingProfile } from 'types/models';
+import {
+  ExerciseHistoryResponse,
+  NextExerciseResponse,
+  OnboardingAnswersPayload,
+  OnboardingProfile,
+  WeeklyRhythmResponse,
+} from 'types/models';
 import { ApiHelper } from './ApiHelper';
 import NetworkError from '../errors/NetworkError';
 
@@ -40,6 +46,42 @@ class ApiEndpointHelper {
       '/api/profile',
       {},
     );
+
+    if (!result || result instanceof NetworkError) {
+      return;
+    }
+
+    return result.Data;
+  };
+
+  getNextExercise = async () => {
+    const result = await ApiController.get<
+      DefaultResponse<NextExerciseResponse>
+    >('/api/exercise/next', {});
+
+    if (!result || result instanceof NetworkError) {
+      return;
+    }
+
+    return result.Data;
+  };
+
+  getWeeklyRhythm = async () => {
+    const result = await ApiController.get<
+      DefaultResponse<WeeklyRhythmResponse>
+    >('/api/exercise/weekly-rhythm', {});
+
+    if (!result || result instanceof NetworkError) {
+      return;
+    }
+
+    return result.Data;
+  };
+
+  getExerciseHistory = async () => {
+    const result = await ApiController.get<
+      DefaultResponse<ExerciseHistoryResponse>
+    >('/api/exercise/history', {});
 
     if (!result || result instanceof NetworkError) {
       return;

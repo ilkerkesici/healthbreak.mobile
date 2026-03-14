@@ -12,13 +12,17 @@ import useAnonymousLoginHook from 'helpers/hooks/auth/useAnonymousLoginHook';
 // import OneSignalHelper from 'helpers/OneSignalHelper';
 import useTranslation from 'helpers/hooks/useTranslation';
 import { requestTrackingTransparency } from 'helpers/PermissionHelper';
+import useProfileHook from 'helpers/hooks/useProfileHook';
+import useNextExercise from 'helpers/hooks/useNextExerciseHook';
 
 const Splash = () => {
-  const { hasHydrated: hydratedApp, token, setProfile } = useAppInitStore();
+  const { hasHydrated: hydratedApp, token } = useAppInitStore();
   const { hasHydrated: hydratedSetting } = useAppSettingStore();
 
   // const { getAppSubscriptions, checkIsPremium } = usePremiumHook();
   const { getUser } = useAuthHook();
+  const { getProfile } = useProfileHook();
+  const { getNextExercise } = useNextExercise();
   const { signIn } = useAnonymousLoginHook({});
   const { initTranslation } = useTranslation();
 
@@ -61,12 +65,21 @@ const Splash = () => {
     //   return;
     // }
     const userInfo = await getUser();
+
+    console.log('userInfo', userInfo);
     if (userInfo) {
       // checkIsPremium(userInfo);
       // await OneSignalHelper.login(userInfo.uid);
     }
 
-    goToOnboarding();
+    const profile = await getProfile();
+
+    if (profile) {
+      getNextExercise();
+      goToHome();
+    } else {
+      goToOnboarding();
+    }
     // goToHome();
     closeSplash();
   }, [token, goToHome, goToOnboarding, closeSplash]);
