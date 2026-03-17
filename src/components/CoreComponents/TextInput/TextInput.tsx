@@ -43,6 +43,7 @@ interface Props extends DesignProps, TextInputProps {
   rightButtonProps?: ButtonProps;
   errorText?: string;
   disabled?: boolean;
+  label?: string;
   renderRight?: () => React.ReactNode;
 }
 
@@ -51,8 +52,8 @@ const TextInput: React.FC<Props> = ({
   rightIconProps,
   placeholderTextColor = 'neutral.600',
   textColor = 'neutral.950',
-  textStyle = { variant: 'text', size: 'lg', fontWeight: '400' },
-  placeholderTextStyle = { variant: 'text', size: 'lg', fontWeight: '400' },
+  textStyle = { variant: 'text', size: 'md', fontWeight: '400' },
+  placeholderTextStyle = { variant: 'text', size: 'md', fontWeight: '400' },
   backgroundColor = 'custom-wb',
   borderColor = 'neutral.400',
   value,
@@ -61,6 +62,7 @@ const TextInput: React.FC<Props> = ({
   errorText,
   disabled,
   secureTextEntry,
+  label,
   renderRight,
   ...rest
 }) => {
@@ -74,12 +76,12 @@ const TextInput: React.FC<Props> = ({
   const propsTextStyle =
     textStyle && value
       ? {
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: textStyle.fontWeight,
         }
       : placeholderTextStyle && !value
       ? {
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: placeholderTextStyle.fontWeight,
         }
       : undefined;
@@ -97,7 +99,7 @@ const TextInput: React.FC<Props> = ({
           backgroundColour={'neutral.300'}
           fill
           flexDirection="row"
-          paddingVertical={10}
+          paddingVertical={12}
           paddingHorizontal={14}
         >
           {leftIconProps ? <Icon marginRight={7} {...leftIconProps} /> : null}
@@ -126,6 +128,15 @@ const TextInput: React.FC<Props> = ({
 
   return (
     <Block {...(rest as any)} alignItems="flex-start">
+      {label ? (
+        <Text
+          marginBottom={4}
+          variant="subhead"
+          size="xs"
+          color={'primary.500'}>
+          {label}
+        </Text>
+      ) : null}
       <Block
         borderRadius={borderRadius}
         backgroundColour={backgroundColor}
@@ -152,7 +163,7 @@ const TextInput: React.FC<Props> = ({
         {rightIconProps ? <Icon marginRight={7} {...rightIconProps} /> : null}
         {secureTextEntry ? (
           <Icon
-            marginRight={7}
+            marginRight={16}
             name={secure ? 'o:eye' : 'o:eye-slash'}
             color="neutral.600"
             onPress={() => setSecure(!secure)}
@@ -179,17 +190,17 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     backgroundColor: 'transparent',
-    paddingVertical: 10,
-    paddingHorizontal: 14,
-    borderRadius: 20,
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 2,
-    shadowColor: '#FF00FF',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 30,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 3,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 3.84,
+    // elevation: 2,
+    // shadowColor: '#FF00FF',
   },
   errorText: {
     position: 'absolute',

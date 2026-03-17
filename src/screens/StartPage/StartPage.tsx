@@ -9,10 +9,13 @@ import { StyleSheet } from 'react-native';
 import LinkedText from 'components/CoreComponents/Text/LinkedText';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigation } from 'containers/Router/Router.type';
+import useNextExercise from 'helpers/hooks/useNextExerciseHook';
+import { TARGET_ICON_MAP } from 'constants/exercise';
 
 const StartPage = () => {
   const { i18n } = useTranslation();
   const navigation = useNavigation<RootNavigation>();
+  const { nextExercise } = useNextExercise();
 
   const onPressStart = useCallback(() => {
     // Şimdilik home'a yönlendir, sonra Paywall'a yönlendirilecek.
@@ -60,9 +63,16 @@ const StartPage = () => {
           </Block>
 
           <Block style={styles.pill}>
-            <Icon name="o:neck" size={16} color="secondary.500" />
+            <Icon
+              name={
+                TARGET_ICON_MAP[nextExercise?.exercise?.target ?? 'neck'] ??
+                'o:neck'
+              }
+              size={16}
+              color="secondary.500"
+            />
             <Text variant="text" size="sm" color="white" marginLeft={6}>
-              {i18n.t('start_page.area')}
+              {i18n.t(`exercise_target.${nextExercise?.exercise?.target}`)}
             </Text>
           </Block>
         </Block>

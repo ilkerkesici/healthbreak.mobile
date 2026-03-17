@@ -9,6 +9,7 @@ const ACCENT_BG = '#056650';
 interface OnboardingStickyFooterProps {
   label: string;
   disabled: boolean;
+  loading: boolean;
   onPress: () => void;
 }
 
@@ -16,6 +17,7 @@ export function OnboardingStickyFooter({
   label,
   disabled,
   onPress,
+  loading,
 }: OnboardingStickyFooterProps) {
   const insets = useSafeAreaInsets();
   const bottomPadding = Math.max(insets.bottom, 16);
@@ -27,6 +29,7 @@ export function OnboardingStickyFooter({
         onPress={onPress}
         disabled={disabled}
         rightIcon="o:arrow_right"
+        loading={loading}
       />
     </View>
   );

@@ -13,6 +13,9 @@ export type RootStackParamList = {
   WELCOME: undefined;
   NOTIF_PERMIT: undefined;
   START_PAGE: undefined;
+  LOGIN: undefined;
+  REGISTER: undefined;
+  FORGOT_PASSWORD: undefined;
 };
 
 export type RootNavigation = NativeStackNavigationProp<RootStackParamList>;

@@ -8,8 +8,8 @@ import useAfterLogin from './useAfterLogin';
 GoogleSignin.configure({
   webClientId:
     Platform.OS === 'ios'
-      ? '870170193165-avqlmen4pe78hi266ci8sa18de03qc6j.apps.googleusercontent.com'
-      : '870170193165-qkin580gei3aj2escl102fe3ed217r8o.apps.googleusercontent.com',
+      ? '698171505477-ek3lq5mu94pitvsvbhpklpukro4sn6jq.apps.googleusercontent.com'
+      : '698171505477-ek3lq5mu94pitvsvbhpklpukro4sn6jq.apps.googleusercontent.com',
   offlineAccess: true,
 });
 
@@ -28,7 +28,7 @@ export default function useGoogleSignInHook({ onLoginSuccess }: Props) {
     try {
       const result = await GoogleSignin.hasPlayServices();
       setHasPlayServices(result);
-    } catch (e) {
+    } catch {
       setHasPlayServices(false);
     }
   };
@@ -47,7 +47,7 @@ export default function useGoogleSignInHook({ onLoginSuccess }: Props) {
       let userInfo;
       try {
         userInfo = await GoogleSignin.signIn();
-      } catch (e) {
+      } catch {
         setLoading(false);
         return;
       }
@@ -60,8 +60,23 @@ export default function useGoogleSignInHook({ onLoginSuccess }: Props) {
       }
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-      await auth().currentUser?.linkWithCredential(googleCredential);
-      const id = await auth().currentUser?.getIdToken();
+      let id: string | undefined | null;
+
+      try {
+        // Önce anonim kullanıcı ile linklemeyi dene.
+        await auth().currentUser?.linkWithCredential(googleCredential);
+        id = await auth().currentUser?.getIdToken();
+      } catch (linkError: any) {
+        // Eğer credential başka bir hesapta ise, direkt signIn ile devam et.
+        if (linkError?.code === 'auth/credential-already-in-use') {
+          const signInResult = await auth().signInWithCredential(
+            googleCredential,
+          );
+          id = await signInResult.user.getIdToken();
+        } else {
+          throw linkError;
+        }
+      }
       // console.log('ID Token: ', id);
 
       if (!id) {

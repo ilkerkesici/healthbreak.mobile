@@ -24,7 +24,11 @@ const MOTIVATION_KEYS = Array.from(
   (_, i) => `motivation_${i + 1}` as const,
 );
 
-export function HomeHeader() {
+interface HomeHeaderProps {
+  onPressProfile?: () => void;
+}
+
+export function HomeHeader({ onPressProfile }: HomeHeaderProps) {
   const { i18n } = useTranslation();
 
   const greetingKey = useMemo(() => getGreetingKey(), []);
@@ -71,6 +75,7 @@ export function HomeHeader() {
         alignItems="center"
         backgroundColour="white"
         borderRadius={24}
+        onPress={onPressProfile}
       >
         <Block
           width={44}

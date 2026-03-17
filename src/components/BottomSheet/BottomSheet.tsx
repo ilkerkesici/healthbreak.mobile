@@ -51,7 +51,7 @@ export type BottomSheetRefType = GorhomBottomSheetScope.BottomSheetModal;
 export const BottomSheet = forwardRef<BottomSheetRefType, BottomSheetProps>(
   (props, ref) => {
     const {handleProps, footerProps, backdropProps, ...rest} = props;
-    const [backgroundColor] = useThemeColor(['neutral.200']);
+    const [backgroundColor] = useThemeColor(['white']);
     const insets = useSafeAreaInsets();
 
     const backgroundStyle = useMemo(

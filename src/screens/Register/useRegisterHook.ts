@@ -1,62 +1,60 @@
-import {CommonActions, useNavigation} from '@react-navigation/native';
-import {RootNavigation} from 'containers/Router/Router.type';
+import { CommonActions, useNavigation } from '@react-navigation/native';
+import { RootNavigation } from 'containers/Router/Router.type';
 import useAppleSignInHook from 'helpers/hooks/auth/useAppleSignInHook';
 import useEmailPasswordSignInHook from 'helpers/hooks/auth/useEmailPasswordSignInHook';
 import useGoogleSignInHook from 'helpers/hooks/auth/useGoogleSignInHook';
 import useTranslation from 'helpers/hooks/useTranslation';
-import {useState} from 'react';
+import { useState } from 'react';
 
-export default function useLoginHook() {
+export default function useRegisterHook() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [confirmError, setConfirmError] = useState('');
 
   const navigation = useNavigation<RootNavigation>();
 
   const onLoginSuccess = () => {
     const action = CommonActions.reset({
       index: 0,
-      routes: [{name: 'HOME'}],
+      routes: [{ name: 'HOME' }],
     });
     navigation.dispatch(action);
   };
 
-  const goToRegister = () => {
-    navigation.navigate('REGISTER');
+  const goToLogin = () => {
+    navigation.navigate('LOGIN');
   };
 
-  const goToForgotPassword = () => {
-    navigation.navigate('FORGOT_PASSWORD');
-  };
+  const { signIn: signInWithGoogle, loading: googleLoading } =
+    useGoogleSignInHook({ onLoginSuccess });
 
-  const {signIn: signInWithGoogle, loading: googleLoading} =
-    useGoogleSignInHook({onLoginSuccess});
+  const { createUser, loading: createLoading } = useEmailPasswordSignInHook({
+    onLoginSuccess,
+  });
 
-  const {signIn: signInWithEmailPassword, loading: signInLoading} =
-    useEmailPasswordSignInHook({
-      onLoginSuccess,
-    });
-
-  const {signIn: signInWithApple, loading: appleSignInLoading} =
+  const { signIn: signInWithApple, loading: appleSignInLoading } =
     useAppleSignInHook({
       onLoginSuccess,
     });
 
-  const {i18n} = useTranslation();
+  const { i18n } = useTranslation();
 
   const onChangeEmail = (text: string) => {
-    if (emailError) {
-      setEmailError('');
-    }
+    if (emailError) setEmailError('');
     setEmail(text);
   };
 
   const onChangePassword = (text: string) => {
-    if (passwordError) {
-      setPasswordError('');
-    }
+    if (passwordError) setPasswordError('');
     setPassword(text);
+  };
+
+  const onChangeConfirmPassword = (text: string) => {
+    if (confirmError) setConfirmError('');
+    setConfirmPassword(text);
   };
 
   const submitPreCheck = () => {
@@ -68,6 +66,10 @@ export default function useLoginHook() {
       setPasswordError(i18n.t('login.password_error'));
       return false;
     }
+    if (password !== confirmPassword) {
+      setConfirmError(i18n.t('register.password_dont_match'));
+      return false;
+    }
     return true;
   };
 
@@ -76,23 +78,26 @@ export default function useLoginHook() {
     if (!isValid) {
       return;
     }
-    await signInWithEmailPassword(email, password);
+    await createUser(email, password);
   };
 
   return {
     email,
     password,
+    confirmPassword,
     emailError,
     passwordError,
+    confirmError,
     googleLoading,
-    signInLoading,
+    createLoading,
     appleSignInLoading,
     onChangeEmail,
     onChangePassword,
+    onChangeConfirmPassword,
     onPressSubmit,
     signInWithGoogle,
-    goToRegister,
-    goToForgotPassword,
+    goToLogin,
     signInWithApple,
   };
 }
+

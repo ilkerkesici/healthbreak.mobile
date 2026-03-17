@@ -22,11 +22,12 @@ export default function useEmailPasswordSignInHook({ onLoginSuccess }: Props) {
   // };
 
   const signIn = async (email: string, password: string) => {
+    console.log('signIn', email, password);
     try {
       setLoading(true);
       const credential = auth.EmailAuthProvider.credential(email, password);
       const result = await auth().currentUser?.linkWithCredential(credential);
-
+      console.log('result', result);
       if (result?.user && !result?.user?.emailVerified) {
         await result?.user?.sendEmailVerification();
       }
@@ -39,7 +40,22 @@ export default function useEmailPasswordSignInHook({ onLoginSuccess }: Props) {
       await runAfterFirebaseLogin(id);
     } catch (error: any) {
       console.log('Error : ', error);
-      catchFirebaseError(error);
+      // Eğer e-posta zaten başka bir hesapta kayıtlıysa, link yerine doğrudan signIn dene.
+      if (error?.code === 'auth/email-already-in-use') {
+        try {
+          const signInResult = await auth().signInWithEmailAndPassword(
+            email,
+            password,
+          );
+          const idToken = await signInResult.user.getIdToken();
+          await runAfterFirebaseLogin(idToken);
+        } catch (innerError: any) {
+          console.log('Fallback signIn error: ', innerError);
+          catchFirebaseError(innerError);
+        }
+      } else {
+        catchFirebaseError(error);
+      }
     }
     setLoading(false);
   };

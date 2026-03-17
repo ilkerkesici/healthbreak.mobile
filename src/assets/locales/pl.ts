@@ -117,6 +117,16 @@ export default {
   },
   home: {
     title: 'Strona główna',
+    next_exercise: {
+      next_break: 'NASTĘPNA PRZERWA',
+      min_later: 'Za {{min}} min',
+      hours_min_later: 'Za {{hours}} godz {{min}} min',
+      now: 'Czas na przerwę',
+      target: 'OBSZAR',
+      duration: 'CZAS TRWANIA',
+      duration_1_min: '1 minuta',
+      take_break_now: 'Zrób przerwę teraz',
+    },
   },
   permission: {
     camera_alert_title: 'Uprawnienie Aparatu',

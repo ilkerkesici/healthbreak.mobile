@@ -120,6 +120,16 @@ export default {
   },
   home: {
     title: 'Startseite',
+    next_exercise: {
+      next_break: 'NÄCHSTE PAUSE',
+      min_later: 'In {{min}} Min',
+      hours_min_later: 'In {{hours}} Std {{min}} Min',
+      now: 'Zeit für eine Pause',
+      target: 'ZIEL',
+      duration: 'DAUER',
+      duration_1_min: '1 Minute',
+      take_break_now: 'Jetzt eine Pause machen',
+    },
   },
   permission: {
     camera_alert_title: 'Kamera-Berechtigung',

@@ -15,6 +15,9 @@ import Home from 'screens/Home/Home';
 import Welcome from 'screens/Welcome/Welcome';
 import StartPage from 'screens/StartPage/StartPage';
 import NotificationPermission from 'screens/NotificationPermission/NotificationPermission';
+import Login from 'screens/Login/Login';
+import ForgotPassword from 'screens/ForgotPassword/ForgotPassword';
+import Register from 'screens/Register/Register';
 
 const MainNavigator = createNativeStackNavigator<RootStackParamList>();
 
@@ -95,6 +98,21 @@ export default function Router() {
           options={screenOptions}
           name="PROMO_CODE"
           component={PromoCodeScreen}
+        />
+        <MainNavigator.Screen
+          options={screenOptions}
+          name="LOGIN"
+          component={Login}
+        />
+        <MainNavigator.Screen
+          options={screenOptions}
+          name="FORGOT_PASSWORD"
+          component={ForgotPassword}
+        />
+        <MainNavigator.Screen
+          options={screenOptions}
+          name="REGISTER"
+          component={Register}
         />
       </MainNavigator.Navigator>
     </NavigationContainer>

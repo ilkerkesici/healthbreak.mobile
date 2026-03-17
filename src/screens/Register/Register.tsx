@@ -13,32 +13,34 @@ import useTranslation from 'helpers/hooks/useTranslation';
 import React from 'react';
 import { Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import useLoginHook from './useLoginHook';
+import useRegisterHook from './useRegisterHook';
 import { SecondaryHeader } from 'components/Header/SecondaryHeader';
 
-export default function Login() {
+export default function Register() {
   const insets = useSafeAreaInsets();
   const { i18n } = useTranslation();
   const {
     email,
     password,
+    confirmPassword,
     emailError,
     passwordError,
+    confirmError,
     googleLoading,
-    signInLoading,
+    createLoading,
     appleSignInLoading,
-    goToRegister,
     onChangeEmail,
     onChangePassword,
+    onChangeConfirmPassword,
     onPressSubmit,
     signInWithGoogle,
-    goToForgotPassword,
+    goToLogin,
     signInWithApple,
-  } = useLoginHook();
+  } = useRegisterHook();
 
   return (
     <ScreenContainer bgColor="bg-2">
-      <SecondaryHeader back title={i18n.t('login.title')} />
+      <SecondaryHeader back title={i18n.t('register.title')} />
       <Block
         fill
         flex={1}
@@ -55,14 +57,14 @@ export default function Login() {
           fill
           center
         >
-          {i18n.t('login.subtitle')}
+          {i18n.t('register.subtitle')}
         </Text>
         <TextInput
           fill
-          label={i18n.t('login.email')}
+          label={i18n.t('register.email')}
           keyboardType="email-address"
           autoCapitalize={'none'}
-          placeholder={i18n.t('login.enter_email')}
+          placeholder={i18n.t('register.enter_email')}
           value={email}
           errorText={emailError}
           onChangeText={onChangeEmail}
@@ -70,36 +72,37 @@ export default function Login() {
         <Block marginTop={20} />
         <TextInput
           fill
-          label={i18n.t('login.password')}
+          label={i18n.t('register.create_password')}
           secureTextEntry
-          placeholder={i18n.t('login.enter_password')}
+          placeholder={i18n.t('register.enter_password')}
           value={password}
           errorText={passwordError}
           onChangeText={onChangePassword}
         />
-        <Block fill marginVertical={14}>
-          <Text
-            onPress={goToForgotPassword}
-            variant="caption1"
-            size="xl"
-            fill
-            right
-          >
-            {i18n.t('login.forgot_password')}
-          </Text>
-        </Block>
+        <Block marginTop={20} />
+        <TextInput
+          fill
+          label={i18n.t('register.confirm_password')}
+          secureTextEntry
+          placeholder={i18n.t('register.enter_confirm_password')}
+          value={confirmPassword}
+          errorText={confirmError}
+          onChangeText={onChangeConfirmPassword}
+        />
+
+        <Block marginTop={24} />
         <Button
           fill
           size="lg"
-          text={i18n.t('login.signin')}
+          text={i18n.t('register.create_account')}
           onPress={onPressSubmit}
-          loading={signInLoading}
+          loading={createLoading}
         />
 
         <Block fill flexDirection="row" marginVertical={20}>
           <Block fillInRow height={2} backgroundColour="neutral.400" />
           <Text variant="caption1" size="xl" marginHorizontal={20}>
-            {i18n.t('login.or')}
+            {i18n.t('register.or')}
           </Text>
           <Block fillInRow height={2} backgroundColour="neutral.400" />
         </Block>
@@ -124,16 +127,11 @@ export default function Login() {
                 marginLeft={12}
                 fontWeight="500"
               >
-                {i18n.t('login.sign_in_with_google')}
+                {i18n.t('register.sign_up_with_google')}
               </Text>
             </>
           ) : null}
-          <Spinner
-            loading={googleLoading}
-            bgColor="transparent"
-            size={'small'}
-            color="neutral.950"
-          />
+          <Spinner loading={googleLoading} size={'small'} />
         </Block>
 
         <Display show={Platform.OS === 'ios'}>
@@ -158,31 +156,27 @@ export default function Login() {
                   marginLeft={12}
                   fontWeight="500"
                 >
-                  {i18n.t('login.sign_in_with_apple')}
+                  {i18n.t('register.sign_up_with_apple')}
                 </Text>
               </>
             ) : null}
-            <Spinner
-              loading={appleSignInLoading}
-              bgColor="transparent"
-              size={'small'}
-              color="neutral.950"
-            />
+            <Spinner loading={appleSignInLoading} size={'small'} />
           </Block>
         </Display>
         <Block flex={1} />
         <Text color="neutral.600" variant="caption1" size="xl" fill center>
-          {`${i18n.t('login.no_account')} `}
+          {`${i18n.t('register.have_account')} `}
           <Text
-            onPress={goToRegister}
+            onPress={goToLogin}
             color="primary.500"
             variant="caption1"
             size="xl"
           >
-            {i18n.t('login.register')}
+            {i18n.t('register.go_to_login')}
           </Text>
         </Text>
       </Block>
     </ScreenContainer>
   );
 }
+

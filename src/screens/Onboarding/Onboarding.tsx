@@ -15,6 +15,7 @@ import {
 import type { OnboardingAnswers } from './Onboarding.types';
 import { useOnboardingQuestions } from './useOnboardingQuestions';
 import useProfileHook from 'helpers/hooks/useProfileHook';
+import useNextExercise from 'helpers/hooks/useNextExerciseHook';
 
 const { width, height } = Dimensions.get('window');
 
@@ -24,8 +25,10 @@ const Onboarding = () => {
   const progress = useSharedValue(0);
   const { questions, nextLabel } = useOnboardingQuestions();
   const { setProfile } = useProfileHook();
+  const { getNextExercise } = useNextExercise();
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [answers, setAnswers] = useState<OnboardingAnswers>({});
 
   const total = questions.length;
@@ -46,6 +49,7 @@ const Onboarding = () => {
 
   const handleSubmit = useCallback(
     async (finalAnswers: OnboardingAnswers) => {
+      setLoading(true);
       const payload = questions.map(q => ({
         questionId: q.id,
         selectedLabels: finalAnswers[q.id] ?? [],
@@ -53,13 +57,15 @@ const Onboarding = () => {
 
       try {
         await setProfile(payload);
+        await getNextExercise();
         navigation.navigate('NOTIF_PERMIT');
         // navigation.navigate('ONBOARDING_PROFILE'); // veya sonraki ekran
       } catch (e: any) {
         console.log(e);
       }
+      setLoading(false);
     },
-    [questions, setProfile, navigation],
+    [questions, setProfile, navigation, getNextExercise],
   );
 
   const goNext = useCallback(() => {
@@ -119,6 +125,7 @@ const Onboarding = () => {
           label={nextLabel}
           disabled={!hasSelection}
           onPress={goNext}
+          loading={loading}
         />
       </View>
     </ScreenContainer>

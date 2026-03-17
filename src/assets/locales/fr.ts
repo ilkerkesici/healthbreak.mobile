@@ -115,6 +115,16 @@ export default {
   },
   home: {
     title: 'Accueil',
+    next_exercise: {
+      next_break: 'PROCHAIN PAUSE',
+      min_later: 'Dans {{min}} min',
+      hours_min_later: 'Dans {{hours}} h {{min}} min',
+      now: "C'est le moment de faire une pause",
+      target: 'ZONE CIBLÉE',
+      duration: 'DURÉE',
+      duration_1_min: '1 minute',
+      take_break_now: 'Prendre une pause maintenant',
+    },
   },
   permission: {
     camera_alert_title: 'Permission Caméra',

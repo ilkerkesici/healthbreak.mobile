@@ -56,7 +56,7 @@ const NotificationPermission = () => {
             <Text
               variant="display"
               size="sm"
-              color="neutral.950"
+              color="white"
               center
               fontWeight="600"
             >
@@ -68,7 +68,7 @@ const NotificationPermission = () => {
             <Text
               variant="text"
               size="md"
-              color="neutral.600"
+              color="neutral.500"
               center
               style={styles.subtitle}
             >

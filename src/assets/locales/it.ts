@@ -118,6 +118,16 @@ export default {
   },
   home: {
     title: 'Home',
+    next_exercise: {
+      next_break: 'PROSSIMA PAUSA',
+      min_later: 'Tra {{min}} min',
+      hours_min_later: 'Tra {{hours}} h {{min}} min',
+      now: 'È il momento di fare una pausa',
+      target: 'OBIETTIVO',
+      duration: 'DURATA',
+      duration_1_min: '1 minuto',
+      take_break_now: 'Fai una pausa ora',
+    },
   },
   permission: {
     camera_alert_title: 'Permesso Fotocamera',

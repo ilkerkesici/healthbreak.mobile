@@ -113,6 +113,16 @@ export default {
   },
   home: {
     title: 'Inicio',
+    next_exercise: {
+      next_break: 'PRÓXIMO DESCANSO',
+      min_later: 'En {{min}} min',
+      hours_min_later: 'En {{hours}} h {{min}} min',
+      now: 'Es hora de un descanso',
+      target: 'OBJETIVO',
+      duration: 'DURACIÓN',
+      duration_1_min: '1 minuto',
+      take_break_now: 'Tomar un descanso ahora',
+    },
   },
   permission: {
     camera_alert_title: 'Permiso de Cámara',

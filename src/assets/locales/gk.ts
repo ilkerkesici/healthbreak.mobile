@@ -122,6 +122,16 @@ export default {
   },
   home: {
     title: 'Αρχική',
+    next_exercise: {
+      next_break: 'ΕΠΟΜΕΝΟ ΔΙΑΛΕΙΜΜΑ',
+      min_later: 'Σε {{min}} λεπτά',
+      hours_min_later: 'Σε {{hours}} ώρες {{min}} λεπτά',
+      now: 'Ήρθε η ώρα για διάλειμμα',
+      target: 'ΠΕΡΙΟΧΗ',
+      duration: 'ΔΙΑΡΚΕΙΑ',
+      duration_1_min: '1 λεπτό',
+      take_break_now: 'Κάνε διάλειμμα τώρα',
+    },
   },
   permission: {
     camera_alert_title: 'Άδεια Κάμερας',

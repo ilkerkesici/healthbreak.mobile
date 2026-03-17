@@ -113,6 +113,7 @@ const Button: React.FC<ButtonProps> = props => {
             fullScreen
             size={'small'}
             loading={loading}
+            bgColor={"transparent"}
           />
           <Display show={rightIcon && !loading}>
             <Icon

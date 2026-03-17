@@ -14,7 +14,7 @@ export default function ForgotPassword() {
     useForgotPasswordHook();
 
   return (
-    <ScreenContainer>
+    <ScreenContainer bgColor="bg-2">
       <SecondaryHeader back title={i18n.t('forgot_password.title')} />
       <Block
         fill
@@ -45,7 +45,7 @@ export default function ForgotPassword() {
 
         <Button
           fill
-          size="md"
+          size="lg"
           text={i18n.t('forgot_password.reset_password')}
           marginTop={30}
           onPress={onPressSubmit}

@@ -38,8 +38,26 @@ export default function useAppleSignInHook({ onLoginSuccess }: Props) {
         identityToken,
         nonce,
       );
-      await auth().currentUser?.linkWithCredential(appleCredential);
-      const id = await auth().currentUser?.getIdToken();
+
+      let id: string | undefined | null;
+
+      try {
+        // Önce anonim kullanıcı ile linklemeyi dene.
+        await auth().currentUser?.linkWithCredential(
+          appleCredential,
+        );
+        id = await auth().currentUser?.getIdToken();
+      } catch (linkError: any) {
+        // Eğer credential başka bir hesapta ise, direkt signIn ile devam et.
+        if (linkError?.code === 'auth/credential-already-in-use') {
+          const signInResult = await auth().signInWithCredential(
+            appleCredential,
+          );
+          id = await signInResult.user.getIdToken();
+        } else {
+          throw linkError;
+        }
+      }
 
       if (!id) {
         setLoading(false);
@@ -47,7 +65,7 @@ export default function useAppleSignInHook({ onLoginSuccess }: Props) {
       }
       await runAfterFirebaseLogin(id);
       setLoading(false);
-    } catch (error) {
+    } catch (error: any) {
       catchFirebaseError(error);
       console.log(error);
     }

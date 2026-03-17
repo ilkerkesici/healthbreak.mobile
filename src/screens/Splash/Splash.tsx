@@ -77,6 +77,7 @@ const Splash = () => {
     if (profile) {
       getNextExercise();
       goToHome();
+      // goToOnboarding();
     } else {
       goToOnboarding();
     }

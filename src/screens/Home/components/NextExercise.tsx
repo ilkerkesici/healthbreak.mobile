@@ -10,7 +10,9 @@ const CARD_BORDER = '#0566500D';
 const CARD_BG = 'rgba(255,255,255,0.9)';
 const INNER_CARD_BG = '#FFFFFF';
 
-/** scheduled_at / delayed_at UTC kabul edilir; şu anki UTC zamanına göre kalan dakikayı döner. */
+/** scheduled_at / delayed_at UTC kabul edilir; şu anki UTC zamanına göre kalan dakikayı döner.
+ * Eğer hedef zaman geçmişse negatif değer dönebilir.
+ */
 function getMinutesUntil(dateStr: string | null): number {
   if (!dateStr) return 0;
   const targetUtc = DateTime.fromISO(dateStr.replace(' ', 'T'), {
@@ -19,7 +21,7 @@ function getMinutesUntil(dateStr: string | null): number {
   if (!targetUtc.isValid) return 0;
   const nowUtc = DateTime.utc();
   const diffMinutes = targetUtc.diff(nowUtc, 'minutes').minutes;
-  return Math.max(0, Math.round(diffMinutes));
+  return Math.round(diffMinutes);
 }
 
 export function NextExercise() {
@@ -38,6 +40,9 @@ export function NextExercise() {
   }, [nextExercise?.schedule]);
 
   const timeLabel = useMemo(() => {
+    if (minutesUntil <= 0) {
+      return i18n.t('home.next_exercise.now');
+    }
     if (minutesUntil >= 60) {
       const hours = Math.floor(minutesUntil / 60);
       const mins = minutesUntil % 60;

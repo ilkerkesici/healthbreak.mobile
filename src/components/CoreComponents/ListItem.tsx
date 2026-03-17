@@ -19,19 +19,19 @@ const ListItem: React.FC<ListItemProps> = ({
   leftIcon,
   text,
   rightIcon,
-  textColor = 'neutral.800',
+  textColor = 'neutral.950',
   onPress,
   renderRight,
 }) => {
   return (
-    <Block fill flexDirection="row" padding={16} onPress={onPress}>
+    <Block fill flexDirection="row" paddingVertical={16} onPress={onPress}>
       <Display show={leftIcon}>
-        <Icon marginRight={12} color="neutral.800" {...leftIcon} />
+        <Icon marginRight={12} size={20} color="neutral.950" {...leftIcon} />
       </Display>
       <Text
         fillInRow
         variant="text"
-        size="md"
+        size="sm"
         fontWeight="500"
         color={textColor}>
         {text}
