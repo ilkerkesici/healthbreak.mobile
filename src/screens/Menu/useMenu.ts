@@ -42,6 +42,10 @@ export const useMenu = () => {
     navigation.navigate('PROMO_CODE');
   };
 
+  const onPressFeedback = () => {
+    navigation.navigate('FEEDBACK');
+  };
+
   const goToOnboarding = useCallback(() => {
     const action = CommonActions.reset({
       index: 0,
@@ -95,6 +99,7 @@ export const useMenu = () => {
     onPressEula,
     onPressDeleteAccount,
     onPressContact,
+    onPressFeedback,
     onPressLanguage,
     onPressPromoCode,
     loading,

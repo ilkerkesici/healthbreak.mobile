@@ -98,3 +98,11 @@ export interface ExerciseHistoryItem {
 export interface ExerciseHistoryResponse {
   items: ExerciseHistoryItem[];
 }
+
+export type FeedbackCategory = 'suggestion' | 'error' | 'general';
+
+export interface FeedbackPayload {
+  feedback: string;
+  vote: number;
+  category: FeedbackCategory;
+}

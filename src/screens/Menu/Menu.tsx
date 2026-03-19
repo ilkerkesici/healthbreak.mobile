@@ -16,6 +16,7 @@ const Menu = () => {
     onPressEula,
     onPressDeleteAccount,
     onPressLanguage,
+    onPressFeedback,
     onPressContact,
     onPressPromoCode,
     loading,
@@ -43,6 +44,11 @@ const Menu = () => {
         <ListItem
           text={i18n.t('menu.promo_code')}
           onPress={onPressPromoCode}
+          rightIcon={{ name: 'o:chevron_right' }}
+        />
+        <ListItem
+          text={i18n.t('menu.feedback')}
+          onPress={onPressFeedback}
           rightIcon={{ name: 'o:chevron_right' }}
         />
         <ListItem

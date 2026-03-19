@@ -71,6 +71,7 @@ export class ApiHelper {
     cache?: { status: boolean; key: APICacheKeys },
   ): Promise<T | NetworkError> {
     try {
+      console.log("post options", this.getOptions());
       const key = `${endpoint}-${JSON.stringify(body)}`;
       if (cache?.status && this.cacheResult[key]) {
         // TODO cache süresi belirle

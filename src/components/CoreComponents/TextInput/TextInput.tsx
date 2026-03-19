@@ -44,6 +44,7 @@ interface Props extends DesignProps, TextInputProps {
   errorText?: string;
   disabled?: boolean;
   label?: string;
+  multiline?: boolean;
   renderRight?: () => React.ReactNode;
 }
 
@@ -64,6 +65,7 @@ const TextInput: React.FC<Props> = ({
   secureTextEntry,
   label,
   renderRight,
+  multiline = false,
   ...rest
 }) => {
   const [placeholderColor, colorOfText, bgColorHex] = useThemeColor([
@@ -133,7 +135,8 @@ const TextInput: React.FC<Props> = ({
           marginBottom={4}
           variant="subhead"
           size="xs"
-          color={'primary.500'}>
+          color={'primary.500'}
+        >
           {label}
         </Text>
       ) : null}
@@ -153,11 +156,13 @@ const TextInput: React.FC<Props> = ({
             { color: colorOfText },
             propsTextStyle,
             { backgroundColor: bgColorHex },
+            multiline && { minHeight: 100, textAlignVertical: 'top' },
           ]}
           value={value}
           {...rest}
           secureTextEntry={secure}
           keyboardAppearance="dark"
+          multiline={multiline}
         />
         {rightButtonProps ? <Button {...rightButtonProps} /> : null}
         {rightIconProps ? <Icon marginRight={7} {...rightIconProps} /> : null}

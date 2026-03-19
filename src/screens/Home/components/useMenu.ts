@@ -6,7 +6,7 @@ import useTranslation from 'helpers/hooks/useTranslation';
 import { useCallback, useState } from 'react';
 import { Alert, Linking } from 'react-native';
 
-export const useMenu = () => {
+export const useMenu = ({ onClose }: { onClose: () => void }) => {
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation<RootNavigation>();
@@ -17,6 +17,7 @@ export const useMenu = () => {
 
   const onPressLanguage = () => {
     navigation.navigate('LANGUAGE_CHANGE');
+    onClose();
   };
 
   const onPressTermsOfUse = () => {
@@ -40,6 +41,11 @@ export const useMenu = () => {
     navigation.navigate('PROMO_CODE');
   };
 
+  const onPressFeedback = () => {
+    navigation.navigate('FEEDBACK');
+    onClose();
+  };
+
   const goToOnboarding = useCallback(() => {
     const action = CommonActions.reset({
       index: 0,
@@ -58,7 +64,6 @@ export const useMenu = () => {
   };
 
   const onPressDeleteAccount = async () => {
-
     Alert.alert(
       i18n.t('menu.delete_account'),
       i18n.t('menu.delete_account_description'),
@@ -86,6 +91,7 @@ export const useMenu = () => {
     onPressEula,
     onPressDeleteAccount,
     onPressContact,
+    onPressFeedback,
     onPressLanguage,
     onPressPromoCode,
     loading,

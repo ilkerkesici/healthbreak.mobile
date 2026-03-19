@@ -1,20 +1,20 @@
-import {Block} from 'components/CoreComponents';
-import {Header} from 'components/Header/Header';
+import { Block } from 'components/CoreComponents';
+import { Header } from 'components/Header/Header';
 import ListItem from 'components/ListItem/ListItem';
 
 import {
   DEFAULT_DIVIDER_HEIGHT,
   DEFAULT_SCREEN_HORIZONTAL_PADDING,
 } from 'constants/design';
-import {LanguageList} from 'constants/i18n';
+import { LanguageList } from 'constants/i18n';
 import ScreenContainer from 'containers/ScreenContainer/ScreenContainer';
 import useTranslation from 'helpers/hooks/useTranslation';
-import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
-import {LanguageType} from 'types/setting';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet } from 'react-native';
+import { LanguageType } from 'types/setting';
 
 export default function LanguageChange() {
-  const {i18n, language, updateLanguage} = useTranslation();
+  const { i18n, language, updateLanguage } = useTranslation();
   const [localLanguage, setLocalLanguage] = useState(language);
 
   const onChangeLanguage = (lang: LanguageType) => {
@@ -34,7 +34,7 @@ export default function LanguageChange() {
   })).sort((a, b) => a.title.localeCompare(b.title));
 
   return (
-    <ScreenContainer>
+    <ScreenContainer bgColor="bg-2">
       <Header title={i18n.t('language.title')} back />
       <Block
         fill
@@ -45,10 +45,12 @@ export default function LanguageChange() {
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.content}
-          showsVerticalScrollIndicator={false}>
+          showsVerticalScrollIndicator={false}
+        >
           {langs.map(lang => {
             return (
               <ListItem
+                key={lang.key}
                 title={lang.title}
                 rightIcon={localLanguage === lang.key ? 'o:check' : undefined}
                 rightIconColor={'primary.500'}

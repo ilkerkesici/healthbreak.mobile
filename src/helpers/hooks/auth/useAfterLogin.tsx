@@ -15,6 +15,7 @@ export default function useAfterLogin({ onLoginSuccess }: Props) {
 
   const runAfterFirebaseLogin = async (id: string) => {
     const result: any = await CommonApiHelper.loginFirebase(id);
+    console.log('anon login result', result);
     if (result && result.token && result.fbData) {
       setUserInfo(result.token, result.fbData);
       onLoginSuccess?.();

@@ -51,7 +51,7 @@ const HeaderSection = ({
           onPress={onPressLogin}
         />
         <ListItem
-          leftIcon={{ name: 'o:user_reg' }}
+          leftIcon={{ name: "o:user" }}
           text={i18n.t('home.settings.register')}
           onPress={onPressRegister}
         />
@@ -132,7 +132,8 @@ export function SettingsModal({ visible, onClose }: SettingsModalProps) {
     onPressPrivacyPolicy,
     onPressTermsOfUse,
     onPressContact,
-  } = useMenu();
+    onPressFeedback,
+  } = useMenu({ onClose });
   // const { theme } = useTheme();
 
   const currentLanguageLabel = useMemo(() => {
@@ -226,7 +227,7 @@ export function SettingsModal({ visible, onClose }: SettingsModalProps) {
           <ListItem
             leftIcon={{ name: 'o:comment' }}
             text={i18n.t('home.settings.feedback')}
-            onPress={onPressContact}
+            onPress={onPressFeedback}
           />
           <ListItem
             leftIcon={{ name: 'o:sms' }}

@@ -52,7 +52,7 @@ export function NextExercise() {
       });
     }
     return i18n.t('home.next_exercise.min_later', { min: minutesUntil });
-  }, [minutesUntil, i18n]);
+  }, [minutesUntil, i18n, i18n.locale]);
 
   if (!nextExercise) {
     return null;

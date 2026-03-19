@@ -149,4 +149,6 @@ export type IconType =
   | 'o:gallery'
   | 'o:camera'
   | 'o:gallery-gradient'
-  | 'o:security';
+  | 'o:security'
+  | 'o:heart'
+  | 's:heart';

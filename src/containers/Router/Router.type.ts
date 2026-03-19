@@ -10,6 +10,7 @@ export type RootStackParamList = {
   PAYWALL: undefined;
   LANGUAGE_CHANGE: undefined;
   PROMO_CODE: undefined;
+  FEEDBACK: undefined;
   WELCOME: undefined;
   NOTIF_PERMIT: undefined;
   START_PAGE: undefined;

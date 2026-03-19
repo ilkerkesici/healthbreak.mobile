@@ -307,6 +307,7 @@ export default {
     delete_account_description:
       'Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.',
     language: 'Dil',
+    feedback: 'Geri Bildirim',
     cancel: 'İptal',
     contact: 'İletişim',
     contact_message: "İletişim - Better Me AI\n\nHesap token'ım: {{token}}",
@@ -330,5 +331,25 @@ export default {
     chinese: '中文',
     romanian: 'Română',
     japanese: '日本語',
+  },
+  feedback: {
+    title: 'Geri Bildirim',
+    description:
+      'Health Break deneyimini iyileştirmemize yardımcı olmak için geri bildirimini paylaş.',
+    vote_label: 'Deneyimin nasıldı?',
+    category_label: 'Kategori',
+    feedback_label: 'Geri bildirimin',
+    placeholder: 'Geri bildirimi buraya yazabilirsin...',
+    submit: 'Gönder',
+    submit_success: 'Teşekkürler! Geri bildirimin gönderildi.',
+    submit_error: 'Geri bildirim gönderilemedi. Lütfen tekrar dene.',
+    validation_title: 'Geri Bildirim',
+    validation_feedback_required: 'Lütfen göndermeden önce geri bildirim yaz.',
+    vote: 'Puan Ver',
+    categories: {
+      suggestion: 'Öneri',
+      error: 'Hata Bildirimi',
+      general: 'Genel Memnuniyet',
+    },
   },
 };

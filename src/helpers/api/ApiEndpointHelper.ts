@@ -1,5 +1,6 @@
 import {
   ExerciseHistoryResponse,
+  FeedbackPayload,
   NextExerciseResponse,
   OnboardingAnswersPayload,
   OnboardingProfile,
@@ -82,6 +83,19 @@ class ApiEndpointHelper {
     const result = await ApiController.get<
       DefaultResponse<ExerciseHistoryResponse>
     >('/api/exercise/history', {});
+
+    if (!result || result instanceof NetworkError) {
+      return;
+    }
+
+    return result.Data;
+  };
+
+  createFeedback = async (payload: FeedbackPayload) => {
+    const result = await ApiController.post<DefaultResponse<any>>(
+      '/api/feedback',
+      payload,
+    );
 
     if (!result || result instanceof NetworkError) {
       return;

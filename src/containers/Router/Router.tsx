@@ -11,6 +11,7 @@ import Browser from 'screens/Browser/Browser';
 import Paywall from 'screens/Paywall/Paywall';
 import LanguageChange from 'screens/LanguageChange/LanguageChange';
 import PromoCodeScreen from 'screens/PromoCodeScreen/PromoCodeScreen';
+import Feedback from 'screens/Feedback/Feedback';
 import Home from 'screens/Home/Home';
 import Welcome from 'screens/Welcome/Welcome';
 import StartPage from 'screens/StartPage/StartPage';
@@ -98,6 +99,11 @@ export default function Router() {
           options={screenOptions}
           name="PROMO_CODE"
           component={PromoCodeScreen}
+        />
+        <MainNavigator.Screen
+          options={screenOptions}
+          name="FEEDBACK"
+          component={Feedback}
         />
         <MainNavigator.Screen
           options={screenOptions}

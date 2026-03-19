@@ -304,6 +304,7 @@ export default {
     delete_account_description:
       'Are you sure you want to delete your account? This action cannot be undone.',
     language: 'Language',
+    feedback: 'Feedback',
     cancel: 'Cancel',
     contact: 'Contact',
     contact_message: 'Contact - Better Me AI\n\nMy account token: {{token}}',
@@ -327,5 +328,24 @@ export default {
     chinese: '中文',
     romanian: 'Română',
     japanese: '日本語',
+  },
+  feedback: {
+    title: 'Feedback',
+    description: 'Share your experience so we can improve Health Break.',
+    vote_label: 'How was your experience?',
+    category_label: 'Category',
+    feedback_label: 'Your feedback',
+    placeholder: 'Write your feedback here...',
+    submit: 'Send',
+    submit_success: 'Thanks! Your feedback was sent.',
+    submit_error: 'Feedback could not be sent. Please try again.',
+    validation_title: 'Feedback',
+    validation_feedback_required: 'Please write your feedback before sending.',
+    vote: 'Puan Ver',
+    categories: {
+      suggestion: 'Suggestion',
+      error: 'Error',
+      general: 'General',
+    },
   },
 };

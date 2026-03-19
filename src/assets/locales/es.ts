@@ -203,4 +203,7 @@ export default {
     romanian: 'Română',
     japanese: '日本語',
   },
+  feedback: {
+    vote: 'Puan Ver',
+  },
 };
