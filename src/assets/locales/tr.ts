@@ -352,4 +352,15 @@ export default {
       general: 'Genel Memnuniyet',
     },
   },
+  contact: {
+    title: 'Bize Ulaşın',
+    description:
+      'Sana yardımcı olmak için buradayız. Her türlü sorun ve önerin için bizimle iletişime geçebilirsin.',
+    email_title: 'E-POSTA GÖNDER',
+    email_subtitle: 'destek@healthbreak.app',
+    instagram_title: 'INSTAGRAM DESTEK',
+    instagram_subtitle: 'Instagram ile iletişime geç',
+    direct_message_title: 'DOĞRUDAN MESAJ GÖNDER',
+    direct_message_subtitle: 'Bize yaz',
+  },
 };

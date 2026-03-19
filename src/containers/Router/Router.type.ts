@@ -11,6 +11,7 @@ export type RootStackParamList = {
   LANGUAGE_CHANGE: undefined;
   PROMO_CODE: undefined;
   FEEDBACK: undefined;
+  CONTACT: undefined;
   WELCOME: undefined;
   NOTIF_PERMIT: undefined;
   START_PAGE: undefined;

@@ -348,4 +348,15 @@ export default {
       general: 'General',
     },
   },
+  contact: {
+    title: 'Contact Us',
+    description:
+      'We are here to help you. You can reach us for any issue or suggestion.',
+    email_title: 'SEND E-MAIL',
+    email_subtitle: 'destek@healthbreak.app',
+    instagram_title: 'INSTAGRAM SUPPORT',
+    instagram_subtitle: 'Contact us on Instagram',
+    direct_message_title: 'SEND DIRECT MESSAGE',
+    direct_message_subtitle: 'Write to us',
+  },
 };

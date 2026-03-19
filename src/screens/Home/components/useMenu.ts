@@ -1,18 +1,15 @@
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { RootNavigation } from 'containers/Router/Router.type';
-import useAuthHook from 'helpers/hooks/useAuthHook';
 import useAnonymousLoginHook from 'helpers/hooks/auth/useAnonymousLoginHook';
 import useTranslation from 'helpers/hooks/useTranslation';
 import { useCallback, useState } from 'react';
-import { Alert, Linking } from 'react-native';
+import { Alert } from 'react-native';
 
 export const useMenu = ({ onClose }: { onClose: () => void }) => {
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation<RootNavigation>();
   const { signIn, signOut } = useAnonymousLoginHook({});
-  const { user } = useAuthHook();
-
   const { i18n } = useTranslation();
 
   const onPressLanguage = () => {
@@ -55,12 +52,8 @@ export const useMenu = ({ onClose }: { onClose: () => void }) => {
   }, [navigation]);
 
   const onPressContact = () => {
-    Linking.openURL(
-      `mailto:info@venei.co?subject=Contact - Better Me AI&body=${i18n.t(
-        'menu.contact_message',
-        { token: user?.fb_uuid },
-      )}`,
-    );
+    navigation.navigate('CONTACT');
+    onClose();
   };
 
   const onPressDeleteAccount = async () => {

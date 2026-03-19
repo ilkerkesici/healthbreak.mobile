@@ -12,6 +12,7 @@ import Paywall from 'screens/Paywall/Paywall';
 import LanguageChange from 'screens/LanguageChange/LanguageChange';
 import PromoCodeScreen from 'screens/PromoCodeScreen/PromoCodeScreen';
 import Feedback from 'screens/Feedback/Feedback';
+import Contact from 'screens/Contact/Contact';
 import Home from 'screens/Home/Home';
 import Welcome from 'screens/Welcome/Welcome';
 import StartPage from 'screens/StartPage/StartPage';
@@ -104,6 +105,11 @@ export default function Router() {
           options={screenOptions}
           name="FEEDBACK"
           component={Feedback}
+        />
+        <MainNavigator.Screen
+          options={screenOptions}
+          name="CONTACT"
+          component={Contact}
         />
         <MainNavigator.Screen
           options={screenOptions}
