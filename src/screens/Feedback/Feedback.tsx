@@ -15,8 +15,13 @@ import useTranslation from 'helpers/hooks/useTranslation';
 import useToastHook from 'helpers/hooks/useToastHook';
 import { APIEndpointHelper } from 'helpers/api/ApiEndpointHelper';
 import { FeedbackCategory } from 'types/models';
-import { useNavigation } from '@react-navigation/native';
-import { RootNavigation } from 'containers/Router/Router.type';
+import {
+  CommonActions,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
+import { RootNavigation, RootStackParamList } from 'containers/Router/Router.type';
 import { Header } from 'components/Header/Header';
 
 const voteValues = [1, 2, 3, 4, 5];
@@ -26,6 +31,9 @@ export default function Feedback() {
   const { i18n } = useTranslation();
   const { showToast } = useToastHook();
   const navigation = useNavigation<RootNavigation>();
+  const route = useRoute<RouteProp<RootStackParamList, 'FEEDBACK'>>();
+  const exerciseId = route.params?.exercise_id ?? route.params?.exercise?.exercise?.id;
+  const hasExerciseSource = !!route.params?.exercise;
 
   const [vote, setVote] = useState<number | null>(null);
   const [category, setCategory] = useState<FeedbackCategory>('general');
@@ -50,6 +58,14 @@ export default function Feedback() {
     [i18n],
   );
 
+  const goHomeWithReset = () => {
+    const action = CommonActions.reset({
+      index: 0,
+      routes: [{ name: 'HOME' }],
+    });
+    navigation.dispatch(action);
+  };
+
   const onPressSubmit = async () => {
     const trimmedFeedback = feedbackText.trim();
 
@@ -63,6 +79,7 @@ export default function Feedback() {
         feedback: trimmedFeedback,
         vote,
         category,
+        exercise_id: exerciseId,
       });
 
       if (!result) {
@@ -71,7 +88,11 @@ export default function Feedback() {
       }
 
       showToast(i18n.t('feedback.submit_success'), 'success');
-      navigation.goBack();
+      if (hasExerciseSource) {
+        goHomeWithReset();
+      } else {
+        navigation.goBack();
+      }
     } catch (error) {
       showToast(i18n.t('feedback.submit_error'), 'error');
     } finally {
@@ -81,7 +102,10 @@ export default function Feedback() {
 
   return (
     <ScreenContainer bgColor="bg-2">
-      <Header back />
+      <Header
+        back
+        onPressBack={hasExerciseSource ? goHomeWithReset : undefined}
+      />
       <Block
         fill
         flex={1}

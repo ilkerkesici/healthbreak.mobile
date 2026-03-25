@@ -19,6 +19,20 @@ export default {
     tasks: 'Giornaliero',
     analyzing: 'Analizzando...',
   },
+  exercise: {
+    default_title: 'Esercizio',
+    ready: {
+      start: 'Sono pronto, avvia',
+    },
+    progress: {
+      running: 'In corso…',
+      paused: 'In pausa',
+    },
+    a11y: {
+      play: 'Riproduci',
+      pause: 'Pausa',
+    },
+  },
   welcome: {
     title_1: "In questo mondo in cui l'IA è ovunque,",
     title_2: 'gli esercizi Health Break',

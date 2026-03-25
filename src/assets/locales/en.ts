@@ -250,6 +250,20 @@ export default {
       logout: 'Log Out',
     },
   },
+  exercise: {
+    default_title: 'Exercise',
+    ready: {
+      start: "I'm ready, start",
+    },
+    progress: {
+      running: 'In progress…',
+      paused: 'Paused',
+    },
+    a11y: {
+      play: 'Play',
+      pause: 'Pause',
+    },
+  },
   permission: {
     camera_alert_title: 'Camera Permission',
     camera_alert_subtitle: 'We need access to your camera to scan your face',

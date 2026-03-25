@@ -19,6 +19,20 @@ export default {
     tasks: 'Καθημερινά',
     analyzing: 'Ανάλυση...',
   },
+  exercise: {
+    default_title: 'Άσκηση',
+    ready: {
+      start: 'Είμαι έτοιμος, έναρξη',
+    },
+    progress: {
+      running: 'Σε εξέλιξη…',
+      paused: 'Παύση',
+    },
+    a11y: {
+      play: 'Αναπαραγωγή',
+      pause: 'Παύση',
+    },
+  },
   welcome: {
     title_1: 'Σε αυτόν τον κόσμο όπου η τεχνητή νοημοσύνη είναι παντού,',
     title_2: 'οι ασκήσεις Health Break',

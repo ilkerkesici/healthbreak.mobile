@@ -103,6 +103,19 @@ class ApiEndpointHelper {
 
     return result.Data;
   };
+
+  completeExercise = async (scheduleId: number) => {
+    const result = await ApiController.post<DefaultResponse<any>>(
+      '/api/exercise/complete',
+      { schedule_id: scheduleId },
+    );
+
+    if (!result || result instanceof NetworkError) {
+      return;
+    }
+
+    return result.Data;
+  };
 }
 
 export const APIEndpointHelper = new ApiEndpointHelper();

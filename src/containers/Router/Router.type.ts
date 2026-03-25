@@ -1,4 +1,5 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NextExerciseResponse } from 'types/models';
 
 export type RootStackParamList = {
   SPLASH: undefined;
@@ -10,7 +11,13 @@ export type RootStackParamList = {
   PAYWALL: undefined;
   LANGUAGE_CHANGE: undefined;
   PROMO_CODE: undefined;
-  FEEDBACK: undefined;
+  FEEDBACK:
+    | undefined
+    | {
+        exercise?: NextExerciseResponse;
+        exercise_id?: number;
+      };
+  EXERCISE: { exercise: NextExerciseResponse };
   CONTACT: undefined;
   WELCOME: undefined;
   NOTIF_PERMIT: undefined;

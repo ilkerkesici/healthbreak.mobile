@@ -19,6 +19,20 @@ export default {
     tasks: 'Quotidien',
     analyzing: 'Analyse en cours...',
   },
+  exercise: {
+    default_title: 'Exercice',
+    ready: {
+      start: 'Je suis prêt, démarrer',
+    },
+    progress: {
+      running: 'En cours…',
+      paused: 'En pause',
+    },
+    a11y: {
+      play: 'Lire',
+      pause: 'Mettre en pause',
+    },
+  },
   welcome: {
     title_1: "Dans ce monde où l'IA est partout,",
     title_2: 'les exercices Health Break',

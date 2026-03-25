@@ -428,6 +428,44 @@ export const ArrowRightOutline = ({
   );
 };
 
+export const VolumeOpenOutline = ({
+  width = 24,
+  height = 24,
+  color,
+  strokeWidth = 2,
+}: IconLibraryProps): JSX.Element => {
+  return (
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M15.54 8.45972C16.4774 9.39736 17.004 10.6689 17.004 11.9947C17.004 13.3205 16.4774 14.5921 15.54 15.5297M19.0698 4.92969C20.9445 6.80496 21.9977 9.34805 21.9977 11.9997C21.9977 14.6513 20.9445 17.1944 19.0698 19.0697M11 4.99976L6 8.99976H2V14.9998H6L11 18.9998V4.99976Z"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
+export const VolumeClosedOutline = ({
+  width = 24,
+  height = 24,
+  color,
+  strokeWidth = 2,
+}: IconLibraryProps): JSX.Element => {
+  return (
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M22 9L16 15M16 9L22 15M11 5L6 9H2V15H6L11 19V5Z"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
 export const HeadphoneOutline = ({
   width = 24,
   height = 24,
@@ -3049,6 +3087,8 @@ const iconLookUp: Record<IconType, any> = {
   'o:arrow_left': ArrowLeftOutline,
   's:arrow_left': ArrowLeftSolid,
   'o:arrow_right': ArrowRightOutline,
+  'o:volume_open': VolumeOpenOutline,
+  'o:volume_closed': VolumeClosedOutline,
   'o:chevron_down': ChevronDownOutline,
   's:chevron_down': ChevronRightSolid,
   'o:chevron_up': ChevronUpOutline,

@@ -27,6 +27,8 @@ export type IconType =
   | 'o:arrow_left'
   | 's:arrow_left'
   | 'o:arrow_right'
+  | 'o:volume_open'
+  | 'o:volume_closed'
   | 'o:x-mark'
   | 's:x-mark'
   | 'o:chevron_down'

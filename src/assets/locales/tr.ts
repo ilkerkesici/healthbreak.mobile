@@ -170,6 +170,20 @@ export default {
       logout: 'Çıkış Yap',
     },
   },
+  exercise: {
+    default_title: 'Egzersiz',
+    ready: {
+      start: 'Hazırım, Başla',
+    },
+    progress: {
+      running: 'Devam ediyor…',
+      paused: 'Durduruldu',
+    },
+    a11y: {
+      play: 'Devam et',
+      pause: 'Durdur',
+    },
+  },
   exercise_target: {
     neck: 'Boyun',
     shoulder: 'Omuz',

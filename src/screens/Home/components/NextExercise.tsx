@@ -1,4 +1,6 @@
 import { Block, Button, Icon, Text } from 'components/CoreComponents';
+import { useNavigation } from '@react-navigation/native';
+import { RootNavigation } from 'containers/Router/Router.type';
 import useTranslation from 'helpers/hooks/useTranslation';
 import useNextExercise from 'helpers/hooks/useNextExerciseHook';
 import { DateTime } from 'luxon';
@@ -25,6 +27,7 @@ function getMinutesUntil(dateStr: string | null): number {
 }
 
 export function NextExercise() {
+  const navigation = useNavigation<RootNavigation>();
   const { nextExercise, getNextExercise } = useNextExercise();
   const { i18n } = useTranslation();
 
@@ -132,7 +135,11 @@ export function NextExercise() {
         size="lg"
         text={i18n.t('home.next_exercise.take_break_now')}
         rightIcon="o:chevron_right"
-        onPress={() => {}}
+        onPress={() => {
+          navigation.navigate('EXERCISE', {
+            exercise: nextExercise,
+          });
+        }}
       />
     </Block>
   );

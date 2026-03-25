@@ -19,6 +19,20 @@ export default {
     tasks: 'Täglich',
     analyzing: 'Analysiere...',
   },
+  exercise: {
+    default_title: 'Übung',
+    ready: {
+      start: 'Ich bin bereit, Start',
+    },
+    progress: {
+      running: 'Läuft…',
+      paused: 'Pausiert',
+    },
+    a11y: {
+      play: 'Abspielen',
+      pause: 'Pausieren',
+    },
+  },
   welcome: {
     title_1: 'In dieser Welt, in der KI überall ist,',
     title_2: 'Health Break Übungen',

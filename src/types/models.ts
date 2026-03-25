@@ -105,4 +105,5 @@ export interface FeedbackPayload {
   feedback: string;
   vote: number;
   category: FeedbackCategory;
+  exercise_id?: number;
 }

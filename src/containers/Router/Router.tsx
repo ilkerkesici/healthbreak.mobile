@@ -13,6 +13,7 @@ import LanguageChange from 'screens/LanguageChange/LanguageChange';
 import PromoCodeScreen from 'screens/PromoCodeScreen/PromoCodeScreen';
 import Feedback from 'screens/Feedback/Feedback';
 import Contact from 'screens/Contact/Contact';
+import Exercise from 'screens/Exercise/Exercise';
 import Home from 'screens/Home/Home';
 import Welcome from 'screens/Welcome/Welcome';
 import StartPage from 'screens/StartPage/StartPage';
@@ -105,6 +106,11 @@ export default function Router() {
           options={screenOptions}
           name="FEEDBACK"
           component={Feedback}
+        />
+        <MainNavigator.Screen
+          options={screenOptions}
+          name="EXERCISE"
+          component={Exercise}
         />
         <MainNavigator.Screen
           options={screenOptions}
