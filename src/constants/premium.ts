@@ -1,0 +1,1 @@
+const PLANS_VARIANT_A = [""]

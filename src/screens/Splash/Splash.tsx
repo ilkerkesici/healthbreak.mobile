@@ -16,6 +16,9 @@ import useProfileHook from 'helpers/hooks/useProfileHook';
 import useNextExercise from 'helpers/hooks/useNextExerciseHook';
 import OneSignalHelper from 'helpers/OneSignalHelper';
 import AnalyticHelper from 'containers/analytic/AnalyticHelper';
+import { useRemoteConfigHook } from 'helpers/hooks/useRemoteConfigHook';
+import usePremiumHook from 'helpers/hooks/usePremiumHook';
+import { initIAPConnection } from 'helpers/utils/premium.utils';
 
 const Splash = () => {
   const { hasHydrated: hydratedApp, token } = useAppInitStore();
@@ -27,6 +30,8 @@ const Splash = () => {
   const { getNextExercise } = useNextExercise();
   const { signIn } = useAnonymousLoginHook({});
   const { initTranslation } = useTranslation();
+  const { remoteConfigReady, getRemoteConfig } = useRemoteConfigHook();
+  const { getAppSubscriptions } = usePremiumHook();
 
   const closeSplash = useSplashStore(state => state.closeSplash);
   const navigation = useNavigation<RootNavigation>();
@@ -49,6 +54,9 @@ const Splash = () => {
 
   const initProject = useCallback(async () => {
     await initTranslation();
+    await initIAPConnection();
+    getRemoteConfig();
+    getAppSubscriptions();
     // getAppSubscriptions();
     requestTrackingTransparency();
     await OneSignalHelper.init();

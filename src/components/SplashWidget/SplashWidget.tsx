@@ -88,7 +88,7 @@ const SplashWidget = () => {
         />
       </Block>
       <Animated.View style={[styles.animatedBottom, animatedOpacity]}>
-        <Text variant="text" size="md">
+        <Text variant="text" size="md" color="white">
           Health Break
         </Text>
       </Animated.View>

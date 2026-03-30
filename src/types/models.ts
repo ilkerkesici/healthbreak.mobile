@@ -1,4 +1,4 @@
-import { Subscription } from 'react-native-iap';
+import { ProductSubscription, Subscription } from 'react-native-iap';
 
 export interface User {
   id: number;
@@ -14,11 +14,19 @@ export interface User {
   premium: number | null;
 }
 
+export interface BasePackage {
+  frequent: 'monthly' | 'yearly' | 'quarterly';
+  sku: string;
+  key: string;
+  percentage?: number;
+  display: boolean;
+}
+
 export interface SubsPackage {
   key?: string;
-  data: Subscription;
+  data: ProductSubscription;
   title: string;
-  price: string;
+  price: number;
   priceFormatted: string;
   currency: string;
   percentage?: number;
