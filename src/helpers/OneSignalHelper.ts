@@ -14,7 +14,7 @@ class OneSignalController {
     OneSignal.User.pushSubscription.addEventListener('change', event => {
       console.log('Onesignal Event : ', event);
     });
-    OneSignal.Notifications.addEventListener('click', data => {
+    OneSignal.Notifications.addEventListener('click', (data: any) => {
       const url =
         (data.notification.additionalData as any)?.launch_url ||
         data.notification.launchURL;
@@ -27,6 +27,15 @@ class OneSignalController {
         });
       }
     });
+    // const isAskedBefore = await this.isNotificationPermissionAsked();
+    // if (!isAskedBefore) {
+    //   OneSignal.Notifications.requestPermission(true);
+    //   await AsyncStorage.setItem('@notification_asked', 'true');
+    // }
+  }
+
+  async askPermission() {
+    await OneSignal.Notifications.requestPermission(true);
     const isAskedBefore = await this.isNotificationPermissionAsked();
     if (!isAskedBefore) {
       OneSignal.Notifications.requestPermission(true);

@@ -23,10 +23,10 @@ export interface PaginationFetchResponse<T> {
   current_page: number;
 }
 
-const PROD_URL = 'https://common-api.venei.co';
+const PROD_URL = 'https://healthbreak-api.venei.co';
 const DEV_URL = 'http://localhost:4003';
 
-const ApiController = new ApiHelper(DEV_URL);
+const ApiController = new ApiHelper(PROD_URL);
 
 class ApiEndpointHelper {
   createOnboardingProfile = async (payload: OnboardingAnswersPayload) => {

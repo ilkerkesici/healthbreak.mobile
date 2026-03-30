@@ -11,7 +11,7 @@ import Animated, {
   withTiming,
   runOnJS,
 } from 'react-native-reanimated';
-import { useThemeColor } from 'helpers/hooks/useThemeColor';
+import { useThemeColor } from 'helpers/hooks/useThemeColor';;
 
 const { width, height } = Dimensions.get('window');
 

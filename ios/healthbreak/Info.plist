@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>healthbreak</string>
+	<string>Health Break</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -35,13 +35,13 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>healthbreak</string>
+				<string>fb1974584670095202</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>-</string>
+				<string>healthbreak</string>
 			</array>
 		</dict>
 		<dict>
@@ -51,14 +51,14 @@
 			</array>
 		</dict>
 	</array>
-	<key>FacebookAppID</key>
-	<string>-</string>
-	<key>FacebookClientToken</key>
-	<string>-</string>
-	<key>FacebookDisplayName</key>
-	<string>HealthBreak</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>1974584670095202</string>
+	<key>FacebookClientToken</key>
+	<string>c04c56f09d98ed40a0b4158e91cec1ef</string>
+	<key>FacebookDisplayName</key>
+	<string>HealthBreak</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -74,28 +74,32 @@
 	<string>This permission will be used to improve your advertising experience.</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This permission will be used to improve your advertising experience.</string>
+	<key>RCTNewArchEnabled</key>
+	<true/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Manrope-VariableFont_wght.ttf</string>
 	</array>
-	<key>RCTNewArchEnabled</key>
-	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>BootSplash</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
 	</array>
-	<key>UISupportedInterfaceOrientations</key>
+	<key>UISupportedInterfaceOrientations~iphone</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

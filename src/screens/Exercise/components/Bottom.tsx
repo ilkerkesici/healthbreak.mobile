@@ -3,8 +3,11 @@ import { StyleSheet, View } from 'react-native';
 import { BottomReady } from './BottomReady';
 import { BottomProgress } from './BottomProgress';
 import useTranslation from 'helpers/hooks/useTranslation';
+import AnalyticHelper from 'containers/analytic/AnalyticHelper';
 
 type Props = {
+  exerciseId: number;
+  scheduleId: number;
   title: string;
   description?: string | null;
   durationSeconds?: number;
@@ -15,6 +18,8 @@ type Props = {
 };
 
 export function Bottom({
+  exerciseId,
+  scheduleId,
   title,
   description,
   durationSeconds = 60,
@@ -32,6 +37,10 @@ export function Bottom({
   }, [durationSeconds, i18n]);
 
   const onPressStart = useCallback(() => {
+    AnalyticHelper.logEvent('exercise_started', {
+      exercise_id: exerciseId,
+      schedule_id: scheduleId,
+    });
     setMode('progress');
     onStart?.();
   }, [onStart]);

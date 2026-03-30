@@ -367,7 +367,7 @@ export default {
     description:
       'We are here to help you. You can reach us for any issue or suggestion.',
     email_title: 'SEND E-MAIL',
-    email_subtitle: 'destek@healthbreak.app',
+    email_subtitle: 'support@healthbreak.app',
     instagram_title: 'INSTAGRAM SUPPORT',
     instagram_subtitle: 'Contact us on Instagram',
     direct_message_title: 'SEND DIRECT MESSAGE',

@@ -3,28 +3,15 @@ import { useNavigation } from '@react-navigation/native';
 import { RootNavigation } from 'containers/Router/Router.type';
 import useTranslation from 'helpers/hooks/useTranslation';
 import useNextExercise from 'helpers/hooks/useNextExerciseHook';
-import { DateTime } from 'luxon';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { ExerciseTarget } from 'types/models';
+import AnalyticHelper from 'containers/analytic/AnalyticHelper';
+import { NextExerciseTimeLabel } from './NextExerciseTimeLabel';
 
 const CARD_BORDER = '#0566500D';
 const CARD_BG = 'rgba(255,255,255,0.9)';
 const INNER_CARD_BG = '#FFFFFF';
-
-/** scheduled_at / delayed_at UTC kabul edilir; şu anki UTC zamanına göre kalan dakikayı döner.
- * Eğer hedef zaman geçmişse negatif değer dönebilir.
- */
-function getMinutesUntil(dateStr: string | null): number {
-  if (!dateStr) return 0;
-  const targetUtc = DateTime.fromISO(dateStr.replace(' ', 'T'), {
-    zone: 'utc',
-  });
-  if (!targetUtc.isValid) return 0;
-  const nowUtc = DateTime.utc();
-  const diffMinutes = targetUtc.diff(nowUtc, 'minutes').minutes;
-  return Math.round(diffMinutes);
-}
 
 export function NextExercise() {
   const navigation = useNavigation<RootNavigation>();
@@ -34,28 +21,6 @@ export function NextExercise() {
   useEffect(() => {
     getNextExercise();
   }, [getNextExercise]);
-
-  const minutesUntil = useMemo(() => {
-    if (!nextExercise?.schedule) return 0;
-    const at =
-      nextExercise.schedule.delayed_at ?? nextExercise.schedule.scheduled_at;
-    return getMinutesUntil(at);
-  }, [nextExercise?.schedule]);
-
-  const timeLabel = useMemo(() => {
-    if (minutesUntil <= 0) {
-      return i18n.t('home.next_exercise.now');
-    }
-    if (minutesUntil >= 60) {
-      const hours = Math.floor(minutesUntil / 60);
-      const mins = minutesUntil % 60;
-      return i18n.t('home.next_exercise.hours_min_later', {
-        hours,
-        min: mins,
-      });
-    }
-    return i18n.t('home.next_exercise.min_later', { min: minutesUntil });
-  }, [minutesUntil, i18n, i18n.locale]);
 
   if (!nextExercise) {
     return null;
@@ -89,7 +54,12 @@ export function NextExercise() {
       <Block flexDirection="row" alignItems="center" marginBottom={16}>
         <Icon name="o:clock" size={20} color="primary.500" />
         <Text size="lg" color="neutral.950" fontWeight="600" marginLeft={8}>
-          {timeLabel}
+          <NextExerciseTimeLabel
+            dateStr={
+              nextExercise.schedule.delayed_at ??
+              nextExercise.schedule.scheduled_at
+            }
+          />
         </Text>
       </Block>
 
@@ -138,6 +108,10 @@ export function NextExercise() {
         onPress={() => {
           navigation.navigate('EXERCISE', {
             exercise: nextExercise,
+          });
+          AnalyticHelper.logEvent('home_exercise_clicked', {
+            exercise_id: nextExercise.exercise.id,
+            schedule_id: nextExercise.schedule.id,
           });
         }}
       />

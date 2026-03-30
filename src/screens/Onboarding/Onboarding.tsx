@@ -16,8 +16,24 @@ import type { OnboardingAnswers } from './Onboarding.types';
 import { useOnboardingQuestions } from './useOnboardingQuestions';
 import useProfileHook from 'helpers/hooks/useProfileHook';
 import useNextExercise from 'helpers/hooks/useNextExerciseHook';
+import AnalyticHelper from 'containers/analytic/AnalyticHelper';
 
 const { width, height } = Dimensions.get('window');
+
+/** Mixpanel’de soru bazlı filtre / breakdown için düz property’ler + tam payload (JSON). */
+function buildOnboardingCompleteEventProps(
+  items: { questionId: string; selectedLabels: string[] }[],
+) {
+  const props: Record<string, string | number> = {
+    onboarding_question_count: items.length,
+    onboarding_payload_json: JSON.stringify(items),
+  };
+  for (const item of items) {
+    const safeId = item.questionId.replace(/[^a-zA-Z0-9_]/g, '_');
+    props[`onboarding_q_${safeId}`] = item.selectedLabels.join(',');
+  }
+  return props;
+}
 
 const Onboarding = () => {
   const navigation = useNavigation<RootNavigation>();
@@ -36,6 +52,10 @@ const Onboarding = () => {
   const selectedIds = currentQuestion ? answers[currentQuestion.id] ?? [] : [];
   const hasSelection = selectedIds.length > 0;
   const isLastSlide = currentIndex === total - 1;
+
+  useEffect(() => {
+    AnalyticHelper.logEvent('onboarding_started');
+  }, [questions]);
 
   const toggleOption = useCallback((questionId: string, optionId: string) => {
     setAnswers(prev => {
@@ -58,6 +78,10 @@ const Onboarding = () => {
       try {
         await setProfile(payload);
         await getNextExercise();
+        AnalyticHelper.logEvent(
+          'onboarding_complete',
+          buildOnboardingCompleteEventProps(payload),
+        );
         navigation.navigate('NOTIF_PERMIT');
         // navigation.navigate('ONBOARDING_PROFILE'); // veya sonraki ekran
       } catch (e: any) {

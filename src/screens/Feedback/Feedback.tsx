@@ -23,6 +23,7 @@ import {
 } from '@react-navigation/native';
 import { RootNavigation, RootStackParamList } from 'containers/Router/Router.type';
 import { Header } from 'components/Header/Header';
+import AnalyticHelper from 'containers/analytic/AnalyticHelper';
 
 const voteValues = [1, 2, 3, 4, 5];
 
@@ -87,6 +88,11 @@ export default function Feedback() {
         return;
       }
 
+      AnalyticHelper.logEvent('feedback_submitted', {
+        vote,
+        feedback: trimmedFeedback,
+        exercise_id: exerciseId ?? null,
+      });
       showToast(i18n.t('feedback.submit_success'), 'success');
       if (hasExerciseSource) {
         goHomeWithReset();

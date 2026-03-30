@@ -371,7 +371,7 @@ export default {
     description:
       'Sana yardımcı olmak için buradayız. Her türlü sorun ve önerin için bizimle iletişime geçebilirsin.',
     email_title: 'E-POSTA GÖNDER',
-    email_subtitle: 'destek@healthbreak.app',
+    email_subtitle: 'support@healthbreak.app',
     instagram_title: 'INSTAGRAM DESTEK',
     instagram_subtitle: 'Instagram ile iletişime geç',
     direct_message_title: 'DOĞRUDAN MESAJ GÖNDER',

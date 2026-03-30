@@ -64,7 +64,7 @@ export default function Contact() {
   const navigation = useNavigation<RootNavigation>();
 
   const onPressEmail = () => {
-    Linking.openURL('mailto:info@venei.co');
+    Linking.openURL('mailto:support@healthbreak.app');
   };
 
   const onPressInstagram = () => {

@@ -217,7 +217,7 @@ export const WristIcon = ({
   height = 24,
   color,
   strokeWidth = 1.5,
-}: IconLibraryProps): JSX.Element => {
+}: IconLibraryProps) => {
   return (
     <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
       {/* Avuç içi */}

@@ -20,9 +20,9 @@ export interface PaginationFetchResponse<T> {
 const PROD_URL = 'https://common-api.venei.co';
 const DEV_URL = 'http://localhost:4002';
 
-const ANDROID_PACKAGE_NAME = 'com.looksgoodai';
+const ANDROID_PACKAGE_NAME = 'com.healthbreak';
 
-const CommonApiController = new ApiHelper(DEV_URL);
+const CommonApiController = new ApiHelper(PROD_URL);
 
 class CommonApi {
   getUser = async () => {

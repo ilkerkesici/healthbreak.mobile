@@ -9,6 +9,7 @@ import useTranslation from 'helpers/hooks/useTranslation';
 import { ExerciseHeader } from './components/ExerciseHeader';
 import { APIEndpointHelper } from 'helpers/api/ApiEndpointHelper';
 import useNextExercise from 'helpers/hooks/useNextExerciseHook';
+import AnalyticHelper from 'containers/analytic/AnalyticHelper';
 
 type ExerciseRoute = RouteProp<RootStackParamList, 'EXERCISE'>;
 
@@ -24,6 +25,10 @@ export default function Exercise() {
 
   const onComplete = useCallback(async () => {
     videoRef.current?.pause();
+    AnalyticHelper.logEvent('exercise_completed', {
+      exercise_id: exercise.exercise.id,
+      schedule_id: exercise.schedule.id,
+    });
     try {
       await APIEndpointHelper.completeExercise(exercise.schedule.id);
     } finally {
@@ -55,6 +60,8 @@ export default function Exercise() {
             onStart={() => videoRef.current?.restart()}
             onPlay={() => videoRef.current?.play()}
             onPause={() => videoRef.current?.pause()}
+            exerciseId={exercise.exercise.id}
+            scheduleId={exercise.schedule.id}
           />
         </View>
       </View>

@@ -9,6 +9,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RootNavigation } from 'containers/Router/Router.type';
 import { useNavigation } from '@react-navigation/native';
+import OneSignalHelper from 'helpers/OneSignalHelper';
 
 const BG_COLOR = '#0d2329';
 const ICON_SIZE = 250;
@@ -18,8 +19,9 @@ const NotificationPermission = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<RootNavigation>();
 
-  const onTurnOn = useCallback(() => {
+  const onTurnOn = useCallback(async () => {
     // OneSignal eklendiğinde bildirim izni isteği burada yapılacak.
+    await OneSignalHelper.askPermission();
     navigation.navigate('START_PAGE');
   }, [navigation]);
 
