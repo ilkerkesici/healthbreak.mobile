@@ -27,7 +27,7 @@ export const BASE_PACKAGES_VARIANT_A: BasePackage[] = [
   },
 ];
 
-export const BASE_PACKAGES_VARIANT_B = [
+export const BASE_PACKAGES_VARIANT_B: BasePackage[] = [
   {
     sku: 'com.healthbreak.1month.1299',
     key: 'packages.1month',
@@ -51,6 +51,7 @@ export default function usePremiumHook() {
     setPremiumPackages,
   } = usePremiumStore();
   const { user } = useAuthHook();
+  const { packagesVariantBEnabled } = useRemoteConfigHook();
 
   const BASE_PACKAGES = [
     ...BASE_PACKAGES_VARIANT_A,
@@ -140,13 +141,18 @@ export default function usePremiumHook() {
   }, [user]);
 
   const sortedPremiumPackages = useMemo(() => {
-    return BASE_PACKAGES.map(item => {
+    const shownPackages = packagesVariantBEnabled
+      ? BASE_PACKAGES_VARIANT_B
+      : BASE_PACKAGES_VARIANT_A;
+    return shownPackages.map(item => {
       const sub = premiumPackages?.find(
-        subItem => subItem.data.productId === item.sku,
+        subItem => subItem.data.id === item.sku,
       );
       return sub;
     });
   }, [premiumPackages]);
+
+  console.log('sortedPremiumPackages', sortedPremiumPackages);
 
   return {
     isPremium: isPremium,

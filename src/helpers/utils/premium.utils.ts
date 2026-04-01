@@ -1,4 +1,5 @@
 import { i18n } from 'constants/i18n';
+import { CommonApiHelper } from 'helpers/api/CommonApiHelper';
 import { Platform } from 'react-native';
 import {
   finishTransaction,
@@ -6,6 +7,9 @@ import {
   initConnection,
   fetchProducts,
   ProductSubscription,
+  Purchase,
+  Product,
+  requestPurchase,
 } from 'react-native-iap';
 
 import { BasePackage, SubsPackage } from 'types/models';
@@ -14,12 +18,9 @@ export const initIAPConnection = async () => {
   try {
     await initConnection();
   } catch (err) {
-    // Sentry.captureException(err);
     try {
       await initConnection();
-    } catch (err) {
-      // Sentry.captureException(err);
-    }
+    } catch (err) {}
   }
 };
 
@@ -86,6 +87,96 @@ export const getIOSSubscriptions = async (
   }
 };
 
+const checkSubscriptionStatus = async (): Promise<boolean> => {
+  try {
+    const result = await CommonApiHelper.premiumCheck();
+    return result;
+  } catch (err) {
+    return false;
+  }
+};
+
+const finishTransactions = async (purchases: Purchase[]) => {
+  for (const purchase of purchases) {
+    try {
+      await finishTransaction({
+        purchase,
+      });
+    } catch (err) {
+      console.log('err', err);
+    }
+  }
+};
+
+const purchaseAndroidPackage = async (
+  subPackage: SubsPackage,
+  userId: string,
+) => {
+  const sku = subPackage.data.id;
+
+  try {
+    const purchase = await requestPurchase({
+      request: {
+        android: {
+          skus: [sku],
+          obfuscatedAccountId: userId,
+        },
+      },
+      type: 'subs',
+    });
+
+    await sleep(1000);
+    const purchases = await getAvailablePurchases();
+    const result = await checkSubscriptionStatus();
+    return result ? purchases : null;
+  } catch (err) {
+    return null;
+  }
+};
+
+const purchaseIOSPackage = async (subPackage: SubsPackage, userId: string) => {
+  const sku = subPackage.data.id;
+  console.log('sku', sku);
+  try {
+    const purchase = await requestPurchase({
+      request: {
+        ios: {
+          sku,
+          appAccountToken: userId,
+          andDangerouslyFinishTransactionAutomatically: false,
+        },
+      },
+      type: 'subs',
+    });
+    console.log('purchase ios', purchase);
+    const purchases = await getAvailablePurchases();
+    console.log('purchases', purchases);
+
+    await finishTransactions(purchases);
+    return purchases;
+  } catch (err) {
+    console.log('err', err);
+    return null;
+  }
+};
+
+export const requestPurchaseSubscription = async (
+  pkg: SubsPackage,
+  uid: string,
+): Promise<Purchase | null> => {
+  try {
+    if (Platform.OS === 'android') {
+      await purchaseAndroidPackage(pkg, uid);
+    }
+    if (Platform.OS === 'ios') {
+      await purchaseIOSPackage(pkg, uid);
+    }
+    return null;
+  } catch (err) {
+    return null;
+  }
+};
+
 export const getActualPriceFromString = (price: string) => {
   if (!price) {
     return 0;
@@ -98,4 +189,8 @@ export const getActualPriceFromString = (price: string) => {
     return float;
   }
   return float / 1000000;
+};
+
+const sleep = (ms: number) => {
+  return new Promise(resolve => setTimeout(() => resolve(true), ms));
 };

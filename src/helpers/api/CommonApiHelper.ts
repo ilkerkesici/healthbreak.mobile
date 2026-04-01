@@ -22,7 +22,7 @@ const DEV_URL = 'http://localhost:4002';
 
 const ANDROID_PACKAGE_NAME = 'com.healthbreak';
 
-const CommonApiController = new ApiHelper(PROD_URL);
+const CommonApiController = new ApiHelper(DEV_URL);
 
 class CommonApi {
   getUser = async () => {
@@ -34,6 +34,17 @@ class CommonApi {
       return;
     }
 
+    return result.Data;
+  };
+
+  premiumCheck = async () => {
+    const result = await CommonApiController.get<DefaultResponse<boolean>>(
+      '/api/app/premium-check',
+      {},
+    );
+    if (!result || result instanceof NetworkError) {
+      return false;
+    }
     return result.Data;
   };
 

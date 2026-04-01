@@ -19,6 +19,7 @@ import AnalyticHelper from 'containers/analytic/AnalyticHelper';
 import { useRemoteConfigHook } from 'helpers/hooks/useRemoteConfigHook';
 import usePremiumHook from 'helpers/hooks/usePremiumHook';
 import { initIAPConnection } from 'helpers/utils/premium.utils';
+import { CommonApiHelper } from 'helpers/api/CommonApiHelper';
 
 const Splash = () => {
   const { hasHydrated: hydratedApp, token } = useAppInitStore();
@@ -75,7 +76,8 @@ const Splash = () => {
     //   return;
     // }
     const userInfo = await getUser();
-
+    const premium = await CommonApiHelper.premiumCheck();
+    console.log('premium', premium);
     console.log('userInfo', userInfo);
     if (userInfo) {
       // checkIsPremium(userInfo);

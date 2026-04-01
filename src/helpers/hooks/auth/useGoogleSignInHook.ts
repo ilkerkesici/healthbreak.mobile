@@ -9,7 +9,7 @@ GoogleSignin.configure({
   webClientId:
     Platform.OS === 'ios'
       ? '698171505477-ek3lq5mu94pitvsvbhpklpukro4sn6jq.apps.googleusercontent.com'
-      : '698171505477-ek3lq5mu94pitvsvbhpklpukro4sn6jq.apps.googleusercontent.com',
+      : '698171505477-l5m9ugt1oitoj9ome514l65og9lbfnm2.apps.googleusercontent.com',
   offlineAccess: true,
 });
 

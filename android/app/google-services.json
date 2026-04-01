@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "698171505477",
+    "project_id": "healthbreak-cadd6",
+    "storage_bucket": "healthbreak-cadd6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:698171505477:android:47f57389ef229df1be1c2c",
+        "android_client_info": {
+          "package_name": "com.healthbreak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "698171505477-l5m9ugt1oitoj9ome514l65og9lbfnm2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO65xTVpwE-cdGU5uGDPF3HqLF1VbVhn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "698171505477-l5m9ugt1oitoj9ome514l65og9lbfnm2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "698171505477-ek3lq5mu94pitvsvbhpklpukro4sn6jq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.healthbreak"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
