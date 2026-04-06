@@ -4,6 +4,7 @@ import { BottomReady } from './BottomReady';
 import { BottomProgress } from './BottomProgress';
 import useTranslation from 'helpers/hooks/useTranslation';
 import AnalyticHelper from 'containers/analytic/AnalyticHelper';
+import { BOTTOM_HEIGHT } from '../constants';
 
 type Props = {
   exerciseId: number;
@@ -73,6 +74,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    height: '30%',
+    height: BOTTOM_HEIGHT,
   },
 });

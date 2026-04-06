@@ -5,11 +5,16 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import Video, { type VideoRef } from 'react-native-video';
+import { VIDEO_BOTTOM_MARGIN } from '../constants';
+
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
+const VIDEO_HEIGHT = width * (16 / 9);
 
 export const DUMMY_VIDEO_URI =
-  'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+  'https://helpimal-images.s3.eu-central-1.amazonaws.com/dev/hb_v1.mp4';
 
 export type BackgroundVideoHandle = {
   play: () => void;
@@ -45,7 +50,7 @@ export const BackgroundVideo = forwardRef<BackgroundVideoHandle, Props>(
         <Video
           ref={videoRef}
           source={{ uri }}
-          style={styles.fill}
+          style={styles.video}
           resizeMode="cover"
           repeat
           paused={paused}
@@ -60,9 +65,13 @@ export const BackgroundVideo = forwardRef<BackgroundVideoHandle, Props>(
 const styles = StyleSheet.create({
   fill: {
     position: 'absolute',
-    top: 0,
+    top: -VIDEO_BOTTOM_MARGIN,
     left: 0,
     right: 0,
     bottom: 0,
+  },
+  video: {
+    width: width,
+    height: VIDEO_HEIGHT,
   },
 });

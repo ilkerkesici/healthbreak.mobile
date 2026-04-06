@@ -106,10 +106,10 @@ export function NextExercise() {
         text={i18n.t('home.next_exercise.take_break_now')}
         rightIcon="o:chevron_right"
         onPress={() => {
-          // navigation.navigate('EXERCISE', {
-          //   exercise: nextExercise,
-          // });
-          navigation.navigate('PAYWALL');
+          navigation.navigate('EXERCISE', {
+            exercise: nextExercise,
+          });
+          // navigation.navigate('PAYWALL');
           AnalyticHelper.logEvent('home_exercise_clicked', {
             exercise_id: nextExercise.exercise.id,
             schedule_id: nextExercise.schedule.id,
