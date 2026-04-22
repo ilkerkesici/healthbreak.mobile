@@ -171,6 +171,30 @@ export default {
     termsOfService: 'Warunki Usługi',
     and: 'i',
     eula: 'EULA',
+    new: {
+      headline: 'Więcej\nzdrowych przerw',
+      subtitle:
+        'Zachowaj energię podczas pracy przy biurku i zadbaj o swoje ciało tak, jak na to zasługuje.',
+      info_card:
+        'Profesjonalne programy ćwiczeń, które pomagają trzymać się z dala od zagrożeń zdrowotnych.',
+      benefits: {
+        unlimited_exercises: {
+          title: 'Nielimitowane ćwiczenia',
+          subtitle: 'Setki różnych filmów i rutyn.',
+        },
+        personalized_reminders: {
+          title: 'Spersonalizowane przypomnienia',
+          subtitle: 'Powiadomienia dopasowane do godzin pracy.',
+        },
+        progress_insights: {
+          title: 'Szczegółowe śledzenie postępów',
+          subtitle: 'Śledź swoje nawyki i postępy.',
+        },
+      },
+      cancel_anytime: 'Anuluj w dowolnym momencie.',
+      restore: 'Przywróć',
+      cta: 'Przejdź na Premium',
+    },
   },
   packages: {
     '1week':

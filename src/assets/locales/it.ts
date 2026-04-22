@@ -172,6 +172,30 @@ export default {
     termsOfService: 'Termini di Servizio',
     and: 'e',
     eula: 'EULA',
+    new: {
+      headline: 'Più\npause salutari',
+      subtitle:
+        'Mantieni alta la tua energia mentre lavori alla scrivania e dai al tuo corpo la cura che merita.',
+      info_card:
+        'Programmi di esercizi professionali per tenerti lontano dai rischi per la salute.',
+      benefits: {
+        unlimited_exercises: {
+          title: 'Esercizi illimitati',
+          subtitle: 'Centinaia di video e routine diverse.',
+        },
+        personalized_reminders: {
+          title: 'Promemoria personalizzati',
+          subtitle: 'Notifiche adatte ai tuoi orari di lavoro.',
+        },
+        progress_insights: {
+          title: 'Monitoraggio dettagliato dei progressi',
+          subtitle: 'Monitora le tue abitudini e i tuoi progressi.',
+        },
+      },
+      cancel_anytime: 'Annulla quando vuoi.',
+      restore: 'Ripristina',
+      cta: 'Passa a Premium',
+    },
   },
   packages: {
     '1week':

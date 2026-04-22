@@ -168,6 +168,30 @@ export default {
     termsOfService: 'Termos de Serviço',
     and: 'e',
     eula: 'EULA',
+    new: {
+      headline: 'Mais\npausas saudáveis',
+      subtitle:
+        'Mantenha sua energia enquanto trabalha na mesa e dê ao seu corpo o cuidado que ele merece.',
+      info_card:
+        'Programas profissionais de exercícios para manter você longe de riscos à saúde.',
+      benefits: {
+        unlimited_exercises: {
+          title: 'Exercícios ilimitados',
+          subtitle: 'Centenas de vídeos e rotinas diferentes.',
+        },
+        personalized_reminders: {
+          title: 'Lembretes personalizados',
+          subtitle: 'Notificações adequadas ao seu horário de trabalho.',
+        },
+        progress_insights: {
+          title: 'Acompanhamento detalhado do progresso',
+          subtitle: 'Acompanhe seus hábitos e seu progresso.',
+        },
+      },
+      cancel_anytime: 'Cancele a qualquer momento.',
+      restore: 'Restaurar',
+      cta: 'Migrar para Premium',
+    },
   },
   packages: {
     '1week':

@@ -5,6 +5,7 @@ import useAuthHook from './useAuthHook';
 import { Platform } from 'react-native';
 import { BasePackage, SubsPackage, User } from 'types/models';
 import {
+  checkSubscriptionStatus,
   getAndroidSubscriptions,
   getIOSSubscriptions,
 } from 'helpers/utils/premium.utils';
@@ -14,30 +15,30 @@ import { useRemoteConfigHook } from './useRemoteConfigHook';
 
 export const BASE_PACKAGES_VARIANT_A: BasePackage[] = [
   {
-    sku: 'com.healthbreak.1month.999',
-    key: 'packages.1month',
-    frequent: 'monthly',
-    display: true,
-  },
-  {
     sku: 'com.healthbreak.1year.5999',
     key: 'packages.1year',
     frequent: 'yearly',
+    display: true,
+  },
+  {
+    sku: 'com.healthbreak.1month.999',
+    key: 'packages.1month',
+    frequent: 'monthly',
     display: true,
   },
 ];
 
 export const BASE_PACKAGES_VARIANT_B: BasePackage[] = [
   {
-    sku: 'com.healthbreak.1month.1299',
-    key: 'packages.1month',
-    frequent: 'monthly',
-    display: true,
-  },
-  {
     sku: 'com.healthbreak.1year.6999',
     key: 'packages.1year',
     frequent: 'yearly',
+    display: true,
+  },
+  {
+    sku: 'com.healthbreak.1month.1299',
+    key: 'packages.1month',
+    frequent: 'monthly',
     display: true,
   },
 ];
@@ -103,6 +104,8 @@ export default function usePremiumHook() {
 
   const checkIsPremium = useCallback(
     async (propUser?: User, isPremiumFromStripeArg?: boolean) => {
+      await checkSubscriptionStatus();
+      return false;
       // if (isPremiumFromStripeArg) {
       //   changePremiumStatus(true, {} as any);
       //   return true;

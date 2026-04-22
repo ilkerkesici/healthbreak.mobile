@@ -167,6 +167,30 @@ export default {
     termsOfService: 'Términos de Servicio',
     and: 'y',
     eula: 'EULA',
+    new: {
+      headline: 'Más\npausas saludables',
+      subtitle:
+        'Mantén tu energía mientras trabajas en el escritorio y dale a tu cuerpo el cuidado que merece.',
+      info_card:
+        'Programas de ejercicio profesionales para mantenerte alejado de riesgos de salud.',
+      benefits: {
+        unlimited_exercises: {
+          title: 'Ejercicios ilimitados',
+          subtitle: 'Cientos de videos y rutinas diferentes.',
+        },
+        personalized_reminders: {
+          title: 'Recordatorios personalizados',
+          subtitle: 'Notificaciones adaptadas a tu horario de trabajo.',
+        },
+        progress_insights: {
+          title: 'Seguimiento detallado del progreso',
+          subtitle: 'Sigue tus hábitos y tu progreso.',
+        },
+      },
+      cancel_anytime: 'Cancela cuando quieras.',
+      restore: 'Restaurar',
+      cta: 'Pasar a Premium',
+    },
   },
   packages: {
     '1week':

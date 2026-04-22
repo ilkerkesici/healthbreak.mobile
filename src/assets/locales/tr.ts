@@ -295,6 +295,30 @@ export default {
     termsOfService: 'Hizmet Şartları',
     and: 've',
     eula: 'EULA',
+    new: {
+      headline: 'Daha fazla\nsağlıklı mola',
+      subtitle:
+        'Masa başında çalışırken enerjini koru ve bedenine hak ettiği özeni göster.',
+      info_card:
+        'Sizi sağlık risklerinden uzak tutacak profesyonel egzersiz programları.',
+      benefits: {
+        unlimited_exercises: {
+          title: 'Sınırsız egzersiz',
+          subtitle: 'Yüzlerce farklı video ve rutin.',
+        },
+        personalized_reminders: {
+          title: 'Kişiselleştirilmiş hatırlatmalar',
+          subtitle: 'Çalışma saatlerine uygun bildirimler.',
+        },
+        progress_insights: {
+          title: 'Detaylı gelişim takibi',
+          subtitle: 'Alışkanlıklarını ve ilerlemeni izle.',
+        },
+      },
+      cancel_anytime: 'İstediğin zaman iptal edebilirsin.',
+      restore: 'Geri Yükle',
+      cta: "Premium'a geç",
+    },
   },
   packages: {
     '1week':

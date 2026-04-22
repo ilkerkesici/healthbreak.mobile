@@ -89,6 +89,7 @@ export default function Packages({ packages, selectedPackage, onSelect }: Props)
 
 const styles = StyleSheet.create({
   item: {
+    alignSelf: 'stretch',
     borderWidth: 1,
     borderColor: '#E5E7EB',
     borderRadius: 14,

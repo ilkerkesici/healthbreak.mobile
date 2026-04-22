@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Block } from 'components/CoreComponents';
 import { RootNavigation } from 'containers/Router/Router.type';
 import ScreenContainer from 'containers/ScreenContainer/ScreenContainer';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
 import { useSharedValue } from 'react-native-reanimated';

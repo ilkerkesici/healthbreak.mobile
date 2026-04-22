@@ -32,7 +32,7 @@ const Splash = () => {
   const { signIn } = useAnonymousLoginHook({});
   const { initTranslation } = useTranslation();
   const { remoteConfigReady, getRemoteConfig } = useRemoteConfigHook();
-  const { getAppSubscriptions } = usePremiumHook();
+  const { getAppSubscriptions, checkIsPremium } = usePremiumHook();
 
   const closeSplash = useSplashStore(state => state.closeSplash);
   const navigation = useNavigation<RootNavigation>();
@@ -80,7 +80,7 @@ const Splash = () => {
     console.log('premium', premium);
     console.log('userInfo', userInfo);
     if (userInfo) {
-      // checkIsPremium(userInfo);
+      checkIsPremium(userInfo);
       await OneSignalHelper.login(userInfo.uid);
       AnalyticHelper.setUser(userInfo);
     }

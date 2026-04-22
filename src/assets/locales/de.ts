@@ -174,6 +174,30 @@ export default {
     termsOfService: 'Nutzungsbedingungen',
     and: 'und',
     eula: 'EULA',
+    new: {
+      headline: 'Mehr\ngesunde Pausen',
+      subtitle:
+        'Bleib bei der Arbeit am Schreibtisch energiegeladen und gib deinem Körper die Aufmerksamkeit, die er verdient.',
+      info_card:
+        'Von Expert:innen entwickelte Trainingsprogramme, die dich von Gesundheitsrisiken fernhalten.',
+      benefits: {
+        unlimited_exercises: {
+          title: 'Unbegrenzte Übungen',
+          subtitle: 'Hunderte verschiedene Videos und Routinen.',
+        },
+        personalized_reminders: {
+          title: 'Personalisierte Erinnerungen',
+          subtitle: 'Benachrichtigungen passend zu deinen Arbeitszeiten.',
+        },
+        progress_insights: {
+          title: 'Detaillierte Fortschrittsanalyse',
+          subtitle: 'Verfolge deine Gewohnheiten und deinen Fortschritt.',
+        },
+      },
+      cancel_anytime: 'Jederzeit kündbar.',
+      restore: 'Wiederherstellen',
+      cta: 'Auf Premium umsteigen',
+    },
   },
   packages: {
     '1week':

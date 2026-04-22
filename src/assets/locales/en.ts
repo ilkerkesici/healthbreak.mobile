@@ -292,6 +292,29 @@ export default {
     termsOfService: 'Terms of Service',
     and: 'and',
     eula: 'EULA',
+    new: {
+      headline: 'More healthy\nbreaks',
+      subtitle:
+        'Stay energetic while you work and give your body the care it deserves.',
+      info_card: 'Expert approved guided break programs.',
+      benefits: {
+        unlimited_exercises: {
+          title: 'Unlimited exercise programs',
+          subtitle: 'Hundreds of different videos and routines.',
+        },
+        personalized_reminders: {
+          title: 'Personalized reminders',
+          subtitle: 'Notifications tailored to your working hours.',
+        },
+        progress_insights: {
+          title: 'Detailed progress insights',
+          subtitle: 'Track your habits and your progress.',
+        },
+      },
+      cancel_anytime: 'Cancel anytime.',
+      restore: 'Restore',
+      cta: 'Go Premium',
+    },
   },
   packages: {
     '1week':

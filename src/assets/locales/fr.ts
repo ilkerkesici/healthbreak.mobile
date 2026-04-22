@@ -169,6 +169,30 @@ export default {
     termsOfService: "Conditions d'Utilisation",
     and: 'et',
     eula: 'EULA',
+    new: {
+      headline: 'Plus de\npauses saines',
+      subtitle:
+        'Reste énergique pendant ton travail de bureau et offre à ton corps l\'attention qu\'il mérite.',
+      info_card:
+        'Des programmes d\'exercices conçus par des professionnels pour te protéger des risques pour la santé.',
+      benefits: {
+        unlimited_exercises: {
+          title: 'Exercices illimités',
+          subtitle: 'Des centaines de vidéos et de routines différentes.',
+        },
+        personalized_reminders: {
+          title: 'Rappels personnalisés',
+          subtitle: 'Notifications adaptées à tes heures de travail.',
+        },
+        progress_insights: {
+          title: 'Suivi détaillé des progrès',
+          subtitle: 'Suis tes habitudes et ta progression.',
+        },
+      },
+      cancel_anytime: 'Annule à tout moment.',
+      restore: 'Restaurer',
+      cta: 'Passer à Premium',
+    },
   },
   packages: {
     '1week':

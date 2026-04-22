@@ -8,7 +8,6 @@ import {
   fetchProducts,
   ProductSubscription,
   Purchase,
-  Product,
   requestPurchase,
 } from 'react-native-iap';
 
@@ -87,9 +86,10 @@ export const getIOSSubscriptions = async (
   }
 };
 
-const checkSubscriptionStatus = async (): Promise<boolean> => {
+export const checkSubscriptionStatus = async (): Promise<boolean> => {
   try {
     const result = await CommonApiHelper.premiumCheck();
+    console.log('checkSubscriptionStatus', result);
     return result;
   } catch (err) {
     return false;
@@ -127,6 +127,7 @@ const purchaseAndroidPackage = async (
 
     await sleep(1000);
     const purchases = await getAvailablePurchases();
+    await finishTransactions(purchases);
     const result = await checkSubscriptionStatus();
     return result ? purchases : null;
   } catch (err) {
@@ -148,9 +149,8 @@ const purchaseIOSPackage = async (subPackage: SubsPackage, userId: string) => {
       },
       type: 'subs',
     });
-    console.log('purchase ios', purchase);
+    await sleep(1000);
     const purchases = await getAvailablePurchases();
-    console.log('purchases', purchases);
 
     await finishTransactions(purchases);
     return purchases;

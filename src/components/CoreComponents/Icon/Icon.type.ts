@@ -153,4 +153,8 @@ export type IconType =
   | 'o:gallery-gradient'
   | 'o:security'
   | 'o:heart'
-  | 's:heart';
+  | 's:heart'
+  | 'o:leaf'
+  | 'o:limitless'
+  | 'o:bell-2'
+  | 'o:stats';

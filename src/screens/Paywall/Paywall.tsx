@@ -1,10 +1,11 @@
 import React, { useMemo, useState } from 'react';
-import { Platform, ScrollView, StyleSheet } from 'react-native';
+import { Animated, Dimensions, Platform, StyleSheet } from 'react-native';
 import { Block, Button, Icon, Text } from 'components/CoreComponents';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigation } from 'containers/Router/Router.type';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DEFAULT_SCREEN_HORIZONTAL_PADDING } from 'constants/design';
+import images from 'assets/images';
 import useTranslation from 'helpers/hooks/useTranslation';
 import usePremiumHook from 'helpers/hooks/usePremiumHook';
 import PrivacyPolicyTexts from './components/PrivacyPolicyTexts';
@@ -14,14 +15,18 @@ import { SubsPackage } from 'types/models';
 import { Purchase } from 'react-native-iap';
 import { CommonApiHelper } from 'helpers/api/CommonApiHelper';
 import Packages from './components/Packages';
+import Benefits from './components/Benefits';
+import InfoHighlightCard from './components/InfoHighlightCard';
+import PaywallHeroBackground from './components/PaywallHeroBackground';
 
 const Paywall = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuthHook();
   const navigation = useNavigation<RootNavigation>();
   const insets = useSafeAreaInsets();
-  const { i18n, language } = useTranslation();
+  const { i18n } = useTranslation();
   const { premiumPackages, changePremiumStatus } = usePremiumHook();
+  const [scrollY] = useState(() => new Animated.Value(0));
   const [selectedPackage, setSelectedPackage] = useState<SubsPackage | null>(
     null,
   );
@@ -29,6 +34,10 @@ const Paywall = () => {
   const activePackage = useMemo(
     () => selectedPackage ?? premiumPackages?.find(Boolean) ?? null,
     [premiumPackages, selectedPackage],
+  );
+  const heroHeight = useMemo(
+    () => Dimensions.get('window').width * (3 / 4),
+    [],
   );
 
   const onSuccessSubscription = async (
@@ -65,7 +74,10 @@ const Paywall = () => {
     }
 
     setLoading(true);
-    const purchase = await requestPurchaseSubscription(activePackage, user?.uid);
+    const purchase = await requestPurchaseSubscription(
+      activePackage,
+      user?.uid,
+    );
     if (purchase) {
       await onSuccessSubscription(activePackage, purchase);
     }
@@ -75,108 +87,104 @@ const Paywall = () => {
   return (
     <Block fill flex={1} backgroundColour="bg-2">
       <Block
+        style={styles.closeButtonContainer}
         paddingTop={(insets.top || 0) + 8}
         paddingHorizontal={DEFAULT_SCREEN_HORIZONTAL_PADDING}
-        flexDirection="row"
         justifyContent="flex-end"
+        alignItems="flex-end"
       >
-        <Text size="sm" color="neutral.500" onPress={() => navigation.goBack()}>
-          {language === 'tr' ? 'Atla' : 'Skip'}
-        </Text>
+        <Block
+          width={34}
+          height={34}
+          borderRadius={17}
+          alignItems="center"
+          justifyContent="center"
+          backgroundColour="neutral.200"
+          borderWidth={1}
+          borderColor="neutral.400/30"
+        >
+          <Icon
+            name="o:x-mark"
+            size={18}
+            color="neutral.700"
+            onPress={() => navigation.goBack()}
+          />
+        </Block>
       </Block>
 
-      <ScrollView
+      <Block style={styles.heroContainer}>
+        <PaywallHeroBackground scrollY={scrollY} imageSource={images.paywall} />
+      </Block>
+
+      <Animated.ScrollView
         style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[
+          styles.scrollContent,
+          { paddingTop: heroHeight },
+        ]}
         showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: true },
+        )}
+        scrollEventThrottle={16}
       >
-        <Block paddingHorizontal={DEFAULT_SCREEN_HORIZONTAL_PADDING}>
-          <Text
-            variant="title2"
-            size="3xl"
-            fontWeight="700"
-            color="neutral.950"
-          >
-            {language === 'tr'
-              ? 'Daha fazla\nsağlıklı mola'
-              : 'More healthy breaks'}
-          </Text>
-          <Text marginTop={8} size="sm" color="neutral.500">
-            {language === 'tr'
-              ? 'Masa başında çalışırken enerjini koru ve bedenine hak ettiği özeni göster.'
-              : 'Stay energetic while you work and give your body the care it deserves.'}
+        <Text
+          variant="title2"
+          size="3xl"
+          fontWeight="700"
+          color="neutral.950"
+          fill
+          left
+          paddingHorizontal={DEFAULT_SCREEN_HORIZONTAL_PADDING}
+          marginTop={-40}
+        >
+          {i18n.t('paywall.new.headline')}
+        </Text>
+
+        <Block paddingHorizontal={DEFAULT_SCREEN_HORIZONTAL_PADDING} fill>
+          <Text marginTop={12} size="sm" color="neutral.500" marginBottom={12}>
+            {i18n.t('paywall.new.subtitle')}
           </Text>
 
-          <Block style={styles.infoCard} marginTop={14}>
-            <Icon name="o:clock" size={18} color="primary.500" />
-            <Text marginLeft={8} size="xs" color="neutral.700">
-              {language === 'tr'
-                ? 'Sınırlı profesyonelleri tarafından onaylanmış egzersiz programları.'
-                : 'Expert approved guided break programs.'}
-            </Text>
-          </Block>
-
-          <Block marginTop={16}>
-            <Block flexDirection="row" alignItems="center" marginBottom={10}>
-              <Icon name="o:lineup" size={16} color="primary.500" />
-              <Text marginLeft={10} size="sm" color="neutral.700">
-                {language === 'tr'
-                  ? 'Sınırsız egzersiz'
-                  : 'Unlimited exercise programs'}
-              </Text>
-            </Block>
-            <Block flexDirection="row" alignItems="center" marginBottom={10}>
-              <Icon name="o:clock" size={16} color="primary.500" />
-              <Text marginLeft={10} size="sm" color="neutral.700">
-                {language === 'tr'
-                  ? 'Kişiselleştirilmiş hatırlatmalar'
-                  : 'Personalized reminders'}
-              </Text>
-            </Block>
-            <Block flexDirection="row" alignItems="center" marginBottom={10}>
-              <Icon name="o:star" size={16} color="primary.500" />
-              <Text marginLeft={10} size="sm" color="neutral.700">
-                {language === 'tr'
-                  ? 'Detaylı gelişim takibi'
-                  : 'Detailed progress insights'}
-              </Text>
-            </Block>
-          </Block>
+          <InfoHighlightCard />
+          <Block marginTop={24} />
 
           <Packages
             packages={premiumPackages}
             selectedPackage={activePackage}
             onSelect={setSelectedPackage}
           />
+          <Benefits />
         </Block>
-      </ScrollView>
-
-      <Block
-        paddingHorizontal={DEFAULT_SCREEN_HORIZONTAL_PADDING}
-        paddingBottom={(insets.bottom || 0) + 10}
-        paddingTop={8}
-      >
-        <Button
-          fill
-          size="lg"
-          text={language === 'tr' ? "Premium'a geç" : 'Go Premium'}
-          onPress={onPressPay}
-          loading={loading}
-          disabled={!activePackage || loading}
-        />
         <Text fill center marginTop={8} size="xs" color="neutral.500">
-          {language === 'tr'
-            ? 'İstediğin zaman iptal edebilirsin.'
-            : 'Cancel anytime.'}
+          {i18n.t('paywall.new.cancel_anytime')}
         </Text>
         <Block marginTop={10}>
           <PrivacyPolicyTexts />
         </Block>
         {Platform.OS === 'ios' ? (
           <Text fill center size="xs" color="neutral.500" marginTop={8}>
-            Restore
+            {i18n.t('paywall.new.restore')}
           </Text>
         ) : null}
+      </Animated.ScrollView>
+
+      <Block
+        paddingHorizontal={DEFAULT_SCREEN_HORIZONTAL_PADDING}
+        paddingBottom={(insets.bottom || 0) + 10}
+        paddingTop={8}
+        fill
+      >
+        <Button
+          fill
+          size="lg"
+          text={i18n.t('paywall.new.cta')}
+          onPress={onPressPay}
+          loading={loading}
+          disabled={!activePackage || loading}
+        />
       </Block>
     </Block>
   );
@@ -185,20 +193,26 @@ const Paywall = () => {
 export default Paywall;
 
 const styles = StyleSheet.create({
+  closeButtonContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10,
+  },
+  heroContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 0,
+  },
   scrollView: {
     flex: 1,
+    alignSelf: 'stretch',
+    // backgroundColor: 'red',
   },
   scrollContent: {
     paddingBottom: 8,
-  },
-  infoCard: {
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: '#D8E6E2',
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    backgroundColor: '#EAF4F1',
-    flexDirection: 'row',
-    alignItems: 'center',
   },
 });
