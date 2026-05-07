@@ -1,7 +1,8 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useMemo } from 'react';
+import { StyleSheet, Text as RNText } from 'react-native';
 import { Block, Button, Text } from 'components/CoreComponents';
 import useTranslation from 'helpers/hooks/useTranslation';
+import { useThemeColor } from 'helpers/hooks/useThemeColor';
 import { DEFAULT_SCREEN_HORIZONTAL_PADDING } from 'constants/design';
 
 type Props = {
@@ -18,13 +19,30 @@ export function BottomReady({
   onPressStart,
 }: Props) {
   const { i18n } = useTranslation();
+  const [boldColor] = useThemeColor(['neutral.950']);
+
+  const descriptionNodes = useMemo(() => {
+    if (!description) return null;
+    const parts = description.split(/(\*\*[^*]+\*\*)/g);
+    return parts.map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return (
+          <RNText
+            key={`b-${index}`}
+            style={[styles.bold, { color: boldColor }]}
+          >
+            {part.slice(2, -2)}
+          </RNText>
+        );
+      }
+      return part;
+    });
+  }, [description, boldColor]);
   return (
     <Block
       paddingHorizontal={DEFAULT_SCREEN_HORIZONTAL_PADDING}
-      paddingTop={18}
+      paddingTop={4}
       paddingBottom={18}
-      backgroundColour="white"
-      style={styles.container}
     >
       <Block
         flexDirection="row"
@@ -47,13 +65,13 @@ export function BottomReady({
         </Block>
       </Block>
 
-      {!!description && (
+      {!!descriptionNodes && (
         <Text marginTop={8} size="sm" color="neutral.600">
-          {description}
+          {descriptionNodes}
         </Text>
       )}
 
-      <Block flex={1} justifyContent="flex-end" marginTop={16}>
+      <Block marginTop={16}>
         <Button
           size="lg"
           text={i18n.t('exercise.ready.start')}
@@ -66,17 +84,10 @@ export function BottomReady({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    borderTopLeftRadius: 26,
-    borderTopRightRadius: 26,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 10,
-    elevation: 10,
-  },
   pill: {
     borderRadius: 999,
+  },
+  bold: {
+    fontWeight: '700',
   },
 });

@@ -67,6 +67,18 @@ class ApiEndpointHelper {
     return result.Data;
   };
 
+  scheduleNextExercise = async () => {
+    const result = await ApiController.post<
+      DefaultResponse<NextExerciseResponse>
+    >('/api/exercise/schedule', {});
+
+    if (!result || result instanceof NetworkError) {
+      return;
+    }
+
+    return result.Data;
+  };
+
   getWeeklyRhythm = async () => {
     const result = await ApiController.get<
       DefaultResponse<WeeklyRhythmResponse>

@@ -14,11 +14,9 @@ const ICON_BG = '#05665014';
 /** Onboarding’teki alan ikonlarına göre target -> ikon eşlemesi */
 const TARGET_ICON_MAP: Partial<Record<ExerciseTarget, IconType>> = {
   [ExerciseTarget.NECK]: 'o:neck',
-  [ExerciseTarget.SHOULDER]: 'o:upper_back',
-  [ExerciseTarget.ARM]: 'o:arrow_path',
+  [ExerciseTarget.UPPER_BACK]: 'o:upper_back',
+  [ExerciseTarget.LOWER_BACK]: 'o:lower_back',
   [ExerciseTarget.WRIST]: 'o:wrist',
-  [ExerciseTarget.BACK]: 'o:lower_back',
-  [ExerciseTarget.LEG]: 'o:arrows_up_down',
 };
 
 const DEFAULT_ICON: IconType = 'o:arrow_path';

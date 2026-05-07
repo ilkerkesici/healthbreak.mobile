@@ -1,15 +1,16 @@
 import React, {
   forwardRef,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
 } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import Video, { type VideoRef } from 'react-native-video';
+import { Skeleton } from 'components/CoreComponents/Skeleton';
 import { VIDEO_BOTTOM_MARGIN } from '../constants';
 
-const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 const VIDEO_HEIGHT = width * (16 / 9);
 
@@ -31,6 +32,11 @@ export const BackgroundVideo = forwardRef<BackgroundVideoHandle, Props>(
   ({ volume, uri = DUMMY_VIDEO_URI }, ref) => {
     const videoRef = useRef<VideoRef | null>(null);
     const [paused, setPaused] = useState(false);
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(() => {
+      setIsReady(false);
+    }, [uri]);
 
     const play = useCallback(() => setPaused(false), []);
     const pause = useCallback(() => setPaused(true), []);
@@ -56,7 +62,17 @@ export const BackgroundVideo = forwardRef<BackgroundVideoHandle, Props>(
           paused={paused}
           volume={volume}
           muted={volume === 0}
+          onReadyForDisplay={() => setIsReady(true)}
         />
+        {!isReady && (
+          <View style={styles.skeletonOverlay} pointerEvents="none">
+            <Skeleton
+              width={width}
+              height={VIDEO_HEIGHT}
+              backgroundColor="neutral.400"
+            />
+          </View>
+        )}
       </View>
     );
   },
@@ -71,6 +87,13 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   video: {
+    width: width,
+    height: VIDEO_HEIGHT,
+  },
+  skeletonOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
     width: width,
     height: VIDEO_HEIGHT,
   },

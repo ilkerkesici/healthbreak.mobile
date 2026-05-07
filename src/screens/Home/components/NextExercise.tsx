@@ -8,6 +8,7 @@ import { StyleSheet } from 'react-native';
 import { ExerciseTarget } from 'types/models';
 import AnalyticHelper from 'containers/analytic/AnalyticHelper';
 import { NextExerciseTimeLabel } from './NextExerciseTimeLabel';
+import { PlanNextExercise } from './PlanNextExercise';
 
 const CARD_BORDER = '#0566500D';
 const CARD_BG = 'rgba(255,255,255,0.9)';
@@ -23,7 +24,7 @@ export function NextExercise() {
   }, [getNextExercise]);
 
   if (!nextExercise) {
-    return null;
+    return <PlanNextExercise />;
   }
 
   const targetKey = nextExercise.exercise.target as ExerciseTarget | undefined;
@@ -106,10 +107,10 @@ export function NextExercise() {
         text={i18n.t('home.next_exercise.take_break_now')}
         rightIcon="o:chevron_right"
         onPress={() => {
-          // navigation.navigate('EXERCISE', {
-          //   exercise: nextExercise,
-          // });
-          navigation.navigate('PAYWALL');
+          navigation.navigate('EXERCISE', {
+            exercise: nextExercise,
+          });
+          // navigation.navigate('PAYWALL');
           AnalyticHelper.logEvent('home_exercise_clicked', {
             exercise_id: nextExercise.exercise.id,
             schedule_id: nextExercise.schedule.id,

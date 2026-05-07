@@ -15,8 +15,18 @@ export default function useNextExercise() {
     return result;
   }, [setNextExercise]);
 
+  const scheduleNextExercise = useCallback(async () => {
+    const result = await APIEndpointHelper.scheduleNextExercise();
+    if (result) {
+      setNextExercise(result);
+    }
+
+    return result;
+  }, [setNextExercise]);
+
   return {
     nextExercise,
     getNextExercise,
+    scheduleNextExercise,
   };
 }

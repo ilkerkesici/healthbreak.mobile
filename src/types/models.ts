@@ -67,11 +67,9 @@ export interface ExerciseSchedule {
 /** API'den gelebilecek egzersiz hedef bölgeleri (exercise.target) */
 export enum ExerciseTarget {
   NECK = 'neck',
-  SHOULDER = 'shoulder',
-  ARM = 'arm',
+  UPPER_BACK = 'upper_back',
+  LOWER_BACK = 'lower_back',
   WRIST = 'wrist',
-  BACK = 'back',
-  LEG = 'leg',
 }
 
 export interface Exercise {

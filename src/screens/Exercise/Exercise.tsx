@@ -2,8 +2,14 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import ScreenContainer from 'containers/ScreenContainer/ScreenContainer';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { RootNavigation, RootStackParamList } from 'containers/Router/Router.type';
-import { BackgroundVideo, type BackgroundVideoHandle } from './components/BackgroundVideo';
+import {
+  RootNavigation,
+  RootStackParamList,
+} from 'containers/Router/Router.type';
+import {
+  BackgroundVideo,
+  type BackgroundVideoHandle,
+} from './components/BackgroundVideo';
 import { Bottom } from './components/Bottom';
 import useTranslation from 'helpers/hooks/useTranslation';
 import { ExerciseHeader } from './components/ExerciseHeader';
@@ -22,6 +28,14 @@ export default function Exercise() {
   const [muted, setMuted] = useState(false);
   const volume = useMemo(() => (muted ? 0 : 0.5), [muted]);
   const { getNextExercise } = useNextExercise();
+
+  const videoUri = useMemo(() => {
+    const media = exercise?.exercise?.media as
+      | Record<string, string | undefined>
+      | undefined;
+    if (!media) return undefined;
+    return media[i18n.locale] ?? media.en;
+  }, [exercise, i18n.locale]);
 
   const onComplete = useCallback(async () => {
     videoRef.current?.pause();
@@ -44,7 +58,7 @@ export default function Exercise() {
     <ScreenContainer bgColor="bg-2">
       <View style={styles.stack}>
         <View style={styles.videoLayer}>
-          <BackgroundVideo ref={videoRef} volume={volume} />
+          <BackgroundVideo ref={videoRef} volume={volume} uri={videoUri} />
         </View>
         <View style={styles.contentLayer}>
           <ExerciseHeader
@@ -53,7 +67,9 @@ export default function Exercise() {
           />
 
           <Bottom
-            title={exercise?.exercise?.title ?? i18n.t('exercise.default_title')}
+            title={
+              exercise?.exercise?.title ?? i18n.t('exercise.default_title')
+            }
             description={exercise?.exercise?.description}
             durationSeconds={60}
             onComplete={onComplete}

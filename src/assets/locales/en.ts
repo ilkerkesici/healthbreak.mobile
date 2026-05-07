@@ -43,11 +43,9 @@ export default {
   },
   exercise_target: {
     neck: 'Neck',
-    shoulder: 'Shoulder',
-    arm: 'Arm',
+    upper_back: 'Upper back',
+    lower_back: 'Lower back',
     wrist: 'Wrist',
-    back: 'Back',
-    leg: 'Leg',
   },
   onboarding_next: 'Continue',
   onboarding_questions: {
@@ -196,6 +194,14 @@ export default {
       motivation_18: 'Stand tall, trust yourself.',
       motivation_19: 'Be proud of taking your breaks.',
       motivation_20: 'You are getting better every day.',
+    },
+    plan_next_exercise: {
+      label: 'NEXT STEP',
+      title: 'Plan your next break',
+      subtitle:
+        "Let's prepare a personalized exercise for you based on your preferences.",
+      cta: 'Plan',
+      error: "Couldn't schedule right now. Please try again.",
     },
     next_exercise: {
       next_break: 'NEXT BREAK',

@@ -81,12 +81,10 @@ export function BottomProgress({
   return (
     <Block
       paddingHorizontal={DEFAULT_SCREEN_HORIZONTAL_PADDING}
-      paddingTop={18}
+      paddingTop={4}
       paddingBottom={18}
-      backgroundColour="white"
-      style={styles.container}
     >
-      <Block fill flexDirection="row">
+      <Block flexDirection="row">
         <Block fillInRow>
           <Text fill left size="lg" fontWeight="700" color="primary.500">
             {title}
@@ -115,7 +113,7 @@ export function BottomProgress({
         />
       </Block>
 
-      <Block flex={1} justifyContent="center" marginTop={16}>
+      <Block marginTop={16} alignItems="center">
         <TouchableOpacity
           onPress={onTogglePause}
           activeOpacity={0.7}
@@ -139,16 +137,6 @@ export function BottomProgress({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    borderTopLeftRadius: 26,
-    borderTopRightRadius: 26,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 10,
-    elevation: 10,
-  },
   progressTrack: {
     height: 10,
     borderRadius: 999,

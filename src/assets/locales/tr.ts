@@ -117,6 +117,14 @@ export default {
       motivation_19: 'Molalarını alan biri olarak gurur duy.',
       motivation_20: 'Her gün biraz daha iyileşiyorsun.',
     },
+    plan_next_exercise: {
+      label: 'BIR SONRAKI ADIM',
+      title: 'Sonraki molanı planla',
+      subtitle:
+        'Tercihlerine göre senin için kişiselleştirilmiş bir egzersiz hazırlayalım.',
+      cta: 'Planla',
+      error: 'Şu an planlanamadı. Lütfen tekrar dene.',
+    },
     next_exercise: {
       next_break: 'BIR SONRAKI MOLA',
       min_later: '{{min}} dk sonra',
@@ -186,11 +194,9 @@ export default {
   },
   exercise_target: {
     neck: 'Boyun',
-    shoulder: 'Omuz',
-    arm: 'Kol',
+    upper_back: 'Sırt',
+    lower_back: 'Bel',
     wrist: 'Bilek',
-    back: 'Sırt',
-    leg: 'Bacak',
   },
   onboarding_next: 'İlerle',
   onboarding_questions: {
