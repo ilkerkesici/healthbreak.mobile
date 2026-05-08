@@ -4,4 +4,8 @@ export type AnalyticEventTypes =
   | 'feedback_submitted'
   | 'home_exercise_clicked'
   | 'onboarding_complete'
-  | 'onboarding_started';
+  | 'onboarding_started'
+  | 'subscription_success'
+  | 'subscription_failed'
+  | 'paywall_seen'
+  | 'exercise_viewed';

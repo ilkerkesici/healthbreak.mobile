@@ -19,7 +19,7 @@ const StartPage = () => {
 
   const onPressStart = useCallback(() => {
     // Şimdilik home'a yönlendir, sonra Paywall'a yönlendirilecek.
-    navigation.navigate('HOME');
+    navigation.navigate('PAYWALL', { goToNextExercise: true, source: 'start' });
   }, [navigation]);
 
   return (

@@ -4,7 +4,7 @@ import { SubsPackage } from 'types/models';
 
 class FacebookSDKController {
   init() {
-    Settings.setAppID('1974584670095202');
+    Settings.setAppID('944575138477868');
     Settings.initializeSDK();
   }
 
@@ -12,11 +12,8 @@ class FacebookSDKController {
     AppEventsLogger.logEvent(eventName, data);
   }
 
-  logPurchase(pkc: SubsPackage, purchase: Purchase | Purchase[]) {
-    const purchaseData = Array.isArray(purchase) ? purchase[0] : purchase;
-    AppEventsLogger.logPurchase(pkc.data?.price || 0, pkc.currency, {
-      transaction_id: purchaseData?.transactionId || '',
-    });
+  logPurchase(pkc: SubsPackage) {
+    AppEventsLogger.logPurchase(pkc.price || 0, pkc.currency, {});
   }
 }
 

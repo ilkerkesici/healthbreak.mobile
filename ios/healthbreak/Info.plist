@@ -35,7 +35,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1974584670095202</string>
+				<string>fb944575138477868</string>
 			</array>
 		</dict>
 		<dict>
@@ -54,9 +54,9 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
-	<string>1974584670095202</string>
+	<string>944575138477868</string>
 	<key>FacebookClientToken</key>
-	<string>c04c56f09d98ed40a0b4158e91cec1ef</string>
+	<string>57fabef4efce97083618d8a3bae0356c</string>
 	<key>FacebookDisplayName</key>
 	<string>HealthBreak</string>
 	<key>LSRequiresIPhoneOS</key>

@@ -29,10 +29,10 @@ class AnalyticController {
     FacebookSDKHelper.logEvent(eventName, data);
   }
 
-  logPurchase(pkc: SubsPackage, purchase: Purchase | Purchase[]) {
-    FirebaseAnalyticHelper.logPurchase(pkc, purchase);
-    MixpanelHelper.logPurchase(pkc, purchase);
-    FacebookSDKHelper.logPurchase(pkc, purchase);
+  logPurchase(pkc: SubsPackage) {
+    FirebaseAnalyticHelper.logPurchase(pkc);
+    MixpanelHelper.logPurchase(pkc);
+    FacebookSDKHelper.logPurchase(pkc);
   }
 }
 

@@ -21,7 +21,6 @@ export function NextExercise() {
   const { i18n } = useTranslation();
 
   const { isPremium } = usePremiumHook();
-  console.log("Is Premium", isPremium);
 
   useEffect(() => {
     getNextExercise();
@@ -112,7 +111,7 @@ export function NextExercise() {
         rightIcon="o:chevron_right"
         onPress={() => {
           if (!isPremium) {
-            navigation.navigate('PAYWALL');
+            navigation.navigate('PAYWALL', { source: 'home' });
             return;
           }
           navigation.navigate('EXERCISE', {

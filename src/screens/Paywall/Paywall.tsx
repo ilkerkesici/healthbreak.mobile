@@ -1,35 +1,59 @@
-import React, { useMemo, useState } from 'react';
-import { Animated, Dimensions, Platform, StyleSheet } from 'react-native';
+import React, { useEffect, useMemo, useState } from 'react';
+import {
+  Alert,
+  Animated,
+  Dimensions,
+  Platform,
+  StyleSheet,
+} from 'react-native';
 import { Block, Button, Icon, Text } from 'components/CoreComponents';
-import { useNavigation } from '@react-navigation/native';
-import { RootNavigation } from 'containers/Router/Router.type';
+import {
+  CommonActions,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
+import {
+  RootNavigation,
+  RootStackParamList,
+} from 'containers/Router/Router.type';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DEFAULT_SCREEN_HORIZONTAL_PADDING } from 'constants/design';
 import images from 'assets/images';
 import useTranslation from 'helpers/hooks/useTranslation';
 import usePremiumHook from 'helpers/hooks/usePremiumHook';
 import PrivacyPolicyTexts from './components/PrivacyPolicyTexts';
-import { requestPurchaseSubscription } from 'helpers/utils/premium.utils';
+import {
+  checkSubscriptionStatus,
+  requestPurchaseSubscription,
+} from 'helpers/utils/premium.utils';
 import useAuthHook from 'helpers/hooks/useAuthHook';
 import { SubsPackage } from 'types/models';
-import { Purchase } from 'react-native-iap';
-import { CommonApiHelper } from 'helpers/api/CommonApiHelper';
 import Packages from './components/Packages';
 import Benefits from './components/Benefits';
 import InfoHighlightCard from './components/InfoHighlightCard';
 import PaywallHeroBackground from './components/PaywallHeroBackground';
+import useNextExercise from 'helpers/hooks/useNextExerciseHook';
+import AnalyticHelper from 'containers/analytic/AnalyticHelper';
+import { useRemoteConfigHook } from 'helpers/hooks/useRemoteConfigHook';
+
+type PaywallRoute = RouteProp<RootStackParamList, 'PAYWALL'>;
 
 const Paywall = () => {
   const [loading, setLoading] = useState(false);
-  const { user } = useAuthHook();
-  const navigation = useNavigation<RootNavigation>();
-  const insets = useSafeAreaInsets();
-  const { i18n } = useTranslation();
-  const { premiumPackages, changePremiumStatus } = usePremiumHook();
   const [scrollY] = useState(() => new Animated.Value(0));
   const [selectedPackage, setSelectedPackage] = useState<SubsPackage | null>(
     null,
   );
+
+  const { user } = useAuthHook();
+  const navigation = useNavigation<RootNavigation>();
+  const route = useRoute<PaywallRoute>();
+  const insets = useSafeAreaInsets();
+  const { i18n } = useTranslation();
+  const { premiumPackages, changePremiumStatus } = usePremiumHook();
+  const { nextExercise } = useNextExercise();
+  const { packagesVariantBEnabled } = useRemoteConfigHook();
 
   const activePackage = useMemo(
     () => selectedPackage ?? premiumPackages?.find(Boolean) ?? null,
@@ -40,32 +64,36 @@ const Paywall = () => {
     [],
   );
 
-  const onSuccessSubscription = async (
-    pkc: SubsPackage,
-    purchase: Purchase | Purchase[],
-  ) => {
-    // if (Platform.OS === 'ios' && purchase) {
-    //   const thePurchase = Array.isArray(purchase) ? purchase[0] : purchase;
-    //   const result = await validateIOSReceiptLocal(
-    //     thePurchase.transactionReceipt,
-    //   );
-    //   if (result) {
-    //     changePremiumStatus(true);
-    //     // AnalyticHelper.logPurchase(pkc, purchase);
-    //     navigation.goBack();
-    //   }
-    //   return;
-    // }
-    // if (
-    //   (purchase && Array.isArray(purchase) && purchase[0].purchaseToken) ||
-    //   (purchase && !Array.isArray(purchase) && purchase.purchaseToken)
-    // ) {
-    //   const token = Array.isArray(purchase)
-    //     ? purchase?.[0]?.purchaseToken
-    //     : purchase.purchaseToken;
-    //   changePremiumStatus(true);
-    //   navigation.goBack();
-    // }
+  const onSuccessSubscription = async (pkc: SubsPackage) => {
+    changePremiumStatus(true);
+
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: 'HOME' }],
+      }),
+    );
+
+    const shouldGoToNextExercise = !!route.params?.goToNextExercise;
+
+    if (shouldGoToNextExercise && nextExercise) {
+      setTimeout(() => {
+        navigation.navigate('EXERCISE', { exercise: nextExercise });
+      }, 0);
+    }
+  };
+
+  const onPressClose = () => {
+    if (route.params?.goToNextExercise) {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'HOME' }],
+        }),
+      );
+      return;
+    }
+    navigation.goBack();
   };
 
   const onPressPay = async () => {
@@ -74,15 +102,34 @@ const Paywall = () => {
     }
 
     setLoading(true);
-    const purchase = await requestPurchaseSubscription(
-      activePackage,
-      user?.uid,
-    );
-    if (purchase) {
-      await onSuccessSubscription(activePackage, purchase);
+    await requestPurchaseSubscription(activePackage, user?.uid);
+    const checkSubscription = await checkSubscriptionStatus();
+    console.log('checkSubscription', checkSubscription);
+    if (checkSubscription) {
+      AnalyticHelper.logEvent('subscription_success', {
+        package: activePackage.data?.id,
+        price: activePackage.price,
+        currency: activePackage.currency,
+      });
+      AnalyticHelper.logPurchase(activePackage);
+      await onSuccessSubscription(activePackage);
+    } else {
+      Alert.alert('Subscription Failed', 'Please try again later');
+      AnalyticHelper.logEvent('subscription_failed', {
+        package: activePackage.data?.id,
+        price: activePackage.price,
+        currency: activePackage.currency,
+      });
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    AnalyticHelper.logEvent('paywall_seen', {
+      packagesVariantBEnabled,
+      source: route.params?.source,
+    });
+  }, []);
 
   return (
     <Block fill flex={1} backgroundColour="bg-2">
@@ -107,7 +154,7 @@ const Paywall = () => {
             name="o:x-mark"
             size={18}
             color="neutral.700"
-            onPress={() => navigation.goBack()}
+            onPress={onPressClose}
           />
         </Block>
       </Block>

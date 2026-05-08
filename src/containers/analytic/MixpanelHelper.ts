@@ -15,7 +15,12 @@ const mixpanel = new Mixpanel(
 class MixpanelController {
   init() {
     // mixpanel.setServerURL('https://api-eu.mixpanel.com');
-    mixpanel.init(undefined, undefined, 'https://api-eu.mixpanel.com', undefined);
+    mixpanel.init(
+      undefined,
+      undefined,
+      'https://api-eu.mixpanel.com',
+      undefined,
+    );
   }
 
   setUser(data: User, isPremium?: boolean) {
@@ -36,15 +41,11 @@ class MixpanelController {
     mixpanel.track(eventName, data);
   }
 
-  async logPurchase(pkc: SubsPackage, purchaseData: Purchase | Purchase[]) {
-    const purchase = Array.isArray(purchaseData)
-      ? purchaseData[0]
-      : purchaseData;
+  async logPurchase(pkc: SubsPackage) {
     mixpanel.track('purchase_completed_success', {
       package: pkc.data?.id,
       price: pkc.price,
       currency: pkc.currency,
-      transaction_id: purchase?.transactionId,
     });
     mixpanel.getPeople().set({ isPremium: true });
   }

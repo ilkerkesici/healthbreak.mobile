@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { StyleSheet, View } from 'react-native';
 import ScreenContainer from 'containers/ScreenContainer/ScreenContainer';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
@@ -53,6 +59,15 @@ export default function Exercise() {
       });
     }
   }, [exercise, getNextExercise, navigation]);
+
+  useEffect(() => {
+    AnalyticHelper.logEvent('exercise_viewed', {
+      exercise_id: exercise.exercise.id,
+      schedule_id: exercise.schedule.id,
+      name: exercise.exercise.title,
+      target: exercise.exercise.target,
+    });
+  }, [exercise]);
 
   return (
     <ScreenContainer bgColor="bg-2">

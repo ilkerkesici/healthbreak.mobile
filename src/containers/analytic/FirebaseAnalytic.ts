@@ -60,20 +60,15 @@ class FirebaseAnalyticController {
     await logAnalyticsEvent(this.analytics, eventName, data);
   }
 
-  async logPurchase(pkc: SubsPackage, purchaseData: Purchase | Purchase[]) {
-    const purchase = Array.isArray(purchaseData)
-      ? purchaseData[0]
-      : purchaseData;
-
+  async logPurchase(pkc: SubsPackage) {
     const sendData = {
-      transaction_id: purchase.transactionId,
-      value: getActualPriceFromString(pkc.price), // total amount
-      currency: pkc.currency,
+      value: pkc.price, // total amount
+      currency: pkc.data.currency,
       items: [
         {
           item_id: pkc.data?.id || '',
           item_name: pkc.title,
-          price: getActualPriceFromString(pkc.price),
+          price: pkc.price,
         },
       ],
     };

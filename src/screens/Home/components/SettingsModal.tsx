@@ -126,7 +126,7 @@ const HeaderSection = ({
 export function SettingsModal({ visible, onClose }: SettingsModalProps) {
   const { i18n } = useTranslation();
   const navigation = useNavigation<RootNavigation>();
-  const { user, isLoggedIn, logout } = useAuthHook();
+  const { user, isLoggedIn, logout, onPressDeleteAccount } = useAuthHook();
   const {
     onPressLanguage,
     onPressPrivacyPolicy,
@@ -265,6 +265,17 @@ export function SettingsModal({ visible, onClose }: SettingsModalProps) {
               textColor="secondary.600"
               onPress={handleLogout}
             />
+            <Text
+              fill
+              center
+              size="xs"
+              marginTop={16}
+              color="red.500"
+              underline
+              onPress={onPressDeleteAccount}
+            >
+              {i18n.t('menu.delete_account')}
+            </Text>
           </Block>
         )}
       </BottomSheetView>

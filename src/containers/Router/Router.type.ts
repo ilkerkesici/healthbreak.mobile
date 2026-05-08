@@ -8,7 +8,9 @@ export type RootStackParamList = {
   TABBAR_STACK: undefined;
   ONBOARDING: undefined;
   BROWSER: { uri: string; incognito?: boolean };
-  PAYWALL: undefined;
+  PAYWALL:
+    | { goToNextExercise?: boolean; source?: 'start' | 'home' }
+    | undefined;
   LANGUAGE_CHANGE: undefined;
   PROMO_CODE: undefined;
   FEEDBACK:

@@ -16,13 +16,13 @@ import { useRemoteConfigHook } from './useRemoteConfigHook';
 export const BASE_PACKAGES_VARIANT_A: BasePackage[] = [
   {
     sku: 'com.healthbreak.1year.5999',
-    key: 'packages.1year',
+    key: 'package_title.1year',
     frequent: 'yearly',
     display: true,
   },
   {
     sku: 'com.healthbreak.1month.999',
-    key: 'packages.1month',
+    key: 'package_title.1month',
     frequent: 'monthly',
     display: true,
   },
@@ -31,13 +31,13 @@ export const BASE_PACKAGES_VARIANT_A: BasePackage[] = [
 export const BASE_PACKAGES_VARIANT_B: BasePackage[] = [
   {
     sku: 'com.healthbreak.1year.6999',
-    key: 'packages.1year',
+    key: 'package_title.1year',
     frequent: 'yearly',
     display: true,
   },
   {
     sku: 'com.healthbreak.1month.1299',
-    key: 'packages.1month',
+    key: 'package_title.1month',
     frequent: 'monthly',
     display: true,
   },

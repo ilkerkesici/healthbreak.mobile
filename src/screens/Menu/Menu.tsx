@@ -20,6 +20,7 @@ const Menu = () => {
     onPressContact,
     onPressPromoCode,
     loading,
+    isLoggedIn,
   } = useMenu();
 
   return (
@@ -103,17 +104,19 @@ const Menu = () => {
           </Text>
         </Block>
       </Display> */}
-      <Text
-        fill
-        center
-        size="xs"
-        marginTop={40}
-        color="red.500"
-        underline
-        onPress={onPressDeleteAccount}
-      >
-        {i18n.t('menu.delete_account')}
-      </Text>
+      <Display show={isLoggedIn}>
+        <Text
+          fill
+          center
+          size="xs"
+          marginTop={40}
+          color="red.500"
+          underline
+          onPress={onPressDeleteAccount}
+        >
+          {i18n.t('menu.delete_account')}
+        </Text>
+      </Display>
       <Spinner loading={loading} />
     </ScreenContainer>
   );

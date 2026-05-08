@@ -162,13 +162,15 @@ const purchaseIOSPackage = async (subPackage: SubsPackage, userId: string) => {
 export const requestPurchaseSubscription = async (
   pkg: SubsPackage,
   uid: string,
-): Promise<Purchase | null> => {
+): Promise<Purchase[] | null> => {
   try {
     if (Platform.OS === 'android') {
-      await purchaseAndroidPackage(pkg, uid);
+      const result = await purchaseAndroidPackage(pkg, uid);
+      return result;
     }
     if (Platform.OS === 'ios') {
-      await purchaseIOSPackage(pkg, uid);
+      const result = await purchaseIOSPackage(pkg, uid);
+      return result;
     }
     return null;
   } catch (err) {

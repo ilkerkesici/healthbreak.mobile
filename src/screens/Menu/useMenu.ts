@@ -4,6 +4,7 @@ import useAnonymousLoginHook from 'helpers/hooks/auth/useAnonymousLoginHook';
 import useTranslation from 'helpers/hooks/useTranslation';
 import { useCallback, useState } from 'react';
 import { Alert } from 'react-native';
+import { useAppInitStore } from 'store/useAppInitStore';
 
 export const useMenu = () => {
   const [loading, setLoading] = useState(false);
@@ -11,6 +12,8 @@ export const useMenu = () => {
   const navigation = useNavigation<RootNavigation>();
   const { signIn, signOut } = useAnonymousLoginHook({});
   const { i18n } = useTranslation();
+  const isLoggedIn = useAppInitStore(state => !!state.user?.email);
+  console.log('isLoggedIn', isLoggedIn);
 
   const onPressLanguage = () => {
     navigation.navigate('LANGUAGE_CHANGE');
@@ -85,5 +88,6 @@ export const useMenu = () => {
     onPressLanguage,
     onPressPromoCode,
     loading,
+    isLoggedIn,
   };
 };
