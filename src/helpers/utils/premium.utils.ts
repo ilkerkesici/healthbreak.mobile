@@ -89,7 +89,6 @@ export const getIOSSubscriptions = async (
 export const checkSubscriptionStatus = async (): Promise<boolean> => {
   try {
     const result = await CommonApiHelper.premiumCheck();
-    console.log('checkSubscriptionStatus', result);
     return result;
   } catch (err) {
     return false;

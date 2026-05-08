@@ -198,6 +198,16 @@ export default {
         },
       },
       cancel_anytime: 'Ακύρωσε οποιαδήποτε στιγμή.',
+      package_card: {
+        discount_badge: 'ΕΚΠΤΩΣΗ {{percent}}%',
+        billed_yearly: '{{price}} / ετήσια χρέωση',
+        monthly_price: '{{price}}/μήνα',
+        frequency: {
+          yearly: 'ΕΤΗΣΙΟ',
+          monthly: 'ΜΗΝΙΑΙΟ',
+          plan: 'ΠΛΑΝΟ',
+        },
+      },
       restore: 'Επαναφορά',
       cta: 'Μετάβαση σε Premium',
     },

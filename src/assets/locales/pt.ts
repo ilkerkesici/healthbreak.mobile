@@ -189,6 +189,16 @@ export default {
         },
       },
       cancel_anytime: 'Cancele a qualquer momento.',
+      package_card: {
+        discount_badge: '{{percent}}% DE ECONOMIA',
+        billed_yearly: '{{price}} / cobrado anualmente',
+        monthly_price: '{{price}}/mês',
+        frequency: {
+          yearly: 'ANUAL',
+          monthly: 'MENSAL',
+          plan: 'PLANO',
+        },
+      },
       restore: 'Restaurar',
       cta: 'Migrar para Premium',
     },

@@ -48,6 +48,17 @@ class CommonApi {
     return result.Data;
   };
 
+  getSettings = async () => {
+    const result = await CommonApiController.get<DefaultResponse<boolean>>(
+      '/api/app/settings',
+      {},
+    );
+    if (!result || result instanceof NetworkError) {
+      return false;
+    }
+    return result.Data;
+  };
+
   loginFirebase = async (idToken: string) => {
     const result = await CommonApiController.post<DefaultResponse<User>>(
       '/api/app/token',

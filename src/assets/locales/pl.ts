@@ -192,6 +192,16 @@ export default {
         },
       },
       cancel_anytime: 'Anuluj w dowolnym momencie.',
+      package_card: {
+        discount_badge: '{{percent}}% OSZCZĘDNOŚCI',
+        billed_yearly: '{{price}} / rozliczane rocznie',
+        monthly_price: '{{price}}/mies.',
+        frequency: {
+          yearly: 'ROCZNIE',
+          monthly: 'MIESIĘCZNIE',
+          plan: 'PLAN',
+        },
+      },
       restore: 'Przywróć',
       cta: 'Przejdź na Premium',
     },

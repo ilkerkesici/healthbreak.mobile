@@ -322,9 +322,25 @@ export default {
         },
       },
       cancel_anytime: 'İstediğin zaman iptal edebilirsin.',
+      package_card: {
+        discount_badge: '{{percent}}% TASARRUF',
+        billed_yearly: '{{price}} / Yıl olarak faturalandırılır',
+        monthly_price: '{{price}}/ay',
+        frequency: {
+          yearly: 'YILLIK',
+          monthly: 'AYLIK',
+          plan: 'PLAN',
+        },
+      },
       restore: 'Geri Yükle',
       cta: "Premium'a geç",
     },
+  },
+  package_title: {
+    '1week': 'Haftalık Plan',
+    '1month': 'Aylık Plan',
+    '3months': '3 Aylık Plan',
+    '1year': 'Yıllık Plan',
   },
   packages: {
     '1week':

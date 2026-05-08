@@ -20,6 +20,7 @@ import { useRemoteConfigHook } from 'helpers/hooks/useRemoteConfigHook';
 import usePremiumHook from 'helpers/hooks/usePremiumHook';
 import { initIAPConnection } from 'helpers/utils/premium.utils';
 import { CommonApiHelper } from 'helpers/api/CommonApiHelper';
+import useAppSettingsHook from 'helpers/hooks/useAppSettingsHook';
 
 const Splash = () => {
   const { hasHydrated: hydratedApp, token } = useAppInitStore();
@@ -33,6 +34,7 @@ const Splash = () => {
   const { initTranslation } = useTranslation();
   const { remoteConfigReady, getRemoteConfig } = useRemoteConfigHook();
   const { getAppSubscriptions, checkIsPremium } = usePremiumHook();
+  const { initSettings } = useAppSettingsHook();
 
   const closeSplash = useSplashStore(state => state.closeSplash);
   const navigation = useNavigation<RootNavigation>();
@@ -57,6 +59,7 @@ const Splash = () => {
     await initTranslation();
     await initIAPConnection();
     getRemoteConfig();
+    await initSettings();
     getAppSubscriptions();
     // getAppSubscriptions();
     requestTrackingTransparency();
@@ -66,15 +69,6 @@ const Splash = () => {
       await signIn();
     }
 
-    // const profile = await LooksGoodApi.getProfile();
-
-    // setProfile(profile);
-
-    // if (!profile) {
-    //   goToOnboarding();
-    //   closeSplash();
-    //   return;
-    // }
     const userInfo = await getUser();
     const premium = await CommonApiHelper.premiumCheck();
     console.log('premium', premium);

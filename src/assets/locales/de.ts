@@ -195,6 +195,16 @@ export default {
         },
       },
       cancel_anytime: 'Jederzeit kündbar.',
+      package_card: {
+        discount_badge: '{{percent}}% SPAREN',
+        billed_yearly: '{{price}} / jährlich abgerechnet',
+        monthly_price: '{{price}}/Monat',
+        frequency: {
+          yearly: 'JÄHRLICH',
+          monthly: 'MONATLICH',
+          plan: 'PLAN',
+        },
+      },
       restore: 'Wiederherstellen',
       cta: 'Auf Premium umsteigen',
     },

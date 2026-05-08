@@ -193,6 +193,16 @@ export default {
         },
       },
       cancel_anytime: 'Annulla quando vuoi.',
+      package_card: {
+        discount_badge: '{{percent}}% DI RISPARMIO',
+        billed_yearly: '{{price}} / fatturato annualmente',
+        monthly_price: '{{price}}/mese',
+        frequency: {
+          yearly: 'ANNUALE',
+          monthly: 'MENSILE',
+          plan: 'PIANO',
+        },
+      },
       restore: 'Ripristina',
       cta: 'Passa a Premium',
     },

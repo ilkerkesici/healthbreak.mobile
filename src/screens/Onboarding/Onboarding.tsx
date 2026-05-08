@@ -60,6 +60,28 @@ const Onboarding = () => {
   const toggleOption = useCallback((questionId: string, optionId: string) => {
     setAnswers(prev => {
       const current = prev[questionId] ?? [];
+
+      // Step 3 ("areas") selection rules:
+      // - Max 2 selections
+      // - If "none" selected, clear other selections
+      // - If another option selected while "none" is active, remove "none"
+      if (questionId === 'areas') {
+        const isNoneOption = optionId === 'none';
+        const hasOption = current.includes(optionId);
+
+        if (hasOption) {
+          return { ...prev, [questionId]: current.filter(id => id !== optionId) };
+        }
+
+        if (isNoneOption) {
+          return { ...prev, [questionId]: ['none'] };
+        }
+
+        const withoutNone = current.filter(id => id !== 'none');
+        const next = [...withoutNone, optionId].slice(0, 2);
+        return { ...prev, [questionId]: next };
+      }
+
       const next = current.includes(optionId)
         ? current.filter(id => id !== optionId)
         : [...current, optionId];

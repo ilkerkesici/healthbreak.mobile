@@ -23,6 +23,7 @@ export interface BasePackage {
 }
 
 export interface SubsPackage {
+  basePackage: BasePackage;
   key?: string;
   data: ProductSubscription;
   title: string;

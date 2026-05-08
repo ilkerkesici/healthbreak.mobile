@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Block, Text } from 'components/CoreComponents';
 import { SubsPackage } from 'types/models';
+import { i18n } from 'constants/i18n';
+import useAppSettingsHook from 'helpers/hooks/useAppSettingsHook';
 
 type Props = {
   packages: (SubsPackage | null | undefined)[];
@@ -9,21 +11,48 @@ type Props = {
   onSelect: (pkg: SubsPackage) => void;
 };
 
-function getFrequencyLabel(pkg: SubsPackage) {
-  const key = pkg.key || '';
-  if (key.includes('1year')) return 'YILLIK';
-  if (key.includes('1month')) return 'AYLIK';
-  return 'PLAN';
+function formatCurrency(amount: number, currency: string) {
+  return new Intl.NumberFormat('tr-TR', {
+    style: 'currency',
+    currency,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount);
 }
 
-export default function Packages({ packages, selectedPackage, onSelect }: Props) {
-  const list = packages.filter((item): item is SubsPackage => !!item);
+export default function Packages({
+  packages,
+  selectedPackage,
+  onSelect,
+}: Props) {
+  const { hbPaywallUnitEnabled } = useAppSettingsHook();
 
+  const SHOW_YEARLY_PRICE_AS_ORIGINAL = !hbPaywallUnitEnabled;
+
+  const list = packages.filter((item): item is SubsPackage => !!item);
   return (
     <Block fill>
       {list.map(pkg => {
         const selected = selectedPackage?.data?.id === pkg.data?.id;
-        const isYearly = (pkg.key || '').includes('1year');
+        const isYearly = pkg.basePackage.frequent === 'yearly';
+        const yearlyPriceFormatted = formatCurrency(pkg.price, pkg.currency);
+        const monthlyPriceFormatted = formatCurrency(
+          pkg.price / 12,
+          pkg.currency,
+        );
+        const rawDiscountPercent =
+          pkg.advantage ?? pkg.percentage ?? pkg.basePackage.percentage ?? 50;
+        const discountPercent = Math.max(0, Math.round(rawDiscountPercent));
+        const priceLabel = SHOW_YEARLY_PRICE_AS_ORIGINAL
+          ? pkg.priceFormatted
+          : isYearly
+          ? monthlyPriceFormatted
+          : pkg.priceFormatted;
+        const frequencyLabel = SHOW_YEARLY_PRICE_AS_ORIGINAL
+          ? isYearly
+            ? i18n.t('paywall.new.package_card.frequency.yearly')
+            : i18n.t('paywall.new.package_card.frequency.monthly')
+          : i18n.t('paywall.new.package_card.frequency.monthly');
 
         return (
           <TouchableOpacity
@@ -35,7 +64,9 @@ export default function Packages({ packages, selectedPackage, onSelect }: Props)
             {isYearly ? (
               <Block style={styles.badge}>
                 <Text size="xs" color="custom-wb" fontWeight="700">
-                  %50 TASARRUF
+                  {i18n.t('paywall.new.package_card.discount_badge', {
+                    percent: discountPercent,
+                  })}
                 </Text>
               </Block>
             ) : null}
@@ -62,22 +93,26 @@ export default function Packages({ packages, selectedPackage, onSelect }: Props)
 
               <Block marginLeft={10}>
                 <Text size="md" color="neutral.950" fontWeight="700">
-                  {isYearly ? 'Yıllık Plan' : 'Aylık Plan'}
+                  {pkg.basePackage.key
+                    ? i18n.t(pkg.basePackage.key || '')
+                    : pkg.data.title}
                 </Text>
                 <Text size="xs" color="neutral.500">
                   {isYearly
-                    ? '63,99/ay olarak faturalandırılır'
-                    : 'İstediğin zaman iptal et'}
+                    ? i18n.t('paywall.new.package_card.billed_yearly', {
+                        price: yearlyPriceFormatted,
+                      })
+                    : i18n.t('paywall.new.cancel_anytime')}
                 </Text>
               </Block>
             </Block>
 
             <Block alignItems="flex-end">
               <Text size="md" color="neutral.950" fontWeight="700">
-                {pkg.priceFormatted}
+                {priceLabel}
               </Text>
               <Text size="xs" color="neutral.500">
-                {getFrequencyLabel(pkg)}
+                {frequencyLabel}
               </Text>
             </Block>
           </TouchableOpacity>
@@ -116,4 +151,3 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
   },
 });
-

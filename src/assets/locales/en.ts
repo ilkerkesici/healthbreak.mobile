@@ -318,9 +318,25 @@ export default {
         },
       },
       cancel_anytime: 'Cancel anytime.',
+      package_card: {
+        discount_badge: '{{percent}}% OFF',
+        billed_yearly: '{{price}} / billed yearly',
+        monthly_price: '{{price}}/mo',
+        frequency: {
+          yearly: 'YEARLY',
+          monthly: 'MONTHLY',
+          plan: 'PLAN',
+        },
+      },
       restore: 'Restore',
       cta: 'Go Premium',
     },
+  },
+  package_title: {
+    '1week': 'Weekly Plan',
+    '1month': 'Monthly Plan',
+    '3months': '3 Month Plan',
+    '1year': 'Yearly Plan',
   },
   packages: {
     '1week':
