@@ -91,7 +91,7 @@ export default {
       footerText:
         'Puoi selezionare più fasce orarie. Personalizziamo il programma.',
       options: {
-        morning: 'Mattina 08:00 - 10:00',
+        morning: 'Mattina 10:00 - 12:00',
         noon: 'Pomeriggio 12:00 - 17:00',
         evening: 'Sera 17:00 - 20:00',
       },

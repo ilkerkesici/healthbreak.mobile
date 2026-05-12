@@ -4,6 +4,10 @@ import useAnonymousLoginHook from 'helpers/hooks/auth/useAnonymousLoginHook';
 import useTranslation from 'helpers/hooks/useTranslation';
 import { useCallback, useState } from 'react';
 import { Alert } from 'react-native';
+import {
+  PRIVACY_POLICY_URL,
+  TERMS_OF_USE_URL,
+} from 'constants/urls';
 
 export const useMenu = ({ onClose }: { onClose: () => void }) => {
   const [loading, setLoading] = useState(false);
@@ -19,8 +23,9 @@ export const useMenu = ({ onClose }: { onClose: () => void }) => {
 
   const onPressTermsOfUse = () => {
     navigation.navigate('BROWSER', {
-      uri: 'https://sites.google.com/view/bettermeai-terms-of-use/ana-sayfa',
+      uri: TERMS_OF_USE_URL,
     });
+    onClose();
   };
 
   const onPressEula = () => {
@@ -31,8 +36,9 @@ export const useMenu = ({ onClose }: { onClose: () => void }) => {
 
   const onPressPrivacyPolicy = () => {
     navigation.navigate('BROWSER', {
-      uri: 'https://sites.google.com/view/better-me-ai-privacy-policy/ana-sayfa',
+      uri: PRIVACY_POLICY_URL,
     });
+    onClose();
   };
   const onPressPromoCode = () => {
     navigation.navigate('PROMO_CODE');

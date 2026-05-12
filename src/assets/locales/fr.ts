@@ -88,7 +88,7 @@ export default {
       footerText:
         'Vous pouvez choisir plusieurs créneaux. Personnalisons le programme.',
       options: {
-        morning: 'Matin 08:00 - 10:00',
+        morning: 'Matin 10:00 - 12:00',
         noon: 'Midi 12:00 - 17:00',
         evening: 'Soir 17:00 - 20:00',
       },

@@ -93,7 +93,7 @@ export default {
       footerText:
         'Du kannst mehrere Zeitspannen wählen. Wir passen das Programm an.',
       options: {
-        morning: 'Morgen 08:00 - 10:00',
+        morning: 'Morgen 10:00 - 12:00',
         noon: 'Mittag 12:00 - 17:00',
         evening: 'Abend 17:00 - 20:00',
       },

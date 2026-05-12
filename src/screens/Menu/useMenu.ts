@@ -5,6 +5,10 @@ import useTranslation from 'helpers/hooks/useTranslation';
 import { useCallback, useState } from 'react';
 import { Alert } from 'react-native';
 import { useAppInitStore } from 'store/useAppInitStore';
+import {
+  PRIVACY_POLICY_URL,
+  TERMS_OF_USE_URL,
+} from 'constants/urls';
 
 export const useMenu = () => {
   const [loading, setLoading] = useState(false);
@@ -21,7 +25,7 @@ export const useMenu = () => {
 
   const onPressTermsOfUse = () => {
     navigation.navigate('BROWSER', {
-      uri: 'https://sites.google.com/view/bettermeai-terms-of-use/ana-sayfa',
+      uri: TERMS_OF_USE_URL,
     });
   };
 
@@ -33,7 +37,7 @@ export const useMenu = () => {
 
   const onPressPrivacyPolicy = () => {
     navigation.navigate('BROWSER', {
-      uri: 'https://sites.google.com/view/better-me-ai-privacy-policy/ana-sayfa',
+      uri: PRIVACY_POLICY_URL,
     });
   };
   const onPressPromoCode = () => {

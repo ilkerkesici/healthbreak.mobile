@@ -87,7 +87,7 @@ export default {
       footerText:
         'Você pode selecionar mais de um horário. Vamos personalizar o programa.',
       options: {
-        morning: 'Manhã 08:00 - 10:00',
+        morning: 'Manhã 10:00 - 12:00',
         noon: 'Tarde 12:00 - 17:00',
         evening: 'Noite 17:00 - 20:00',
       },

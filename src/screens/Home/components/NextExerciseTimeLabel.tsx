@@ -49,4 +49,3 @@ export function NextExerciseTimeLabel({ dateStr }: Props) {
 
   return <>{timeLabel}</>;
 }
-

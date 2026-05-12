@@ -58,7 +58,7 @@ export const BackgroundVideo = forwardRef<BackgroundVideoHandle, Props>(
           source={{ uri }}
           style={styles.video}
           resizeMode="cover"
-          repeat
+          repeat={false}
           paused={paused}
           volume={volume}
           muted={volume === 0}

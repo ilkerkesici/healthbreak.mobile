@@ -250,7 +250,7 @@ export default {
       footerText:
         'Birden fazla zaman dilimi seçebilirsin. Programı sana göre değiştirelim.',
       options: {
-        morning: 'Sabah 08:00 - 10:00',
+        morning: 'Sabah 10:00 - 12:00',
         noon: 'Öğlen 12:00 - 17:00',
         evening: 'Akşam 17:00 - 20:00',
       },
@@ -417,7 +417,7 @@ export default {
     description:
       'Sana yardımcı olmak için buradayız. Her türlü sorun ve önerin için bizimle iletişime geçebilirsin.',
     email_title: 'E-POSTA GÖNDER',
-    email_subtitle: 'support@healthbreak.app',
+    email_subtitle: 'info@venei.co',
     instagram_title: 'INSTAGRAM DESTEK',
     instagram_subtitle: 'Instagram ile iletişime geç',
     direct_message_title: 'DOĞRUDAN MESAJ GÖNDER',

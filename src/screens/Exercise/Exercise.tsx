@@ -22,6 +22,7 @@ import { ExerciseHeader } from './components/ExerciseHeader';
 import { APIEndpointHelper } from 'helpers/api/ApiEndpointHelper';
 import useNextExercise from 'helpers/hooks/useNextExerciseHook';
 import AnalyticHelper from 'containers/analytic/AnalyticHelper';
+import { resolveExerciseVideoUri } from 'helpers/utils/exerciseMedia.utils';
 
 type ExerciseRoute = RouteProp<RootStackParamList, 'EXERCISE'>;
 
@@ -35,13 +36,15 @@ export default function Exercise() {
   const volume = useMemo(() => (muted ? 0 : 0.5), [muted]);
   const { getNextExercise } = useNextExercise();
 
-  const videoUri = useMemo(() => {
-    const media = exercise?.exercise?.media as
-      | Record<string, string | undefined>
-      | undefined;
-    if (!media) return undefined;
-    return media[i18n.locale] ?? media.en;
-  }, [exercise, i18n.locale]);
+  const videoUri = useMemo(
+    () =>
+      exercise?.exercise
+        ? resolveExerciseVideoUri(exercise.exercise, i18n.locale)
+        : undefined,
+    [exercise, i18n.locale],
+  );
+
+  console.log('Video uri', videoUri);
 
   const onComplete = useCallback(async () => {
     videoRef.current?.pause();

@@ -98,7 +98,7 @@ export default {
       footerText:
         "You can select more than one time slot. Let's customize the program for you.",
       options: {
-        morning: 'Morning 08:00 - 10:00',
+        morning: 'Morning 10:00 - 12:00',
         noon: 'Noon 12:00 - 17:00',
         evening: 'Evening 17:00 - 20:00',
       },
@@ -412,7 +412,7 @@ export default {
     description:
       'We are here to help you. You can reach us for any issue or suggestion.',
     email_title: 'SEND E-MAIL',
-    email_subtitle: 'support@healthbreak.app',
+    email_subtitle: 'info@venei.co',
     instagram_title: 'INSTAGRAM SUPPORT',
     instagram_subtitle: 'Contact us on Instagram',
     direct_message_title: 'SEND DIRECT MESSAGE',

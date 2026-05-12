@@ -78,6 +78,7 @@ export interface Exercise {
   title: string | null;
   description: string | null;
   media: Record<string, unknown>;
+  media_stream: Record<string, unknown> | null;
   target: string;
 }
 

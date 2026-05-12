@@ -6,6 +6,10 @@ import { Block, Text } from 'components/CoreComponents';
 import useTranslation from 'helpers/hooks/useTranslation';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigation } from 'containers/Router/Router.type';
+import {
+  PRIVACY_POLICY_URL,
+  TERMS_OF_USE_URL,
+} from 'constants/urls';
 
 const PrivacyPolicyTexts = () => {
   const { i18n } = useTranslation();
@@ -13,7 +17,7 @@ const PrivacyPolicyTexts = () => {
 
   const onPressTermsOfUse = () => {
     navigation.navigate('BROWSER', {
-      uri: 'https://sites.google.com/view/bettermeai-terms-of-use/ana-sayfa',
+      uri: TERMS_OF_USE_URL,
     });
   };
 
@@ -25,7 +29,7 @@ const PrivacyPolicyTexts = () => {
 
   const onPressPrivacyPolicy = () => {
     navigation.navigate('BROWSER', {
-      uri: 'https://sites.google.com/view/better-me-ai-privacy-policy/ana-sayfa',
+      uri: PRIVACY_POLICY_URL,
     });
   };
 

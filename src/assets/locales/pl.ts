@@ -90,7 +90,7 @@ export default {
       footerText:
         'Możesz wybrać więcej niż jeden przedział. Spersonalizujmy program.',
       options: {
-        morning: 'Rano 08:00 - 10:00',
+        morning: 'Rano 10:00 - 12:00',
         noon: 'Południe 12:00 - 17:00',
         evening: 'Wieczór 17:00 - 20:00',
       },
