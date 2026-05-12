@@ -104,6 +104,10 @@ export default function usePremiumHook() {
 
   const checkIsPremium = useCallback(
     async (propUser?: User, isPremiumFromStripeArg?: boolean) => {
+      if(propUser?.premium === 1) {
+        changePremiumStatus(true, {} as any);
+        return true;
+      }
       await checkSubscriptionStatus();
       return false;
       // if (isPremiumFromStripeArg) {
