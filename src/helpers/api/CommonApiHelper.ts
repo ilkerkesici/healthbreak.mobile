@@ -17,6 +17,16 @@ export interface PaginationFetchResponse<T> {
   current_page: number;
 }
 
+export interface RestorePremiumPurchasePayload {
+  platform: 'ios' | 'android';
+  productId: string;
+  transactionId?: string | null;
+  originalTransactionId?: string | null;
+  purchaseToken?: string | null;
+  currentPlanId?: string | null;
+  transactionDate?: number | null;
+}
+
 const PROD_URL = 'https://common-api.venei.co';
 const DEV_URL = 'http://localhost:4002';
 
@@ -46,6 +56,17 @@ class CommonApi {
       return false;
     }
     return result.Data;
+  };
+
+  restorePremiumPurchase = async (payload: RestorePremiumPurchasePayload) => {
+    const result = await CommonApiController.post<DefaultResponse<boolean>>(
+      '/api/app/premium-restore',
+      payload,
+    );
+    if (!result || result instanceof NetworkError) {
+      return false;
+    }
+    return !!result.Data;
   };
 
   getSettings = async () => {

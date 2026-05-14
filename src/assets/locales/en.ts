@@ -329,6 +329,7 @@ export default {
         },
       },
       restore: 'Restore',
+      restore_success: 'Subscription restored.',
       cta: 'Go Premium',
     },
   },

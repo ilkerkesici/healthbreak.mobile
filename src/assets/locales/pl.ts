@@ -203,6 +203,7 @@ export default {
         },
       },
       restore: 'Przywróć',
+      restore_success: 'Subskrypcja została przywrócona.',
       cta: 'Przejdź na Premium',
     },
   },

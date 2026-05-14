@@ -1,5 +1,8 @@
 import { i18n } from 'constants/i18n';
-import { CommonApiHelper } from 'helpers/api/CommonApiHelper';
+import {
+  CommonApiHelper,
+  RestorePremiumPurchasePayload,
+} from 'helpers/api/CommonApiHelper';
 import { Platform } from 'react-native';
 import {
   finishTransaction,
@@ -9,6 +12,7 @@ import {
   ProductSubscription,
   Purchase,
   requestPurchase,
+  clearTransactionIOS,
 } from 'react-native-iap';
 
 import { BasePackage, SubsPackage } from 'types/models';
@@ -34,16 +38,26 @@ export const getAndroidSubscriptions = async (
     })) as ProductSubscription[];
 
     if (Platform.OS === 'android' && subscriptions) {
-      const result: SubsPackage[] = subscriptions.map(sub => ({
-        data: sub,
-        title: packages.find(item => item.sku === sub.id)
-          ? i18n.t(packages.find(item => item.sku === sub.id)?.key || '')
-          : sub.displayName || '',
-        currency: sub.currency,
-        priceFormatted: sub.displayPrice,
-        price: sub.price || 0,
-        basePackage: packages.find(item => item.sku === sub.id),
-      }));
+      const result: SubsPackage[] = subscriptions.reduce<SubsPackage[]>(
+        (acc, sub) => {
+          const foundBasePackage = packages.find(item => item.sku === sub.id);
+          if (!foundBasePackage) {
+            return acc;
+          }
+
+          acc.push({
+            data: sub,
+            title: i18n.t(foundBasePackage.key || ''),
+            currency: sub.currency,
+            priceFormatted: sub.displayPrice,
+            price: sub.price || 0,
+            basePackage: foundBasePackage,
+          });
+
+          return acc;
+        },
+        [],
+      );
       return result;
     }
     return [];
@@ -64,19 +78,26 @@ export const getIOSSubscriptions = async (
     })) as ProductSubscription[];
 
     if (Platform.OS === 'ios' && subscriptions) {
-      const result: SubsPackage[] = subscriptions.map(sub => {
-        const foundBasePackage = packages.find(item => item.sku === sub.id);
-        return {
-          data: sub,
-          title: foundBasePackage
-            ? i18n.t(foundBasePackage?.key || '')
-            : sub.title || '',
-          currency: sub.currency,
-          priceFormatted: sub.displayPrice,
-          price: sub.price || 0,
-          basePackage: foundBasePackage,
-        };
-      });
+      const result: SubsPackage[] = subscriptions.reduce<SubsPackage[]>(
+        (acc, sub) => {
+          const foundBasePackage = packages.find(item => item.sku === sub.id);
+          if (!foundBasePackage) {
+            return acc;
+          }
+
+          acc.push({
+            data: sub,
+            title: i18n.t(foundBasePackage.key || ''),
+            currency: sub.currency,
+            priceFormatted: sub.displayPrice,
+            price: sub.price || 0,
+            basePackage: foundBasePackage,
+          });
+
+          return acc;
+        },
+        [],
+      );
 
       return result;
     }
@@ -107,6 +128,70 @@ const finishTransactions = async (purchases: Purchase[]) => {
   }
 };
 
+const getLatestRelevantPurchase = (
+  purchases: Purchase[],
+  productId?: string,
+): Purchase | null => {
+  const scopedPurchases = productId
+    ? purchases.filter(purchase => purchase.productId === productId)
+    : purchases;
+  const relevantPurchases =
+    scopedPurchases.length > 0 ? scopedPurchases : purchases;
+
+  if (relevantPurchases.length === 0) {
+    return null;
+  }
+
+  return [...relevantPurchases].sort(
+    (a, b) => (b.transactionDate || 0) - (a.transactionDate || 0),
+  )[0];
+};
+
+const mapPurchaseToRestorePayload = (
+  purchase: Purchase,
+): RestorePremiumPurchasePayload => ({
+  platform: Platform.OS === 'ios' ? 'ios' : 'android',
+  productId: purchase.productId,
+  transactionId: purchase.transactionId ?? purchase.id ?? null,
+  originalTransactionId:
+    'originalTransactionIdentifierIOS' in purchase
+      ? purchase.originalTransactionIdentifierIOS ?? null
+      : null,
+  purchaseToken: purchase.purchaseToken ?? null,
+  currentPlanId: purchase.currentPlanId ?? null,
+  transactionDate: purchase.transactionDate ?? null,
+});
+
+export const restoreSubscriptionFromPurchases = async (
+  purchases: Purchase[],
+  productId?: string,
+): Promise<boolean> => {
+  const purchase = getLatestRelevantPurchase(purchases, productId);
+  if (!purchase) {
+    return false;
+  }
+  console.log('Restore Purchase : ', purchase);
+  return CommonApiHelper.restorePremiumPurchase(
+    mapPurchaseToRestorePayload(purchase),
+  );
+};
+
+export const restoreSubscription = async (
+  productId?: string,
+): Promise<boolean> => {
+  try {
+    const purchases = await getAvailablePurchases();
+    if (!purchases.length) {
+      return false;
+    }
+
+    await finishTransactions(purchases);
+    return restoreSubscriptionFromPurchases(purchases, productId);
+  } catch (err) {
+    return false;
+  }
+};
+
 const purchaseAndroidPackage = async (
   subPackage: SubsPackage,
   userId: string,
@@ -114,7 +199,7 @@ const purchaseAndroidPackage = async (
   const sku = subPackage.data.id;
 
   try {
-    const purchase = await requestPurchase({
+    await requestPurchase({
       request: {
         android: {
           skus: [sku],
@@ -127,8 +212,7 @@ const purchaseAndroidPackage = async (
     await sleep(1000);
     const purchases = await getAvailablePurchases();
     await finishTransactions(purchases);
-    const result = await checkSubscriptionStatus();
-    return result ? purchases : null;
+    return purchases;
   } catch (err) {
     return null;
   }
@@ -136,9 +220,10 @@ const purchaseAndroidPackage = async (
 
 const purchaseIOSPackage = async (subPackage: SubsPackage, userId: string) => {
   const sku = subPackage.data.id;
+  await clearTransactionIOS();
   console.log('sku', sku);
   try {
-    const purchase = await requestPurchase({
+    await requestPurchase({
       request: {
         ios: {
           sku,

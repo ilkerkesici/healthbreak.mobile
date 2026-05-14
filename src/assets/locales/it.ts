@@ -204,6 +204,7 @@ export default {
         },
       },
       restore: 'Ripristina',
+      restore_success: 'Abbonamento ripristinato.',
       cta: 'Passa a Premium',
     },
   },

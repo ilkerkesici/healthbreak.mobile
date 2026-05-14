@@ -333,6 +333,7 @@ export default {
         },
       },
       restore: 'Geri Yükle',
+      restore_success: 'Abonelik geri yüklendi.',
       cta: "Premium'a geç",
     },
   },

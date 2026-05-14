@@ -200,6 +200,7 @@ export default {
         },
       },
       restore: 'Restaurar',
+      restore_success: 'Assinatura restaurada.',
       cta: 'Migrar para Premium',
     },
   },

@@ -22,10 +22,13 @@ import { DEFAULT_SCREEN_HORIZONTAL_PADDING } from 'constants/design';
 import images from 'assets/images';
 import useTranslation from 'helpers/hooks/useTranslation';
 import usePremiumHook from 'helpers/hooks/usePremiumHook';
+import useToastHook from 'helpers/hooks/useToastHook';
 import PrivacyPolicyTexts from './components/PrivacyPolicyTexts';
 import {
   checkSubscriptionStatus,
   requestPurchaseSubscription,
+  restoreSubscription,
+  restoreSubscriptionFromPurchases,
 } from 'helpers/utils/premium.utils';
 import useAuthHook from 'helpers/hooks/useAuthHook';
 import { SubsPackage } from 'types/models';
@@ -51,6 +54,7 @@ const Paywall = () => {
   const route = useRoute<PaywallRoute>();
   const insets = useSafeAreaInsets();
   const { i18n } = useTranslation();
+  const { showToast } = useToastHook();
   const { premiumPackages, changePremiumStatus } = usePremiumHook();
   const { nextExercise } = useNextExercise();
   const { packagesVariantBEnabled } = useRemoteConfigHook();
@@ -64,7 +68,7 @@ const Paywall = () => {
     [],
   );
 
-  const onSuccessSubscription = async (pkc: SubsPackage) => {
+  const onSuccessSubscription = async () => {
     changePremiumStatus(true);
 
     navigation.dispatch(
@@ -102,26 +106,75 @@ const Paywall = () => {
     }
 
     setLoading(true);
-    await requestPurchaseSubscription(activePackage, user?.uid);
-    const checkSubscription = await checkSubscriptionStatus();
-    console.log('checkSubscription', checkSubscription);
-    if (checkSubscription) {
-      AnalyticHelper.logEvent('subscription_success', {
-        package: activePackage.data?.id,
-        price: activePackage.price,
-        currency: activePackage.currency,
-      });
-      AnalyticHelper.logPurchase(activePackage);
-      await onSuccessSubscription(activePackage);
-    } else {
-      Alert.alert('Subscription Failed', 'Please try again later');
-      AnalyticHelper.logEvent('subscription_failed', {
-        package: activePackage.data?.id,
-        price: activePackage.price,
-        currency: activePackage.currency,
-      });
+    try {
+      const purchases = await requestPurchaseSubscription(
+        activePackage,
+        user.uid,
+      );
+      let hasSubscription = await checkSubscriptionStatus();
+      let restoredFromExistingPurchase = false;
+
+      if (!hasSubscription && purchases?.length) {
+        restoredFromExistingPurchase = await restoreSubscriptionFromPurchases(
+          purchases,
+          activePackage.data?.id,
+        );
+        hasSubscription = restoredFromExistingPurchase;
+      }
+
+      console.log('checkSubscription', hasSubscription);
+      if (hasSubscription) {
+        if (restoredFromExistingPurchase) {
+          AnalyticHelper.logEvent('subscription_restored', {
+            package: activePackage.data?.id,
+            price: activePackage.price,
+            currency: activePackage.currency,
+          });
+        } else {
+          AnalyticHelper.logEvent('subscription_success', {
+            package: activePackage.data?.id,
+            price: activePackage.price,
+            currency: activePackage.currency,
+          });
+          AnalyticHelper.logPurchase(activePackage);
+        }
+
+        await onSuccessSubscription();
+      } else {
+        Alert.alert('Subscription Failed', 'Please try again later');
+        AnalyticHelper.logEvent('subscription_failed', {
+          package: activePackage.data?.id,
+          price: activePackage.price,
+          currency: activePackage.currency,
+        });
+      }
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
+  };
+
+  const onPressRestore = async () => {
+    if (loading || !user?.uid) {
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await restoreSubscription();
+      const hasRestored = await checkSubscriptionStatus();
+      if (hasRestored) {
+        AnalyticHelper.logEvent('subscription_restored', {
+          source: 'restore_button',
+        });
+        showToast(i18n.t('paywall.new.restore_success'), 'success');
+        await onSuccessSubscription();
+        return;
+      }
+
+      Alert.alert('Restore Failed', 'Please try again later');
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -212,7 +265,15 @@ const Paywall = () => {
           <PrivacyPolicyTexts />
         </Block>
         {Platform.OS === 'ios' ? (
-          <Text fill center size="xs" color="neutral.500" marginTop={8}>
+          <Text
+            fill
+            center
+            size="xs"
+            color={loading ? 'neutral.400' : 'neutral.500'}
+            marginTop={8}
+            underline
+            onPress={onPressRestore}
+          >
             {i18n.t('paywall.new.restore')}
           </Text>
         ) : null}

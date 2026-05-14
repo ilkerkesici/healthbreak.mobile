@@ -206,6 +206,7 @@ export default {
         },
       },
       restore: 'Wiederherstellen',
+      restore_success: 'Abo wurde wiederhergestellt.',
       cta: 'Auf Premium umsteigen',
     },
   },

@@ -199,6 +199,7 @@ export default {
         },
       },
       restore: 'Restaurar',
+      restore_success: 'Suscripción restaurada.',
       cta: 'Pasar a Premium',
     },
   },

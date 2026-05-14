@@ -201,6 +201,7 @@ export default {
         },
       },
       restore: 'Restaurer',
+      restore_success: 'Abonnement restauré.',
       cta: 'Passer à Premium',
     },
   },

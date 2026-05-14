@@ -5,6 +5,7 @@ export type AnalyticEventTypes =
   | 'home_exercise_clicked'
   | 'onboarding_complete'
   | 'onboarding_started'
+  | 'subscription_restored'
   | 'subscription_success'
   | 'subscription_failed'
   | 'paywall_seen'

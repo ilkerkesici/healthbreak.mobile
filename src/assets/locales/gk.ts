@@ -209,6 +209,7 @@ export default {
         },
       },
       restore: 'Επαναφορά',
+      restore_success: 'Η συνδρομή αποκαταστάθηκε.',
       cta: 'Μετάβαση σε Premium',
     },
   },

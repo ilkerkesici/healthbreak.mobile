@@ -111,7 +111,10 @@ export function NextExercise() {
         rightIcon="o:chevron_right"
         onPress={() => {
           if (!isPremium) {
-            navigation.navigate('PAYWALL', { source: 'home' });
+            navigation.navigate('PAYWALL', {
+              source: 'home',
+              goToNextExercise: true,
+            });
             return;
           }
           navigation.navigate('EXERCISE', {
