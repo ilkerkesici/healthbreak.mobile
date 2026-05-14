@@ -34,9 +34,9 @@ export default {
     },
   },
   welcome: {
-    title_1: 'En este mundo donde la IA está en todas partes,',
-    title_2: 'los ejercicios Health Break',
-    title_3: 'están preparados por profesionales de la salud reales.',
+    title_1: 'Tu pausa más saludable',
+    title_2: 'en solo 1 minuto.',
+    title_3: 'Microejercicios avalados por expertos que puedes hacer en cualquier lugar.',
     subtitle: 'Micro-ejercicios cortos, seguros y adaptados al día a día.',
     get_started: 'Comenzar',
     expert_approved: 'CONTENIDO AVALADO POR EXPERTOS',

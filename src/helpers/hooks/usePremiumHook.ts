@@ -104,38 +104,38 @@ export default function usePremiumHook() {
 
   const checkIsPremium = useCallback(
     async (propUser?: User, isPremiumFromStripeArg?: boolean) => {
-      if(propUser?.premium === 1) {
+      // if(propUser?.premium === 1) {
+      //   changePremiumStatus(true, {} as any);
+      //   return true;
+      // }
+      // await checkSubscriptionStatus();
+      // return false;
+      if (isPremiumFromStripeArg) {
         changePremiumStatus(true, {} as any);
         return true;
       }
-      await checkSubscriptionStatus();
-      return false;
-      // if (isPremiumFromStripeArg) {
-      //   changePremiumStatus(true, {} as any);
-      //   return true;
-      // }
-      // if (propUser?.premium === 1) {
-      //   changePremiumStatus(true, {} as any);
-      //   return true;
-      // }
-      // if (propUser?.premium === 2) {
-      //   // trial
-      //   changePremiumStatus(false, {} as any);
-      //   return false;
-      // }
-      // if (user?.premium === 1) {
-      //   changePremiumStatus(true, {} as any);
-      //   return true;
-      // }
-      // const subscription = await checkSubscriptionStatus();
-      // console.log('🌴 : ', subscription);
-      // if (subscription) {
-      //   changePremiumStatus(true, subscription as any);
-      // } else {
-      //   changePremiumStatus(false);
-      // }
+      if (propUser?.premium === 1) {
+        changePremiumStatus(true, {} as any);
+        return true;
+      }
+      if (propUser?.premium === 2) {
+        // trial
+        changePremiumStatus(false, {} as any);
+        return false;
+      }
+      if (user?.premium === 1) {
+        changePremiumStatus(true, {} as any);
+        return true;
+      }
+      const subscription = await checkSubscriptionStatus();
+      console.log('🌴 : ', subscription);
+      if (subscription) {
+        changePremiumStatus(true, subscription as any);
+      } else {
+        changePremiumStatus(false);
+      }
 
-      // return !!subscription;
+      return !!subscription;
       return false;
     },
     [changePremiumStatus],

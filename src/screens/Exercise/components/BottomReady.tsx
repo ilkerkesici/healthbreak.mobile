@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { StyleSheet, Text as RNText } from 'react-native';
+import { StyleSheet, Text as RNText, Platform } from 'react-native';
 import { Block, Button, Text } from 'components/CoreComponents';
 import useTranslation from 'helpers/hooks/useTranslation';
 import { useThemeColor } from 'helpers/hooks/useThemeColor';
@@ -71,7 +71,7 @@ export function BottomReady({
         </Text>
       )}
 
-      <Block marginTop={16}>
+      <Block marginTop={16} marginBottom={Platform.OS === 'ios' ? 0 : 24}>
         <Button
           size="lg"
           text={i18n.t('exercise.ready.start')}

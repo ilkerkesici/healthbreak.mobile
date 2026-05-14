@@ -34,9 +34,9 @@ export default {
     },
   },
   welcome: {
-    title_1: 'W tym świecie, w którym AI jest wszędzie,',
-    title_2: 'ćwiczenia Health Break',
-    title_3: 'są przygotowane przez prawdziwych profesjonalistów zdrowia!',
+    title_1: 'Najzdrowsza przerwa dnia',
+    title_2: 'w zaledwie 1 minutę.',
+    title_3: 'Mikroćwiczenia zatwierdzone przez ekspertów, które możesz robić wszędzie.',
     subtitle: 'Krótkie, bezpieczne mikro-ćwiczenia na co dzień.',
     get_started: 'Rozpocznij',
     expert_approved: 'TREŚCI ZATWIERDZONE PRZEZ EKSPERTÓW',

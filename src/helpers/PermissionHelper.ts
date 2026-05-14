@@ -343,7 +343,6 @@ export const requestTrackingTransparency = async () => {
     return;
   }
   try {
-    const result = await request(PERMISSIONS.IOS.APP_TRACKING_TRANSPARENCY);
-    console.log('REsult: ', result);
+    await request(PERMISSIONS.IOS.APP_TRACKING_TRANSPARENCY);
   } catch (e) {}
 };

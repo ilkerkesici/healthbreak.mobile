@@ -34,9 +34,9 @@ export default {
     },
   },
   welcome: {
-    title_1: 'In dieser Welt, in der KI überall ist,',
-    title_2: 'Health Break Übungen',
-    title_3: 'wurden von echten Gesundheitsexperten erstellt!',
+    title_1: 'Deine gesündeste Pause',
+    title_2: 'in nur 1 Minute.',
+    title_3: 'Von Experten geprüfte Mikro-Übungen, die du überall machen kannst.',
     subtitle: 'Kurze, sichere Mikro-Übungen für den Alltag.',
     get_started: 'Loslegen',
     expert_approved: 'VON EXPERTEN GEPRÜFTE INHALTE',

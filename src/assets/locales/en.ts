@@ -20,9 +20,9 @@ export default {
     analyzing: 'Analyzing...',
   },
   welcome: {
-    title_1: 'In this world where AI is everywhere,',
-    title_2: 'Health Break exercises',
-    title_3: 'are prepared by real health professionals!',
+    title_1: 'Your healthiest break',
+    title_2: 'in just 1 minute.',
+    title_3: 'Expert-approved micro exercises you can do anywhere.',
     subtitle: 'Short, safe micro-exercises that fit into daily life.',
     get_started: 'Get Started',
     expert_approved: 'EXPERT APPROVED CONTENT',

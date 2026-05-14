@@ -20,9 +20,9 @@ export default {
     analyzing: 'Analiz Ediliyor...',
   },
   welcome: {
-    title_1: 'Yapay zekanın her yerde olduğu bu dünyada,',
-    title_2: 'Health Break egzersizleri',
-    title_3: 'gerçek sağlık profesyonelleri tarafından hazırlandı!',
+    title_1: 'Günün en sağlıklı molası',
+    title_2: 'sadece 1 dakika.',
+    title_3: 'Her yerde yapabileceğin uzman onaylı mikro egzersizler.',
     subtitle: 'Kısa, güvenli ve günlük hayata uygun mikro egzersizler.',
     get_started: 'Başla',
     expert_approved: 'UZMAN ONAYLI İÇERİK',
