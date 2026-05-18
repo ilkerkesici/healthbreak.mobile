@@ -2,6 +2,8 @@ import useTranslation from '../useTranslation';
 import useToastHook from '../useToastHook';
 import { CommonApiHelper } from 'helpers/api/CommonApiHelper';
 import { useAppInitStore } from 'store/useAppInitStore';
+import usePremiumHook from '../usePremiumHook';
+import useAuthHook from '../useAuthHook';
 
 interface Props {
   onLoginSuccess?: (redirectToTeamSelection?: boolean) => void;
@@ -11,7 +13,8 @@ export default function useAfterLogin({ onLoginSuccess }: Props) {
   const { i18n } = useTranslation();
   const { showToast } = useToastHook();
   const setUserInfo = useAppInitStore(state => state.setUserInfo);
-  // const {checkIsPremium} = usePremiumHook();
+  const { getUser } = useAuthHook();
+  const { checkIsPremium } = usePremiumHook();
 
   const runAfterFirebaseLogin = async (id: string) => {
     const result: any = await CommonApiHelper.loginFirebase(id);
@@ -19,6 +22,9 @@ export default function useAfterLogin({ onLoginSuccess }: Props) {
     if (result && result.token && result.fbData) {
       setUserInfo(result.token, result.fbData);
       onLoginSuccess?.();
+
+      const userInfo = await getUser();
+      checkIsPremium(userInfo);
       return result;
     } else {
       showToast(result?.message || i18n.t('errors.unexpected_issue'), 'error');

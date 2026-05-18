@@ -168,6 +168,7 @@ export function SettingsModal({ visible, onClose }: SettingsModalProps) {
 
   const onPressRegister = () => {
     // TODO: Register ekranına yönlendirme.
+    navigation.navigate('REGISTER');
     onClose();
   };
 
