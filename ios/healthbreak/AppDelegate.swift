@@ -3,10 +3,12 @@ import React
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
 import Firebase
+import FirebaseMessaging
+import UserNotifications
 import RNBootSplash
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
   var window: UIWindow?
 
   var reactNativeDelegate: ReactNativeDelegate?
@@ -19,8 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let delegate = ReactNativeDelegate()
     let factory = RCTReactNativeFactory(delegate: delegate)
     delegate.dependencyProvider = RCTAppDependencyProvider()
-    
+
     FirebaseApp.configure()
+
+    // Foreground bildirim gösterimi için; APNs kaydı RNFB auto-registration ile yapılır
+    // (ARM64 Simulator'da UIKit registerForRemoteNotifications asılabilir).
+    UNUserNotificationCenter.current().delegate = self
 
     reactNativeDelegate = delegate
     reactNativeFactory = factory
@@ -34,6 +40,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     )
 
     return true
+  }
+
+  func application(
+    _ application: UIApplication,
+    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+  ) {
+    Messaging.messaging().apnsToken = deviceToken
+  }
+
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    willPresent notification: UNNotification,
+    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+  ) {
+    completionHandler([[.banner, .list, .sound, .badge]])
   }
 }
 

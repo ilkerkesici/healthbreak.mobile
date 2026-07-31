@@ -2,8 +2,10 @@ import useTranslation from '../useTranslation';
 import useToastHook from '../useToastHook';
 import { CommonApiHelper } from 'helpers/api/CommonApiHelper';
 import { useAppInitStore } from 'store/useAppInitStore';
-import usePremiumHook from '../usePremiumHook';
-import useAuthHook from '../useAuthHook';
+import FirebaseMessagingHelper from 'helpers/FirebaseMessagingHelper';
+// import useAuthHook from '../useAuthHook';
+import { useCallback } from 'react';
+import { usePremiumStore } from 'store/usePremiumStore';
 
 interface Props {
   onLoginSuccess?: (redirectToTeamSelection?: boolean) => void;
@@ -13,8 +15,26 @@ export default function useAfterLogin({ onLoginSuccess }: Props) {
   const { i18n } = useTranslation();
   const { showToast } = useToastHook();
   const setUserInfo = useAppInitStore(state => state.setUserInfo);
-  const { getUser } = useAuthHook();
-  const { checkIsPremium } = usePremiumHook();
+  const setUser = useAppInitStore(state => state.setUser);
+  const setPremium = usePremiumStore(state => state.setPremium);
+  // const { getUser } = useAuthHook();
+  // const { checkIsPremium } = usePremiumHook();
+
+  const changePremiumStatus = useCallback(
+    (status: boolean, data?: any) => {
+      setPremium(status, data || null);
+    },
+    [setPremium],
+  );
+
+  const getUser = useCallback(async () => {
+    const result = await CommonApiHelper.getUser();
+    console.log('user res', result);
+    if (result) {
+      setUser(result);
+    }
+    return result;
+  }, [setUser]);
 
   const runAfterFirebaseLogin = async (id: string) => {
     const result: any = await CommonApiHelper.loginFirebase(id);
@@ -24,7 +44,14 @@ export default function useAfterLogin({ onLoginSuccess }: Props) {
       onLoginSuccess?.();
 
       const userInfo = await getUser();
-      checkIsPremium(userInfo);
+      if (userInfo?.uid) {
+        await FirebaseMessagingHelper.login(userInfo.uid);
+      }
+      if (userInfo?.premium === 1) {
+        changePremiumStatus(true, {} as any);
+        return true;
+      }
+      // checkIsPremium(userInfo);
       return result;
     } else {
       showToast(result?.message || i18n.t('errors.unexpected_issue'), 'error');

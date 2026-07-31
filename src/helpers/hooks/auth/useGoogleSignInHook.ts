@@ -1,8 +1,14 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import auth from '@react-native-firebase/auth';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  linkWithCredential,
+  signInWithCredential,
+  getIdToken,
+  onAuthStateChanged,
+} from '@react-native-firebase/auth';
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
-// import {GOOGLE_ANDROID_CLIENT_ID} from '@env';
 import useAfterLogin from './useAfterLogin';
 
 GoogleSignin.configure({
@@ -20,6 +26,7 @@ interface Props {
 export default function useGoogleSignInHook({ onLoginSuccess }: Props) {
   const [hasPlayServices, setHasPlayServices] = useState(true);
   const [loading, setLoading] = useState(false);
+  const auth = getAuth();
   const { catchFirebaseError, runAfterFirebaseLogin } = useAfterLogin({
     onLoginSuccess,
   });
@@ -58,26 +65,29 @@ export default function useGoogleSignInHook({ onLoginSuccess }: Props) {
         setLoading(false);
         return;
       }
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      const googleCredential = GoogleAuthProvider.credential(idToken);
 
       let id: string | undefined | null;
 
       try {
-        // Önce anonim kullanıcı ile linklemeyi dene.
-        await auth().currentUser?.linkWithCredential(googleCredential);
-        id = await auth().currentUser?.getIdToken();
+        const currentUser = auth.currentUser;
+        if (currentUser) {
+          // Önce anonim kullanıcı ile linklemeyi dene.
+          await linkWithCredential(currentUser, googleCredential);
+          id = await getIdToken(auth.currentUser ?? currentUser);
+        }
       } catch (linkError: any) {
         // Eğer credential başka bir hesapta ise, direkt signIn ile devam et.
         if (linkError?.code === 'auth/credential-already-in-use') {
-          const signInResult = await auth().signInWithCredential(
+          const signInResult = await signInWithCredential(
+            auth,
             googleCredential,
           );
-          id = await signInResult.user.getIdToken();
+          id = await getIdToken(signInResult.user);
         } else {
           throw linkError;
         }
       }
-      // console.log('ID Token: ', id);
 
       if (!id) {
         setLoading(false);
@@ -98,9 +108,9 @@ export default function useGoogleSignInHook({ onLoginSuccess }: Props) {
   }, []);
 
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(() => null);
-    return subscriber; // unsubscribe on unmount
-  }, []);
+    const subscriber = onAuthStateChanged(auth, () => null);
+    return subscriber;
+  }, [auth]);
 
   return { signIn, loading };
 }

@@ -1,10 +1,10 @@
-import {CommonActions, useNavigation} from '@react-navigation/native';
-import {RootNavigation} from 'containers/Router/Router.type';
+import { CommonActions, useNavigation } from '@react-navigation/native';
+import { RootNavigation } from 'containers/Router/Router.type';
 import useAppleSignInHook from 'helpers/hooks/auth/useAppleSignInHook';
 import useEmailPasswordSignInHook from 'helpers/hooks/auth/useEmailPasswordSignInHook';
 import useGoogleSignInHook from 'helpers/hooks/auth/useGoogleSignInHook';
 import useTranslation from 'helpers/hooks/useTranslation';
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function useLoginHook() {
   const [email, setEmail] = useState('');
@@ -17,7 +17,7 @@ export default function useLoginHook() {
   const onLoginSuccess = () => {
     const action = CommonActions.reset({
       index: 0,
-      routes: [{name: 'HOME'}],
+      routes: [{ name: 'HOME' }],
     });
     navigation.dispatch(action);
   };
@@ -30,20 +30,20 @@ export default function useLoginHook() {
     navigation.navigate('FORGOT_PASSWORD');
   };
 
-  const {signIn: signInWithGoogle, loading: googleLoading} =
-    useGoogleSignInHook({onLoginSuccess});
+  const { signIn: signInWithGoogle, loading: googleLoading } =
+    useGoogleSignInHook({ onLoginSuccess });
 
-  const {signIn: signInWithEmailPassword, loading: signInLoading} =
+  const { signIn: signInWithEmailPassword, loading: signInLoading } =
     useEmailPasswordSignInHook({
       onLoginSuccess,
     });
 
-  const {signIn: signInWithApple, loading: appleSignInLoading} =
+  const { signIn: signInWithApple, loading: appleSignInLoading } =
     useAppleSignInHook({
       onLoginSuccess,
     });
 
-  const {i18n} = useTranslation();
+  const { i18n } = useTranslation();
 
   const onChangeEmail = (text: string) => {
     if (emailError) {

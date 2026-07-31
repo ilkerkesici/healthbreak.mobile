@@ -1,4 +1,13 @@
-import auth from '@react-native-firebase/auth';
+import {
+  getAuth,
+  EmailAuthProvider,
+  linkWithCredential,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  sendEmailVerification,
+  getIdToken,
+} from '@react-native-firebase/auth';
 import { useState } from 'react';
 import useAfterLogin from './useAfterLogin';
 
@@ -8,30 +17,28 @@ interface Props {
 
 export default function useEmailPasswordSignInHook({ onLoginSuccess }: Props) {
   const [loading, setLoading] = useState(false);
+  const auth = getAuth();
 
   const { runAfterFirebaseLogin, catchFirebaseError } = useAfterLogin({
     onLoginSuccess,
   });
 
-  // const signOut = async () => {
-  //   try {
-  //     if (auth().currentUser) {
-  //       await auth().signOut();
-  //     }
-  //   } catch (_) {}
-  // };
-
   const signIn = async (email: string, password: string) => {
     console.log('signIn', email, password);
     try {
       setLoading(true);
-      const credential = auth.EmailAuthProvider.credential(email, password);
-      const result = await auth().currentUser?.linkWithCredential(credential);
+      const credential = EmailAuthProvider.credential(email, password);
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        setLoading(false);
+        return;
+      }
+      const result = await linkWithCredential(currentUser, credential);
       console.log('result', result);
       if (result?.user && !result?.user?.emailVerified) {
-        await result?.user?.sendEmailVerification();
+        await sendEmailVerification(result.user);
       }
-      const id = await auth().currentUser?.getIdToken();
+      const id = await getIdToken(auth.currentUser ?? result.user);
       if (!id) {
         setLoading(false);
         return;
@@ -43,11 +50,12 @@ export default function useEmailPasswordSignInHook({ onLoginSuccess }: Props) {
       // Eğer e-posta zaten başka bir hesapta kayıtlıysa, link yerine doğrudan signIn dene.
       if (error?.code === 'auth/email-already-in-use') {
         try {
-          const signInResult = await auth().signInWithEmailAndPassword(
+          const signInResult = await signInWithEmailAndPassword(
+            auth,
             email,
             password,
           );
-          const idToken = await signInResult.user.getIdToken();
+          const idToken = await getIdToken(signInResult.user);
           await runAfterFirebaseLogin(idToken);
         } catch (innerError: any) {
           console.log('Fallback signIn error: ', innerError);
@@ -63,7 +71,7 @@ export default function useEmailPasswordSignInHook({ onLoginSuccess }: Props) {
   const sendPassworReset = async (email: string) => {
     try {
       setLoading(true);
-      await auth().sendPasswordResetEmail(email);
+      await sendPasswordResetEmail(auth, email);
     } catch (e) {
       console.log(e);
     }
@@ -73,14 +81,11 @@ export default function useEmailPasswordSignInHook({ onLoginSuccess }: Props) {
   const createUser = async (email: string, password: string) => {
     setLoading(true);
     try {
-      const result = await auth().createUserWithEmailAndPassword(
-        email,
-        password,
-      );
+      const result = await createUserWithEmailAndPassword(auth, email, password);
       if (result.user && !result.user.emailVerified) {
-        await result.user.sendEmailVerification();
+        await sendEmailVerification(result.user);
       }
-      const idToken = await result.user.getIdToken();
+      const idToken = await getIdToken(result.user);
 
       await runAfterFirebaseLogin(idToken);
       setLoading(false);

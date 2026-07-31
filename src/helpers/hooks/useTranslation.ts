@@ -5,7 +5,7 @@ import { LanguageType } from 'types/setting';
 import { LocalStorageType } from 'constants/localstorage';
 import { useCallback, useMemo } from 'react';
 import { useAppSettingStore } from 'store/useAppSettingStore';
-// import OneSignalHelper from 'helpers/OneSignalHelper';
+import FirebaseMessagingHelper from 'helpers/FirebaseMessagingHelper';
 import { getDeviceLocale } from 'react-native-get-device-locale';
 
 export const primaryLanguage = [
@@ -22,7 +22,7 @@ const useTranslation = () => {
       i18n.locale = lang;
       setLanguage(lang);
       await AsyncStorage.setItem(LocalStorageType.LANGUAGE, lang);
-      // OneSignalHelper.updateLanguage(lang);
+      await FirebaseMessagingHelper.updateLanguage(lang);
     },
     [setLanguage],
   );

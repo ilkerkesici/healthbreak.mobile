@@ -9,12 +9,11 @@ import { useSplashStore } from 'store/useSplashStore';
 import useAuthHook from 'helpers/hooks/useAuthHook';
 import ScreenContainer from 'containers/ScreenContainer/ScreenContainer';
 import useAnonymousLoginHook from 'helpers/hooks/auth/useAnonymousLoginHook';
-// import OneSignalHelper from 'helpers/OneSignalHelper';
 import useTranslation from 'helpers/hooks/useTranslation';
 import { requestTrackingTransparency } from 'helpers/PermissionHelper';
 import useProfileHook from 'helpers/hooks/useProfileHook';
 import useNextExercise from 'helpers/hooks/useNextExerciseHook';
-import OneSignalHelper from 'helpers/OneSignalHelper';
+import FirebaseMessagingHelper from 'helpers/FirebaseMessagingHelper';
 import AnalyticHelper from 'containers/analytic/AnalyticHelper';
 import { useRemoteConfigHook } from 'helpers/hooks/useRemoteConfigHook';
 import usePremiumHook from 'helpers/hooks/usePremiumHook';
@@ -63,7 +62,7 @@ const Splash = () => {
     getAppSubscriptions();
     // getAppSubscriptions();
     requestTrackingTransparency();
-    await OneSignalHelper.init();
+    await FirebaseMessagingHelper.init();
 
     if (!token) {
       await signIn();
@@ -75,7 +74,7 @@ const Splash = () => {
     console.log('userInfo', userInfo);
     if (userInfo) {
       checkIsPremium(userInfo);
-      await OneSignalHelper.login(userInfo.uid);
+      await FirebaseMessagingHelper.login(userInfo.uid);
       AnalyticHelper.setUser(userInfo);
     }
 

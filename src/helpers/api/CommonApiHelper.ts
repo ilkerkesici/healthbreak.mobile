@@ -27,6 +27,18 @@ export interface RestorePremiumPurchasePayload {
   transactionDate?: number | null;
 }
 
+export interface RegisterFcmTokenPayload {
+  token: string;
+  platform: 'ios' | 'android';
+  language: string;
+  external_id: string;
+}
+
+export interface UnregisterFcmTokenPayload {
+  token: string;
+  external_id: string;
+}
+
 const PROD_URL = 'https://common-api.venei.co';
 const DEV_URL = 'http://localhost:4002';
 
@@ -62,6 +74,50 @@ class CommonApi {
     const result = await CommonApiController.post<DefaultResponse<boolean>>(
       '/api/app/premium-restore',
       payload,
+    );
+    if (!result || result instanceof NetworkError) {
+      return false;
+    }
+    return !!result.Data;
+  };
+
+  registerFcmToken = async (payload: RegisterFcmTokenPayload) => {
+    const result = await CommonApiController.post<DefaultResponse<boolean>>(
+      '/api/notification/fcm-token',
+      payload,
+    );
+    if (!result || result instanceof NetworkError) {
+      return false;
+    }
+    return !!result.Data;
+  };
+
+  unregisterFcmToken = async (payload: UnregisterFcmTokenPayload) => {
+    const result = await CommonApiController.post<DefaultResponse<boolean>>(
+      '/api/notification/fcm-token/delete',
+      payload,
+    );
+    if (!result || result instanceof NetworkError) {
+      return false;
+    }
+    return !!result.Data;
+  };
+
+  updateFcmTokenLanguage = async (language: string) => {
+    const result = await CommonApiController.put<DefaultResponse<boolean>>(
+      '/api/notification/fcm-token/language',
+      { language },
+    );
+    if (!result || result instanceof NetworkError) {
+      return false;
+    }
+    return !!result.Data;
+  };
+
+  readNotification = async (channel_id: string) => {
+    const result = await CommonApiController.put<DefaultResponse<boolean>>(
+      '/api/notification/read',
+      { channel_id },
     );
     if (!result || result instanceof NetworkError) {
       return false;

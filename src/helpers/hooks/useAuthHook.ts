@@ -1,8 +1,7 @@
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { RootNavigation } from 'containers/Router/Router.type';
 import { CommonApiHelper } from 'helpers/api/CommonApiHelper';
-// import {APIEndpointHelper} from 'helpers/ApiEndpointHelper';
-// import OneSignalHelper from 'helpers/OneSignalHelper';
+import FirebaseMessagingHelper from 'helpers/FirebaseMessagingHelper';
 import { useCallback } from 'react';
 import { useAppInitStore } from 'store/useAppInitStore';
 import useAnonymousLoginHook from './auth/useAnonymousLoginHook';
@@ -24,6 +23,7 @@ export default function useAuthHook() {
   }, [setUser]);
 
   const logout = useCallback(async () => {
+    await FirebaseMessagingHelper.logout();
     setToken(undefined);
     setUser(undefined);
     await signOut();

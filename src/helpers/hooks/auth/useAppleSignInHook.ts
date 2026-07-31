@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import { Alert, Platform } from 'react-native';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
-import auth from '@react-native-firebase/auth';
+import {
+  getAuth,
+  AppleAuthProvider,
+  linkWithCredential,
+  signInWithCredential,
+  getIdToken,
+} from '@react-native-firebase/auth';
 import useAfterLogin from './useAfterLogin';
-// import SessionHelper from '../helpers/SessionHelper';
 
 const isAndroid = Platform.OS === 'android';
 
@@ -13,6 +18,7 @@ interface Props {
 
 export default function useAppleSignInHook({ onLoginSuccess }: Props) {
   const [loading, setLoading] = useState(false);
+  const auth = getAuth();
 
   const { catchFirebaseError, runAfterFirebaseLogin } = useAfterLogin({
     onLoginSuccess,
@@ -34,7 +40,7 @@ export default function useAppleSignInHook({ onLoginSuccess }: Props) {
         return;
       }
       const { identityToken, nonce } = appleAuthRequestResponse;
-      const appleCredential = auth.AppleAuthProvider.credential(
+      const appleCredential = AppleAuthProvider.credential(
         identityToken,
         nonce,
       );
@@ -42,18 +48,20 @@ export default function useAppleSignInHook({ onLoginSuccess }: Props) {
       let id: string | undefined | null;
 
       try {
-        // Önce anonim kullanıcı ile linklemeyi dene.
-        await auth().currentUser?.linkWithCredential(
-          appleCredential,
-        );
-        id = await auth().currentUser?.getIdToken();
+        const currentUser = auth.currentUser;
+        if (currentUser) {
+          // Önce anonim kullanıcı ile linklemeyi dene.
+          await linkWithCredential(currentUser, appleCredential);
+          id = await getIdToken(auth.currentUser ?? currentUser);
+        }
       } catch (linkError: any) {
         // Eğer credential başka bir hesapta ise, direkt signIn ile devam et.
         if (linkError?.code === 'auth/credential-already-in-use') {
-          const signInResult = await auth().signInWithCredential(
+          const signInResult = await signInWithCredential(
+            auth,
             appleCredential,
           );
-          id = await signInResult.user.getIdToken();
+          id = await getIdToken(signInResult.user);
         } else {
           throw linkError;
         }

@@ -9,4 +9,5 @@ export type AnalyticEventTypes =
   | 'subscription_success'
   | 'subscription_failed'
   | 'paywall_seen'
-  | 'exercise_viewed';
+  | 'exercise_viewed'
+  | 'notification_clicked';

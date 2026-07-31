@@ -1,5 +1,9 @@
 import { useState } from 'react';
-import auth from '@react-native-firebase/auth';
+import {
+  getAuth,
+  signInAnonymously,
+  signOut as firebaseSignOut,
+} from '@react-native-firebase/auth';
 import useAfterLogin from './useAfterLogin';
 
 interface Props {
@@ -8,19 +12,20 @@ interface Props {
 
 export default function useAnonymousLoginHook({ onLoginSuccess }: Props) {
   const [loading, setLoading] = useState(false);
+  const auth = getAuth();
 
   const { runAfterFirebaseLogin, catchFirebaseError } = useAfterLogin({
     onLoginSuccess,
   });
 
   const signOut = async () => {
-    await auth().signOut();
+    await firebaseSignOut(auth);
   };
 
   const signIn = async () => {
     setLoading(true);
     try {
-      const response = await auth().signInAnonymously();
+      const response = await signInAnonymously(auth);
       const id = await response.user.getIdToken();
       if (!id) {
         setLoading(false);
